@@ -1,0 +1,14 @@
+ehdev_festival_festival_bundle:
+    resource:     "@EHDevFestivalBasicsBundle/Controller/"
+    type:         annotation
+    prefix:       /festival
+
+ehdev_festival_festival_api_festival:
+    resource:     "@EHDevFestivalBasicsBundle/Controller/Api/Rest/FestivalController.php"
+    type:         rest
+    prefix:       api/rest/{version}/
+    requirements:
+        version:  latest|v1
+        _format:  json
+    defaults:
+        version:  latest

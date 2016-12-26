@@ -1,0 +1,36 @@
+{% extends 'OroUIBundle:actions:index.html.twig' %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set gridName = 'ehdev-festival-festival-grid' %}
+{% set pageTitle = 'ehdev.festival.festival.entity_label'|trans %}
+
+{% block navButtons %}
+    {% if resource_granted('ehdev_festival_festival_festival_create') %}
+        {% set dialogTitle = 'ehdev.festival.festival.create_entity'|trans %}
+        {{ UI.clientButton({
+            'dataUrl': path('ehdev_festival_festival_festival_create'),
+            'aCss': 'no-hash',
+            'iCss': 'icon-plus-sign',
+            'dataId': null,
+            'title' : dialogTitle,
+            'label' : dialogTitle,
+            'widget' : {
+                'type' : 'dialog',
+                'multiple' : false,
+                'reload-grid-name' : gridName,
+                'options' : {
+                    'stateEnabled': false,
+                    'dialogOptions' : {
+                        'title' : dialogTitle,
+                        'allowMaximize': true,
+                        'allowMinimize': true,
+                        'dblclick': 'maximize',
+                        'maximizedHeightDecreaseBy': 'minimize-bar',
+                        'width': 500
+                    }
+                }
+            }
+        })
+        }}
+    {% endif %}
+{% endblock %}

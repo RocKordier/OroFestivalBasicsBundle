@@ -1,0 +1,67 @@
+datagrids:
+    ehdev-festival-festival-grid:
+        extended_entity_name: "%ehdev.festival.entity.festival.class%"
+        acl_resource: ehdev_festival_festival_view
+        source:
+            type: orm
+            query:
+                select:
+                    - fw.id
+                    - fw.name
+                    - fw.startDate
+                    - fw.endDate
+                    - fw.maxGuests
+                    - fw.createdAt
+                    - fw.updatedAt
+                from:
+                    - { table: "%ehdev.festival.entity.festival.class%", alias: fw }
+        columns:
+            id:
+                label:         ehdev.festival.festival.id.label
+            name:
+                frontend_type: string
+                label:         ehdev.festival.festival.name.label
+            startDate:
+                frontend_type: date
+                label:         ehdev.festival.festival.startDate.label
+            endDate:
+                frontend_type: date
+                label:         ehdev.festival.festival.endDate.label
+            maxGuests:
+                frontend_type: integer
+                label:         ehdev.festival.festival.maxGuests.label
+            createdAt:
+                frontend_type: date
+                label:         ehdev.festival.festival.createdat.label
+            updatedAt:
+                frontend_type: date
+                label:         ehdev.festival.festival.updatedat.label
+        properties:
+            id: ~
+            update_link:
+                type:       url
+                route:      ehdev_festival_festival_festival_update
+                params:     [ id ]
+            delete_link:
+                type: url
+                route: oro_api_delete_festival
+                params: [ id ]
+        actions:
+            update:
+                type: dialog
+                label: oro.grid.action.update
+                icon: edit
+                link: update_link
+                widgetOptions:
+                    reload-grid-name: ehdev-festival-festival-grid
+                    options:
+                        dialogOptions:
+                            title:  "@translator->trans(ehdev.festival.festival.widget.edit.title)"
+                            modal:  true
+                            width:  700
+            delete:
+                type:          delete
+                acl_resource:  ehdev_festival_festival_festival_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link

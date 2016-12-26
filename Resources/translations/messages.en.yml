@@ -1,0 +1,19 @@
+ehdev:
+    festival:
+        tab: Festival
+        festival:
+            entity_plural_label: Festivals
+            entity_label: Festival
+            create_entity: Create Festival
+            saved.message: Festival saved
+            name.label: Name
+            startDate.label: Start Date
+            endDate.label: End Date
+            maxGuests.label: Max Guests
+            createdat.label: Created
+            updatedat.label: Updated
+            id.label: Id
+            widget:
+                edit.title: Edit Festival
+                create.title: Create Festival
+

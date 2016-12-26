@@ -1,0 +1,2 @@
+bundles:
+    - { name: EHDev\Bundle\FestivalBasicsBundle\EHDevFestivalBasicsBundle, priority: 10 }

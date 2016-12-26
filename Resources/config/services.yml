@@ -1,0 +1,11 @@
+parameters:
+    ehdev.festival.entity.festival.class: EHDev\Bundle\FestivalBasicsBundle\Entity\Festival
+    ehdev.festival.festival.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+
+services:
+    ehdev.festival.festival.manager:
+        class: %ehdev.festival.festival.manager.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %ehdev.festival.entity.festival.class%
+            - "@doctrine.orm.entity_manager"
