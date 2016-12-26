@@ -1,0 +1,24 @@
+{
+    "name": "ehdev/oro-festival-basics-bundle",
+    "description": "FestivalBasics Bundle for an Oro Application",
+    "homepage": "https://github.com/RocKordier/OroFestivalBasicsBundle",
+    "keywords": ["Oro Platform", "Symfony2", "Basics", "Music", "Festival"],
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "[RocKordier] Eric Hertwig",
+            "homepage": "http://eric-hertwig.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EHDev\\Bundle\\FestivalBasicsBundle\\": ""
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "oro/platform": "1.10.*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
