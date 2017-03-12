@@ -20,7 +20,7 @@ class FestivalController extends Controller
 {
     /**
      * Index
-     * @Route("/", name="ehdev_festival_festival_festival_index")
+     * @Route("/", name="ehdev_festival_festival_index")
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
      */
@@ -32,10 +32,10 @@ class FestivalController extends Controller
     /**
      * Create Festival
      *
-     * @Route("/create", name="ehdev_festival_festival_festival_create")
+     * @Route("/create", name="ehdev_festival_festival_create")
      * @Template("@EHDevFestivalBasics/Festival/update.html.twig")
      * @Acl(
-     *      id="ehdev_festival_festival_festival_create",
+     *      id="ehdev_festival_festival_create",
      *      type="entity",
      *      permission="CREATE",
      *      class="EHDevFestivalBasicsBundle:Festival"
@@ -48,11 +48,11 @@ class FestivalController extends Controller
 
     /**
      * Update festival form
-     * @Route("/update/{id}", name="ehdev_festival_festival_festival_update", requirements={"id"="\d+"})
+     * @Route("/update/{id}", name="ehdev_festival_festival_update", requirements={"id"="\d+"})
      *
      * @Template
      * @Acl(
-     *      id="ehdev_festival_festival_festival_update",
+     *      id="ehdev_festival_festival_update",
      *      type="entity",
      *      permission="EDIT",
      *      class="EHDevFestivalBasicsBundle:Festival"

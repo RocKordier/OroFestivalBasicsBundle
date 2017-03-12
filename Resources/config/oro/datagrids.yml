@@ -40,7 +40,7 @@ datagrids:
             id: ~
             update_link:
                 type:       url
-                route:      ehdev_festival_festival_festival_update
+                route:      ehdev_festival_festival_update
                 params:     [ id ]
             delete_link:
                 type: url
@@ -61,7 +61,7 @@ datagrids:
                             width:  700
             delete:
                 type:          delete
-                acl_resource:  ehdev_festival_festival_festival_delete
+                acl_resource:  ehdev_festival_festival_delete
                 label:         oro.grid.action.delete
                 icon:          trash
                 link:          delete_link

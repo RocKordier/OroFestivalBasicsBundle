@@ -5,10 +5,10 @@
 {% set pageTitle = 'ehdev.festival.festival.entity_label'|trans %}
 
 {% block navButtons %}
-    {% if resource_granted('ehdev_festival_festival_festival_create') %}
+    {% if resource_granted('ehdev_festival_festival_create') %}
         {% set dialogTitle = 'ehdev.festival.festival.create_entity'|trans %}
         {{ UI.clientButton({
-            'dataUrl': path('ehdev_festival_festival_festival_create'),
+            'dataUrl': path('ehdev_festival_festival_create'),
             'aCss': 'no-hash',
             'iCss': 'icon-plus-sign',
             'dataId': null,

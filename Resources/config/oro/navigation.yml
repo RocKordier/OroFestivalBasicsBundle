@@ -6,10 +6,10 @@ navigation:
                 label: 'ehdev.festival.tab'
                 extras:
                     position: 50
-            ehdev_festival_festival_festival_tab:
+            ehdev_festival_festival_tab:
                 uri: '#'
                 label: 'ehdev.festival.festival.entity_plural_label'
-                route:   'ehdev_festival_festival_festival_index'
+                route:   'ehdevl_festival_festival_index'
                 extras:
                     icon: fa-puzzle-piece
         tree:
@@ -17,4 +17,4 @@ navigation:
                 children:
                     ehdev_festival_festival_tab:
                         children:
-                            ehdev_festival_festival_festival_tab: ~
+                            ehdev_festival_festival_tab: ~
