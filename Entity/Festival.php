@@ -3,7 +3,7 @@
 namespace EHDev\Bundle\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\Bundle\BasicsBundle\Entity\Base;
+use EHDev\Bundle\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 
@@ -29,7 +29,7 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  *
  * @package EHDev\Bundle\FestivalBasicsBundle\HomepageBundle\Entity
  */
-class Festival extends Base
+class Festival extends ExtendFestival
 {
     /**
      * @var string
