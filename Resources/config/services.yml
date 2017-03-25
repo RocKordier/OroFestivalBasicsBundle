@@ -1,6 +1,7 @@
 parameters:
     ehdev.festival.entity.festival.class: EHDev\Bundle\FestivalBasicsBundle\Entity\Festival
     ehdev.festival.festival.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+    ehdev.festival.event.detailviewlistener.class: EHDev\Bundle\FestivalBasicsBundle\EventListener\AbstractFestivalDetailViewListener
 
 services:
     ehdev.festival.festival.manager:
@@ -9,3 +10,9 @@ services:
         arguments:
             - %ehdev.festival.entity.festival.class%
             - "@doctrine.orm.entity_manager"
+
+    ehdev.festival.event.detailviewlistener:
+        abstract: true
+        arguments:
+            - '@request_stack'
+            - '@translator'
