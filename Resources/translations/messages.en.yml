@@ -5,6 +5,7 @@ ehdev:
             entity_plural_label: Festivals
             entity_label: Festival
             create_entity: Create Festival
+            update_entity: Update Festival
             saved.message: Festival saved
             name.label: Name
             start_date.label: Start Date

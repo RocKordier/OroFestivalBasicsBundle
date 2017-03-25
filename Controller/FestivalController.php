@@ -84,6 +84,24 @@ class FestivalController extends Controller
     }
 
     /**
+     * Info
+     *
+     * @Route("/widget/info/{id}", name="ehdev_festival_festival_widget_info", requirements={"id"="\d+"})
+     * @AclAncestor("ehdev_festival_festival_view")
+     * @Template
+     *
+     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     *
+     * @return array
+     */
+    public function infoAction(Festival $festival)
+    {
+        return [
+            'entity' => $festival,
+        ];
+    }
+
+    /**
      * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $entity
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
