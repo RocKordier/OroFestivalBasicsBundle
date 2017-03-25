@@ -22,11 +22,31 @@ class FestivalController extends Controller
      * Index
      * @Route("/", name="ehdev_festival_festival_index")
      * @AclAncestor("ehdev_festival_festival_view")
+     *
      * @Template
      */
     public function indexAction()
     {
         return [];
+    }
+
+    /**
+     * @Route("/view/{id}", name="ehdev_festival_festival_view", requirements={"id"="\d+"})
+     * @Template
+     * @Acl(
+     *      id="ehdev_festival_festival_view",
+     *      type="entity",
+     *      permission="VIEW",
+     *      class="EHDevFestivalBasicsBundle:Festival"
+     * )
+     *
+     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     */
+    public function viewAction(Festival $festival)
+    {
+        return [
+            'entity' => $festival,
+        ];
     }
 
     /**
@@ -73,7 +93,7 @@ class FestivalController extends Controller
         return $this->get('oro_form.model.update_handler')->update(
             $entity,
             $this->get('ehdev.festival.form'),
-            $this->get('translator')->trans('ehdev.festival.festival.saved.message')
+            $this->get('translator')->trans('ehdev.festivalbasics.festival.saved.message')
         );
     }
 

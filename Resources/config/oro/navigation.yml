@@ -1,20 +1,20 @@
 navigation:
     menu_config:
-        items: #menu items
-            ehdev_festival_festival_tab:
+        items:
+            ehdev_festival_tab:
                 uri: '#'
-                label: 'ehdev.festival.tab'
+                label: 'ehdev.festivalbasics.tab'
                 extras:
                     position: 50
             ehdev_festival_festival_tab:
                 uri: '#'
-                label: 'ehdev.festival.festival.entity_plural_label'
-                route:   'ehdevl_festival_festival_index'
+                label: 'ehdev.festivalbasics.festival.entity_plural_label'
+                route:   'ehdev_festival_festival_index'
                 extras:
                     icon: fa-puzzle-piece
         tree:
             application_menu:
                 children:
-                    ehdev_festival_festival_tab:
+                    ehdev_festival_tab:
                         children:
                             ehdev_festival_festival_tab: ~

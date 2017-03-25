@@ -1,6 +1,6 @@
 {% set formAction = form.vars.value.id
 ? path('ehdev_festival_festival_update', { id: form.vars.value.id})
-: path('ehdev_festival_festivall_create')
+: path('ehdev_festival_festival_create')
 %}
 
 <div class="widget-content">
@@ -38,9 +38,9 @@
                     <div class="widget-actions form-actions">
                         <button class="btn" type="reset">{{ 'Cancel'|trans }}</button>
                         {% if form.vars.value.id %}
-                            <button class="btn btn-primary" type="submit">{{ 'ehdev.festival.festival.widget.edit.title'|trans }}</button>
+                            <button class="btn btn-primary" type="submit">{{ 'ehdev.festivalbasics.festival.widget.edit.title'|trans }}</button>
                         {% else %}
-                            <button class="btn btn-primary" type="submit">{{ 'ehdev.festival.festival.widget.create.title'|trans }}</button>
+                            <button class="btn btn-primary" type="submit">{{ 'ehdev.festivalbasics.festival.widget.create.title'|trans }}</button>
                         {% endif %}
                     </div>
                 </fieldset>

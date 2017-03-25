@@ -13,31 +13,39 @@ datagrids:
                     - fw.maxGuests
                     - fw.createdAt
                     - fw.updatedAt
+                    - owner.id
                 from:
                     - { table: "%ehdev.festival.entity.festival.class%", alias: fw }
+                join:
+                    left:
+                        - { join: fw.owner, alias: owner }
         columns:
             id:
-                label:         ehdev.festival.festival.id.label
+                label:         ehdev.festivalbasics.festival.id.label
             name:
                 frontend_type: string
-                label:         ehdev.festival.festival.name.label
+                label:         ehdev.festivalbasics.festival.name.label
             startDate:
                 frontend_type: date
-                label:         ehdev.festival.festival.startDate.label
+                label:         ehdev.festivalbasics.festival.start_date.label
             endDate:
                 frontend_type: date
-                label:         ehdev.festival.festival.endDate.label
+                label:         ehdev.festivalbasics.festival.end_date.label
             maxGuests:
                 frontend_type: integer
-                label:         ehdev.festival.festival.maxGuests.label
+                label:         ehdev.festivalbasics.festival.max_guests.label
             createdAt:
                 frontend_type: date
-                label:         ehdev.festival.festival.createdat.label
+                label:         ehdev.festivalbasics.festival.createdat.label
             updatedAt:
                 frontend_type: date
-                label:         ehdev.festival.festival.updatedat.label
+                label:         ehdev.festivalbasics.festival.updatedat.label
         properties:
             id: ~
+            view_link:
+                type: url
+                route: ehdev_festival_festival_view
+                params: [ id ]
             update_link:
                 type:       url
                 route:      ehdev_festival_festival_update
@@ -47,6 +55,13 @@ datagrids:
                 route: oro_api_delete_festival
                 params: [ id ]
         actions:
+            view:
+                type: navigate
+                label: oro.grid.action.view
+                icon: eye
+                link: view_link
+                acl_resource: ehdev_festival_festival_view
+                rowAction: true
             update:
                 type: dialog
                 label: oro.grid.action.update
@@ -56,7 +71,7 @@ datagrids:
                     reload-grid-name: ehdev-festival-festival-grid
                     options:
                         dialogOptions:
-                            title:  "@translator->trans(ehdev.festival.festival.widget.edit.title)"
+                            title:  "@translator->trans(ehdev.festivalbasics.festival.widget.edit.title)"
                             modal:  true
                             width:  700
             delete:

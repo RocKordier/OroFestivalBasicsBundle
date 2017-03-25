@@ -1,0 +1,42 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% oro_title_set({params : {"%entity.name%": entity.name|default('N/A') }}) %}
+
+{% block navButtons %}
+
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity':      entity,
+    'indexPath':   path('ehdev_festival_festival_index'),
+    'indexLabel':  'ehdev.festivalbasics.festival.entity_plural_label'|trans,
+    'entityTitle': entity.name|default('N/A'),
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set id = 'festival-detail-view' %}
+    {% set festivalInfos %}
+        {{ UI.renderProperty('ehdev.festivalbasics.festival.id.label'|trans, entity.id) }}
+        {{ UI.renderProperty('ehdev.festivalbasics.festival.name.label'|trans, entity.name) }}
+        {{ UI.renderProperty('ehdev.festivalbasics.festival.start_date.label'|trans, entity.startDate|date('Y-m-d')) }}
+        {{ UI.renderProperty('ehdev.festivalbasics.festival.end_date.label'|trans, entity.endDate|date('Y-m-d')) }}
+        {{ UI.renderProperty('ehdev.festivalbasics.festival.max_guests.label'|trans, entity.maxGuests) }}
+    {% endset %}
+
+    {% set dataBlocks = [{
+        'title': 'ehdev.festivalbasics.festival.widget.info.title'|trans,
+        'subblocks': [{
+            'title' : 'ehdev.festivalbasics.festival.widget.info.subtitle'|trans,
+            'data' : [festivalInfos]
+        }]
+    }] %}
+
+    {% set data = {'dataBlocks': dataBlocks} %}
+
+    {{ parent() }}
+{% endblock content_data %}

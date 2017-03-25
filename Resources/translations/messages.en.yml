@@ -1,5 +1,5 @@
 ehdev:
-    festival:
+    festivalbasics:
         tab: Festival
         festival:
             entity_plural_label: Festivals
@@ -7,13 +7,15 @@ ehdev:
             create_entity: Create Festival
             saved.message: Festival saved
             name.label: Name
-            startDate.label: Start Date
-            endDate.label: End Date
-            maxGuests.label: Max Guests
+            start_date.label: Start Date
+            end_date.label: End Date
+            max_guests.label: Max Guests
             createdat.label: Created
             updatedat.label: Updated
             id.label: Id
+            owner.label: Owner
             widget:
                 edit.title: Edit Festival
                 create.title: Create Festival
-
+                info.title: Festival
+                info.subtitle: Festival Infos

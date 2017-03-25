@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class FestivalType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festival.festival.';
+    const LABEL_PREFIX = 'ehdev.festivalbasics.festival.';
 
     /**
      * @return string
@@ -53,21 +53,21 @@ class FestivalType extends AbstractType
                 'startDate',
                 OroDateType::class,
                 [
-                    'label' => self::LABEL_PREFIX.'startDate.label',
+                    'label' => self::LABEL_PREFIX.'start_date.label',
                 ]
             )
             ->add(
                 'endDate',
                 OroDateType::class,
                 [
-                    'label' => self::LABEL_PREFIX.'endDate.label',
+                    'label' => self::LABEL_PREFIX.'end_date.label',
                 ]
             )
             ->add(
                 'maxGuests',
                 IntegerType::class,
                 [
-                    'label' => self::LABEL_PREFIX.'maxGuests.label',
+                    'label' => self::LABEL_PREFIX.'max_guests.label',
                 ]
             );
     }
