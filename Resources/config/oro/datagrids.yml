@@ -6,14 +6,14 @@ datagrids:
             type: orm
             query:
                 select:
-                    - fw.id
+                    - fw.id AS id
                     - fw.name
                     - fw.startDate
                     - fw.endDate
                     - fw.maxGuests
                     - fw.createdAt
                     - fw.updatedAt
-                    - owner.id
+                    - owner.id AS ownerId
                 from:
                     - { table: "%ehdev.festival.entity.festival.class%", alias: fw }
                 join:
@@ -60,7 +60,6 @@ datagrids:
                 label: oro.grid.action.view
                 icon: eye
                 link: view_link
-                acl_resource: ehdev_festival_festival_view
                 rowAction: true
             update:
                 type: dialog
