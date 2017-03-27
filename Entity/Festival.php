@@ -14,6 +14,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-festival-grid"},
+ *  "form"= {"grid_name"="ehdev-festival-festival-grid"},
  *  "tag"={"enabled"=true},
  *  "security"={
  *      "type"="ACL",
@@ -58,6 +59,16 @@ class Festival extends ExtendFestival
      * @ORM\Column(type="integer")
      */
     protected $maxGuests;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\OneToMany(
+     *      targetEntity="EHDev\Bundle\FestivalBasicsBundle\Entity\Stage", mappedBy="festival",
+     *      cascade={"all"}, orphanRemoval=true
+     * )
+     */
+    protected $stages;
 
     /**
      * @return string
@@ -137,5 +148,31 @@ class Festival extends ExtendFestival
         $this->maxGuests = $maxGuests;
 
         return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStages()
+    {
+        return $this->stages;
+    }
+
+    /**
+     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Stage $stage
+     */
+    public function addStage(Stage $stage)
+    {
+        if (!$this->stages->contains($stage)) {
+            $this->stages->add($stage);
+        }
+    }
+
+    /**
+     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Stage $stage
+     */
+    public function removeStage(Stage $stage)
+    {
+        $this->stages->removeElement($stage);
     }
 }

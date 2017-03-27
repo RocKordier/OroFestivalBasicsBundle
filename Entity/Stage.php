@@ -1,0 +1,118 @@
+<?php
+
+namespace EHDev\Bundle\FestivalBasicsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use EHDev\Bundle\BasicsBundle\Entity\Traits\BUOwnerTrait;
+use EHDev\Bundle\FestivalBasicsBundle\Model\ExtendStage;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+
+/**
+ * Class Stage
+ * @ORM\Entity(repositoryClass="EHDev\Bundle\FestivalBasicsBundle\Entity\Repository\StageRepository")
+ * @ORM\Table(name="ehdev_fwb_stage")
+ * @Config(defaultValues={
+ *  "entity"={"icon"="fa-flask"},
+ *  "grid"={"default"="ehdev-festival-stage-grid"},
+ *  "tag"={"enabled"=true},
+ *  "security"={
+ *      "type"="ACL",
+ *      "group_name"="",
+ *      "category"="ehdev_festival_stage"
+ *  },
+ *  "ownership"={
+ *    "owner_type"="BUSINESS_UNIT",
+ *    "owner_field_name"="owner",
+ *    "owner_column_name"="business_unit_owner_id",
+ *    "organization_field_name"="organization",
+ *    "organization_column_name"="organization_id"
+ *  }
+ * })
+ *
+ * @package EHDev\Bundle\FestivalBasicsBundle\Entity
+ */
+class Stage extends ExtendStage
+{
+    use BUOwnerTrait;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * @var Festival
+     * 
+     * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
+     * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
+     */
+    private $festival;
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Stage
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return Stage
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Festival
+     */
+    public function getFestival()
+    {
+        return $this->festival;
+    }
+
+    /**
+     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     *
+     * @return Stage
+     */
+    public function setFestival(Festival $festival)
+    {
+        $this->festival = $festival;
+        
+        return $this;
+    }
+}
