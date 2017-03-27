@@ -3,9 +3,9 @@
 namespace EHDev\Bundle\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\Bundle\BasicsBundle\Entity\Traits\BUOwnerTrait;
 use EHDev\Bundle\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 
 /**
  * Class Festival
@@ -23,7 +23,9 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  *  "ownership"={
  *    "owner_type"="BUSINESS_UNIT",
  *    "owner_field_name"="owner",
- *    "owner_column_name"="business_unit_owner_id"
+ *    "owner_column_name"="business_unit_owner_id",
+ *    "organization_field_name"="organization",
+ *    "organization_column_name"="organization_id"
  *  }
  * })
  *
@@ -31,6 +33,8 @@ use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
  */
 class Festival extends ExtendFestival
 {
+    use BUOwnerTrait;
+
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
@@ -54,14 +58,6 @@ class Festival extends ExtendFestival
      * @ORM\Column(type="integer")
      */
     protected $maxGuests;
-
-    /**
-     * @var BusinessUnit
-     *
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit", cascade={"persist"})
-     * @ORM\JoinColumn(name="business_unit_owner_id", referencedColumnName="id", onDelete="SET NULL")
-     */
-    protected $owner;
 
     /**
      * @return string
@@ -139,26 +135,6 @@ class Festival extends ExtendFestival
     public function setMaxGuests($maxGuests)
     {
         $this->maxGuests = $maxGuests;
-
-        return $this;
-    }
-
-    /**
-     * @return BusinessUnit
-     */
-    public function getOwner()
-    {
-        return $this->owner;
-    }
-
-    /**
-     * @param BusinessUnit $owner
-     *
-     * @return Festival
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
 
         return $this;
     }

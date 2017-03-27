@@ -13,12 +13,8 @@ datagrids:
                     - fw.maxGuests
                     - fw.createdAt
                     - fw.updatedAt
-                    - owner.id AS ownerId
                 from:
                     - { table: "%ehdev.festival.entity.festival.class%", alias: fw }
-                join:
-                    left:
-                        - { join: fw.owner, alias: owner }
         columns:
             id:
                 label:         ehdev.festivalbasics.festival.id.label
