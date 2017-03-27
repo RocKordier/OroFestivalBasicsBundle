@@ -1,0 +1,14 @@
+search:
+    EHDev\Bundle\FestivalBasicsBundle\Entity\Festival:
+        alias: ehdev_festival
+        label: ehdev.festivalbasics.festival.entity_label
+        search_template: EHDevFestivalBasicsBundle:Festival:searchResult.html.twig
+        route:
+            name: ehdev_festival_festival_view
+            parameters:
+                id: id
+        fields:
+            -
+                name:                   name
+                target_type:            text
+                target_fields:          [name]

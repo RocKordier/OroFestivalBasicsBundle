@@ -20,3 +20,21 @@ ehdev:
                 create.title: Create Festival
                 info.title: Festival
                 info.subtitle: Festival Infos
+            form:
+                placeholder.choose: Choose Festival
+        stage:
+            entity_plural_label: Stages
+            entity_label: Stage
+            create_entity: Create Stage
+            update_entity: Update Stage
+            saved.message: Stage saved
+            id.label: Id
+            name.label: Name
+            description.label: Description
+            createdat.label: Created
+            updatedat.label: Updated
+            widget:
+                edit.title: Edit Stage
+                create.title: Create Stage
+                info.title: Stage
+

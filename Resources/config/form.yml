@@ -1,5 +1,7 @@
 parameters:
     ehdev.festival.festival.type.class: EHDev\Bundle\FestivalBasicsBundle\Form\Type\FestivalType
+    ehdev.festival.stage.type.class: EHDev\Bundle\FestivalBasicsBundle\Form\Type\StageType
+
 
 services:
 #Types
@@ -7,6 +9,11 @@ services:
         class: "%ehdev.festival.festival.type.class%"
         tags:
             - { name: form.type, alias: "ehdev_festival" }
+
+    ehdev.festival.stage.form.type:
+        class: "%ehdev.festival.stage.type.class%"
+        tags:
+            - { name: form.type, alias: "ehdev_stage" }
 # Forms
     ehdev.festival.form:
         class: Symfony\Component\Form\Form
@@ -14,3 +21,20 @@ services:
         arguments:
             - "ehdev_festival_form"
             - "ehdev_festival"
+
+    ehdev.stage.form:
+        class: Symfony\Component\Form\Form
+        factory: ['@form.factory', createNamed]
+        arguments:
+            - "ehdev_stage_form"
+            - "ehdev_stage"
+
+
+   # Autocomplete Handler
+    ehdev.festival.form.autocomplete.festival.search_handler:
+        parent: oro_form.autocomplete.search_handler
+        arguments:
+            - "%ehdev.festival.entity.festival.class%"
+            - ["name"]
+        tags:
+            - { name: oro_form.autocomplete.search_handler, alias: ehdev_festival, acl_resource: ehdev_festival_festival_view }
