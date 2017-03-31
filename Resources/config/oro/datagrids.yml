@@ -1,4 +1,3 @@
 imports:
     - { resource: 'dg/festival.yml' }
     - { resource: 'dg/stage.yml' }
-

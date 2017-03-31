@@ -63,3 +63,12 @@ datagrids:
                 label:         oro.grid.action.delete
                 icon:          trash
                 link:          delete_link
+    ehdev-festival-festival-stage-grid:
+        extends: ehdev-festival-stage-grid
+        source:
+            query:
+                where:
+                    and:
+                        - fw.id = :festival
+            bind_parameters:
+                - festival

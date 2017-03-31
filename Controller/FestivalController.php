@@ -102,6 +102,24 @@ class FestivalController extends Controller
     }
 
     /**
+     * Stage widget
+     *
+     * @Route("/widget/stages/{id}", name="ehdev_festival_festival_widget_stages", requirements={"id"="\d+"})
+     * @AclAncestor("ehdev_festival_festival_view")
+     * @Template
+     *
+     * @param Festival $festival
+     *
+     * @return array
+     */
+    public function stageAction(Festival $festival)
+    {
+        return [
+            'entity' => $festival,
+        ];
+    }
+
+    /**
      * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $entity
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse

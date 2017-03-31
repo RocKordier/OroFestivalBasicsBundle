@@ -1,0 +1,10 @@
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+
+<div class="widget-content">
+    <div class="row-fluid form-horizontal">
+        <div class="responsive-block">
+            {{ dataGrid.renderGrid('ehdev-festival-festival-stage-grid', { festival: entity.id}, { cssClass: 'inner-grid' }) }}
+        </div>
+    </div>
+</div>

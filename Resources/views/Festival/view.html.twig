@@ -51,9 +51,19 @@
         {{ oro_widget_render({
             'widgetType': 'block',
             'alias': 'festival-info-widget',
-            'wid': 'festival-info-widget'|trans,
+            'wid': 'festival-info-widget',
             'title': '',
             'url': path('ehdev_festival_festival_widget_info', {id: entity.id})
+        }) }}
+    {% endset %}
+
+    {% set festivalStages %}
+        {{ oro_widget_render({
+            'widgetType': 'block',
+            'alias': 'festival-stage-widget',
+            'wid': 'festival-stage-widget',
+            'title': '',
+            'url': path('ehdev_festival_festival_widget_stages', {id: entity.id})
         }) }}
     {% endset %}
 
@@ -64,6 +74,14 @@
             'data' : [festivalInfos]
         }]
     }] %}
+
+    {% set dataBlocks = dataBlocks|merge([{
+        'title': 'ehdev.festivalbasics.festival.widget.stages.title'|trans,
+        'subblocks': [{
+            'title' : '',
+            'data' : [festivalStages]
+        }]
+    }]) %}
 
     {% set data = {'dataBlocks': dataBlocks} %}
 

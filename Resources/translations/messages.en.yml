@@ -20,6 +20,7 @@ ehdev:
                 create.title: Create Festival
                 info.title: Festival
                 info.subtitle: Festival Infos
+                stages.title: Stages
             form:
                 placeholder.choose: Choose Festival
         stage:
