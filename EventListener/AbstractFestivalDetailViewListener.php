@@ -2,6 +2,7 @@
 
 namespace EHDev\Bundle\FestivalBasicsBundle\EventListener;
 
+use Doctrine\ORM\EntityManager;
 use EHDev\Bundle\FestivalBasicsBundle\Entity\Festival;
 use Oro\Bundle\UIBundle\Event\BeforeListRenderEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -20,18 +21,24 @@ abstract class AbstractFestivalDetailViewListener
     /** @var TranslatorInterface */
     protected $translator;
 
+    /** @var  EntityManager */
+    protected $entityManager;
+
     /**
      * AbstractFestivalDetailViewListener constructor.
      *
      * @param \Symfony\Component\HttpFoundation\RequestStack     $requestStack
      * @param \Symfony\Component\Translation\TranslatorInterface $translator
+     * @param \Doctrine\ORM\EntityManager                        $entityManager
      */
     public function __construct(
         RequestStack $requestStack,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        EntityManager $entityManager
     ) {
-        $this->requestStack = $requestStack;
-        $this->translator   = $translator;
+        $this->requestStack  = $requestStack;
+        $this->translator    = $translator;
+        $this->entityManager = $entityManager;
     }
 
     /**

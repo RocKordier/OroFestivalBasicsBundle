@@ -62,26 +62,27 @@
             'widgetType': 'block',
             'alias': 'festival-stage-widget',
             'wid': 'festival-stage-widget',
-            'title': '',
+            'title': 'ehdev.festivalbasics.stage.entity_plural_label'|trans~' '~entity.startDate|date('Y'),
             'url': path('ehdev_festival_festival_widget_stages', {id: entity.id})
         }) }}
     {% endset %}
 
-    {% set dataBlocks = [{
+    {% set dataBlocks = [
+    {
         'title': 'ehdev.festivalbasics.festival.widget.info.title'|trans,
         'subblocks': [{
             'title' : 'ehdev.festivalbasics.festival.widget.info.subtitle'|trans,
             'data' : [festivalInfos]
         }]
-    }] %}
-
-    {% set dataBlocks = dataBlocks|merge([{
+    },
+    {
         'title': 'ehdev.festivalbasics.festival.widget.stages.title'|trans,
         'subblocks': [{
             'title' : '',
             'data' : [festivalStages]
-        }]
-    }]) %}
+    }]
+    }
+    ] %}
 
     {% set data = {'dataBlocks': dataBlocks} %}
 

@@ -9,6 +9,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 
 /**
  * Class Festival
+ *
  * @ORM\Entity(repositoryClass="EHDev\Bundle\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
  * @ORM\Table(name="ehdev_fwb_festival")
  * @Config(defaultValues={
@@ -30,7 +31,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *  }
  * })
  *
- * @package EHDev\Bundle\FestivalBasicsBundle\HomepageBundle\Entity
+ * @package EHDev\Bundle\FestivalBasicsBundle\Entity
  */
 class Festival extends ExtendFestival
 {
