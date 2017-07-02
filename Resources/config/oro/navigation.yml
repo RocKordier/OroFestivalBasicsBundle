@@ -4,17 +4,14 @@ navigation:
             ehdev_festival_tab:
                 uri: '#'
                 label: 'ehdev.festivalbasics.tab'
-                extras:
-                    position: 10
+                position: 10
             ehdev_festival_festival_tab:
-                uri: '#'
                 label: 'ehdev.festivalbasics.festival.entity_plural_label'
                 route:   'ehdev_festival_festival_index'
                 extras:
                     icon: fa-puzzle-piece
 
             ehdev_festival_stage_tab:
-                uri: '#'
                 label: 'ehdev.festivalbasics.stage.entity_plural_label'
                 route:   'ehdev_festival_stage_index'
                 extras:
@@ -26,3 +23,7 @@ navigation:
                         children:
                             ehdev_festival_festival_tab: ~
                             ehdev_festival_stage_tab: ~
+
+    titles:
+        ehdev_festival_festival_index:  ~
+        ehdev_festival_festival_view: 'Festival'
