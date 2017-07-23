@@ -4,7 +4,7 @@
     "homepage": "https://github.com/RocKordier/OroFestivalBasicsBundle",
     "keywords": ["Oro Platform", "Symfony2", "Basics", "Music", "Festival"],
     "license": "OSL-3.0",
-    "version": "0.0.1-beta0",
+    "version": "0.0.2-beta",
     "authors": [
         {
             "name": "[RocKordier] Eric Hertwig",
