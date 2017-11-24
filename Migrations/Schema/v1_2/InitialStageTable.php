@@ -1,17 +1,11 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_2;
+namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
 use EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\EHDevFestivalBasicsBundleInstaller;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-/**
- * Class InitialStageTable
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_2
- */
 class InitialStageTable implements Migration
 {
     /**
@@ -24,11 +18,6 @@ class InitialStageTable implements Migration
         self::addEhdevFwbStageForeignKeys($schema);
     }
 
-    /**
-     * Create ehdev_fwb_festival table
-     *
-     * @param Schema $schema
-     */
     public static function createEhdevFwbStageTable(Schema $schema)
     {
         $table = $schema->createTable('ehdev_fwb_stage');
@@ -46,11 +35,6 @@ class InitialStageTable implements Migration
         $table->setPrimaryKey(['id']);
     }
 
-    /**
-     * Add ehdev_fwb_festival foreign keys.
-     *
-     * @param Schema $schema
-     */
     public static function addEhdevFwbStageForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('ehdev_fwb_stage');

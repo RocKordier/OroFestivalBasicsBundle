@@ -1,17 +1,12 @@
 <?php
 
-namespace EHDev\Bundle\FestivalBasicsBundle\DependencyInjection;
+namespace EHDev\FestivalBasicsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-/**
- * Class EHDevFestivalExtension
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\DependencyInjection
- */
 class EHDevFestivalBasicsExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)

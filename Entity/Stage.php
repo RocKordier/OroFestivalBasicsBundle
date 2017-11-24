@@ -1,15 +1,13 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Entity;
+namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\Bundle\BasicsBundle\Entity\Traits\BUOwnerTrait;
-use EHDev\Bundle\FestivalBasicsBundle\Model\ExtendStage;
+use EHDev\BasicsBundle\Entity\Traits\BUOwnerTrait;
+use EHDev\FestivalBasicsBundle\Model\ExtendStage;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 
 /**
- * Class Stage
- * @ORM\Entity(repositoryClass="EHDev\Bundle\FestivalBasicsBundle\Entity\Repository\StageRepository")
+ * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository")
  * @ORM\Table(name="ehdev_fwb_stage")
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-flask"},
@@ -29,7 +27,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *  }
  * })
  *
- * @package EHDev\Bundle\FestivalBasicsBundle\Entity
+ * @package EHDev\FestivalBasicsBundle\Entity
  */
 class Stage extends ExtendStage
 {
@@ -105,7 +103,7 @@ class Stage extends ExtendStage
     }
 
     /**
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
      *
      * @return Stage
      */

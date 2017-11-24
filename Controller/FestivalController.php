@@ -1,8 +1,7 @@
 <?php
+namespace EHDev\FestivalBasicsBundle\Controller;
 
-namespace EHDev\Bundle\FestivalBasicsBundle\Controller;
-
-use EHDev\Bundle\FestivalBasicsBundle\Entity\Festival;
+use EHDev\FestivalBasicsBundle\Entity\Festival;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -11,9 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class FestivalController
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Controller
  * @Route("/festival")
  */
 class FestivalController extends Controller
@@ -25,7 +21,7 @@ class FestivalController extends Controller
      *
      * @Template
      */
-    public function indexAction()
+    public function indexAction(): array
     {
         return [];
     }
@@ -40,9 +36,9 @@ class FestivalController extends Controller
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      *
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
      */
-    public function viewAction(Festival $festival)
+    public function viewAction(Festival $festival): array
     {
         return [
             'entity' => $festival,
@@ -50,8 +46,6 @@ class FestivalController extends Controller
     }
 
     /**
-     * Create Festival
-     *
      * @Route("/create", name="ehdev_festival_festival_create")
      * @Template("@EHDevFestivalBasics/Festival/update.html.twig")
      * @Acl(

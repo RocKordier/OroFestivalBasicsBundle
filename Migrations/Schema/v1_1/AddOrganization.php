@@ -1,17 +1,11 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_1;
+namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_1;
 
 use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 use Oro\Bundle\SecurityBundle\Migrations\Schema\UpdateOwnershipTypeQuery;
 
-/**
- * Class AddOrganization
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_1
- */
 class AddOrganization implements Migration
 {
     /**
@@ -24,11 +18,6 @@ class AddOrganization implements Migration
         self::updateOwnership($queries);
     }
 
-    /**
-     * Adds organization_id field
-     *
-     * @param Schema $schema
-     */
     public static function addOrganization(Schema $schema)
     {
         $table = $schema->getTable('ehdev_fwb_festival');

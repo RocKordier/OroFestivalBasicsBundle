@@ -1,7 +1,8 @@
 <?php
 
-namespace EHDev\Bundle\FestivalBasicsBundle\Form\Type;
+namespace EHDev\FestivalBasicsBundle\Form\Type;
 
+use EHDev\FestivalBasicsBundle\Entity\Stage;
 use Oro\Bundle\FormBundle\Form\Type\OroDateType;
 use Oro\Bundle\FormBundle\Form\Type\OroEntitySelectOrCreateInlineType;
 use Oro\Bundle\FormBundle\Form\Type\OroRichTextType;
@@ -12,11 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-/**
- * Class StageType
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Form\Type
- */
 class StageType extends AbstractType
 {
     const LABEL_PREFIX    = 'ehdev.festivalbasics.stage.';
@@ -82,7 +78,7 @@ class StageType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'EHDev\Bundle\FestivalBasicsBundle\Entity\Stage',
+                'data_class' => Stage::class,
             ]
         );
     }

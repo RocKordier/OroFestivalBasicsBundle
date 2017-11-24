@@ -1,11 +1,10 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema;
+namespace EHDev\FestivalBasicsBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
-use EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_0\InitialFWTable;
-use EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_1\AddOrganization;
-use EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\v1_2\InitialStageTable;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_0\InitialFWTable;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_1\AddOrganization;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2\InitialStageTable;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 

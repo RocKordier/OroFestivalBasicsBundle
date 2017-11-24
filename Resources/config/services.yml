@@ -1,9 +1,9 @@
 parameters:
-    ehdev.festival.entity.festival.class: EHDev\Bundle\FestivalBasicsBundle\Entity\Festival
-    ehdev.festival.entity.stage.class: EHDev\Bundle\FestivalBasicsBundle\Entity\Stage
+    ehdev.festival.entity.festival.class: EHDev\FestivalBasicsBundle\Entity\Festival
+    ehdev.festival.entity.stage.class: EHDev\FestivalBasicsBundle\Entity\Stage
     ehdev.festival.festival.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     ehdev.festival.stage.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
-    ehdev.festival.event.detailviewlistener.class: EHDev\Bundle\FestivalBasicsBundle\EventListener\AbstractFestivalDetailViewListener
+    ehdev.festival.event.detailviewlistener.class: EHDev\FestivalBasicsBundle\EventListener\AbstractFestivalDetailViewListener
 
 services:
     ehdev.festival.festival.manager:

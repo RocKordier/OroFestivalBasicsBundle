@@ -1,16 +1,15 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Entity;
+namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\Bundle\BasicsBundle\Entity\Traits\BUOwnerTrait;
-use EHDev\Bundle\FestivalBasicsBundle\Model\ExtendFestival;
+use EHDev\BasicsBundle\Entity\Traits\BUOwnerTrait;
+use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 
 /**
  * Class Festival
  *
- * @ORM\Entity(repositoryClass="EHDev\Bundle\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
+ * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
  * @ORM\Table(name="ehdev_fwb_festival")
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
@@ -30,8 +29,6 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *    "organization_column_name"="organization_id"
  *  }
  * })
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Entity
  */
 class Festival extends ExtendFestival
 {
@@ -65,7 +62,7 @@ class Festival extends ExtendFestival
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\OneToMany(
-     *      targetEntity="EHDev\Bundle\FestivalBasicsBundle\Entity\Stage", mappedBy="festival",
+     *      targetEntity="EHDev\FestivalBasicsBundle\Entity\Stage", mappedBy="festival",
      *      cascade={"all"}, orphanRemoval=true
      * )
      */
@@ -160,7 +157,7 @@ class Festival extends ExtendFestival
     }
 
     /**
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Stage $stage
+     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $stage
      */
     public function addStage(Stage $stage)
     {
@@ -170,7 +167,7 @@ class Festival extends ExtendFestival
     }
 
     /**
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Stage $stage
+     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $stage
      */
     public function removeStage(Stage $stage)
     {

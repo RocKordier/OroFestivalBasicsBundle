@@ -1,7 +1,8 @@
 <?php
 
-namespace EHDev\Bundle\FestivalBasicsBundle\Form\Type;
+namespace EHDev\FestivalBasicsBundle\Form\Type;
 
+use EHDev\FestivalBasicsBundle\Entity\Festival;
 use Oro\Bundle\FormBundle\Form\Type\OroDateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -9,11 +10,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * Class FestivalType
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Form\Type
- */
 class FestivalType extends AbstractType
 {
     const LABEL_PREFIX = 'ehdev.festivalbasics.festival.';
@@ -79,7 +75,7 @@ class FestivalType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'EHDev\Bundle\FestivalBasicsBundle\Entity\Festival',
+                'data_class' => Festival::class,
             ]
         );
     }

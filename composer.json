@@ -13,11 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
+            "EHDev\\FestivalBasicsBundle\\": "",
             "EHDev\\Bundle\\FestivalBasicsBundle\\": ""
         }
     },
     "require": {
-        "oro/platform": "2.3.*"
+        "oro/platform": "~2.3"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

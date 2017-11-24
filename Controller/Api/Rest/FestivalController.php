@@ -1,6 +1,5 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Controller\Api\Rest;
+namespace EHDev\FestivalBasicsBundle\Controller\Api\Rest;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 

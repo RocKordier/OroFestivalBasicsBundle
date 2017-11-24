@@ -1,6 +1,5 @@
 <?php
-
-namespace EHDev\Bundle\FestivalBasicsBundle\Controller;
+namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\Bundle\FestivalBasicsBundle\Entity\Festival;
 use EHDev\Bundle\FestivalBasicsBundle\Entity\Stage;
@@ -11,9 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * Class FestivalController
- *
- * @package EHDev\Bundle\FestivalBasicsBundle\Controller
  * @Route("/stage")
  */
 class StageController extends Controller
