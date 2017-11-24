@@ -1,5 +1,5 @@
 search:
-    EHDev\Bundle\FestivalBasicsBundle\Entity\Festival:
+    EHDev\FestivalBasicsBundle\Entity\Festival:
         alias: ehdev_festival
         label: ehdev.festivalbasics.festival.entity_label
         search_template: EHDevFestivalBasicsBundle:Festival:searchResult.html.twig
