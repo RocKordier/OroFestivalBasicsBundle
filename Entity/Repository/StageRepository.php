@@ -1,5 +1,5 @@
 <?php
-namespace EHDev\Bundle\FestivalBasicsBundle\Entity\Repository;
+namespace EHDev\FestivalBasicsBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

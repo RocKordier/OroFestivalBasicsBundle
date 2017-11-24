@@ -1,7 +1,6 @@
 parameters:
-    ehdev.festival.festival.type.class: EHDev\Bundle\FestivalBasicsBundle\Form\Type\FestivalType
-    ehdev.festival.stage.type.class: EHDev\Bundle\FestivalBasicsBundle\Form\Type\StageType
-
+    ehdev.festival.festival.type.class: EHDev\FestivalBasicsBundle\Form\Type\FestivalType
+    ehdev.festival.stage.type.class: EHDev\FestivalBasicsBundle\Form\Type\StageType
 
 services:
 #Types

@@ -35,7 +35,7 @@ class AddOrganization implements Migration
     {
         $queryBag->addQuery(
             new UpdateOwnershipTypeQuery(
-                'EHDev\Bundle\FestivalBasicsBundle\Entity\Festival',
+                'EHDev\FestivalBasicsBundle\Entity\Festival',
                 [
                     'organization_field_name'  => 'organization',
                     'organization_column_name' => 'organization_id',

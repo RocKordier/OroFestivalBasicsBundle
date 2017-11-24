@@ -1,8 +1,8 @@
 <?php
 namespace EHDev\FestivalBasicsBundle\Controller;
 
-use EHDev\Bundle\FestivalBasicsBundle\Entity\Festival;
-use EHDev\Bundle\FestivalBasicsBundle\Entity\Stage;
+use EHDev\FestivalBasicsBundle\Entity\Festival;
+use EHDev\FestivalBasicsBundle\Entity\Stage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 
@@ -66,7 +66,7 @@ class StageController extends Controller
     }
 
     /**
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $entity
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */

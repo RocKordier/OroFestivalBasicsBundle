@@ -84,7 +84,7 @@ class FestivalController extends Controller
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
      *
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $festival
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
      *
      * @return array
      */
@@ -114,7 +114,7 @@ class FestivalController extends Controller
     }
 
     /**
-     * @param \EHDev\Bundle\FestivalBasicsBundle\Entity\Festival $entity
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */

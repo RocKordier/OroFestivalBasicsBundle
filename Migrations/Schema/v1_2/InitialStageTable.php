@@ -2,7 +2,7 @@
 namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
-use EHDev\Bundle\FestivalBasicsBundle\Migrations\Schema\EHDevFestivalBasicsBundleInstaller;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\EHDevFestivalBasicsBundleInstaller;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
