@@ -5,7 +5,7 @@
 {% set pageTitle = 'ehdev.festivalbasics.stage.entity_label'|trans %}
 
 {% block navButtons %}
-    {% if resource_granted('ehdev_festival_stage_create') %}
+    {% if is_granted('ehdev_festival_stage_create') %}
         {% set dialogTitle = 'ehdev.festivalbasics.stage.create_entity'|trans %}
         {{ UI.clientButton({
             'dataUrl': path('ehdev_festival_stage_create'),

@@ -5,7 +5,7 @@
 {% oro_title_set({params : {"%entity.name%": entity.name|default('N/A') }}) %}
 
 {% block navButtons %}
-    {% if resource_granted('ehdev_festival_festival_update') %}
+    {% if is_granted('ehdev_festival_festival_update') %}
         {% set dialogTitle = 'ehdev.festivalbasics.festival.update_entity'|trans %}
         {{ UI.clientButton({
             'dataUrl': path('ehdev_festival_festival_update', {id: entity.id}),
