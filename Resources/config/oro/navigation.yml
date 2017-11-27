@@ -16,6 +16,11 @@ navigation:
                 route:   'ehdev_festival_stage_index'
                 extras:
                     icon: fa-desktop
+            ehdev_festival_securityarea_tab:
+                label: 'ehdev.festivalbasics.securityarea.entity_plural_label'
+                route: 'ehdev_festival_security_area_index'
+                extras:
+                    icon: fa-desktop
         tree:
             application_menu:
                 children:
@@ -23,6 +28,7 @@ navigation:
                         children:
                             ehdev_festival_festival_tab: ~
                             ehdev_festival_stage_tab: ~
+                            ehdev_festival_securityarea_tab: ~
 
     titles:
         ehdev_festival_festival_index:  ~

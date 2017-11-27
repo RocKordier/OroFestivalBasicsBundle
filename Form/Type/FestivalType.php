@@ -1,5 +1,4 @@
 <?php
-
 namespace EHDev\FestivalBasicsBundle\Form\Type;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;

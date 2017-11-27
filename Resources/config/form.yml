@@ -1,6 +1,7 @@
 parameters:
     ehdev.festival.festival.type.class: EHDev\FestivalBasicsBundle\Form\Type\FestivalType
     ehdev.festival.stage.type.class: EHDev\FestivalBasicsBundle\Form\Type\StageType
+    ehdev.festival.security_area.type.class: EHDev\FestivalBasicsBundle\Form\Type\SecurityAreaType
 
 services:
 #Types
@@ -13,6 +14,11 @@ services:
         class: "%ehdev.festival.stage.type.class%"
         tags:
             - { name: form.type, alias: "ehdev_stage" }
+
+    ehdev.festival.securityarea.form.type:
+        class: "%ehdev.festival.security_area.type.class%"
+        tags:
+            - { name: form.type, alias: "ehdev_securityarea" }
 # Forms
     ehdev.festival.form:
         class: Symfony\Component\Form\Form
@@ -28,6 +34,12 @@ services:
             - "ehdev_stage_form"
             - "ehdev_stage"
 
+    ehdev.securityarea.form:
+        class: Symfony\Component\Form\Form
+        factory: ['@form.factory', createNamed]
+        arguments:
+            - "ehdev_securityarea_form"
+            - "EHDev\FestivalBasicsBundle\Form\Type\SecurityAreaType"
 
    # Autocomplete Handler
     ehdev.festival.form.autocomplete.festival.search_handler:

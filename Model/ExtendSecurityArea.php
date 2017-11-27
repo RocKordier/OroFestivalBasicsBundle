@@ -3,7 +3,7 @@ namespace EHDev\FestivalBasicsBundle\Model;
 
 use EHDev\BasicsBundle\Entity\Base;
 
-class ExtendFestival extends Base
+class ExtendSecurityArea extends Base
 {
     public function __construct()
     {

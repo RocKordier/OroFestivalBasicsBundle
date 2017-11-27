@@ -39,3 +39,18 @@ ehdev:
                 create.title: Create Stage
                 info.title: Stage
 
+        securityarea:
+            entity_plural_label: SecurityAreas
+            entity_label: SecurityArea
+            create_entity: Create SecurityArea
+            update_entity: Update SecurityArea
+            id.label: Id
+            name.label: Name
+            description.label: Description
+            createdat.label: Created
+            updatedat.label: Updated
+            saved.message: SecurityArea saved
+            widget:
+                edit.title: Edit SecurityArea
+                create.title: Create SecurityArea
+                info.title: SecurityArea

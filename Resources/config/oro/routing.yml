@@ -3,7 +3,7 @@ ehdev_festival_festival_bundle:
     type:         annotation
     prefix:       /festival
 
-ehdev_festival_festival_api_festival:
+ehdev_festival_festival_api:
     resource:     "@EHDevFestivalBasicsBundle/Controller/Api/Rest/FestivalController.php"
     type:         rest
     prefix:       api/rest/{version}/
@@ -15,6 +15,16 @@ ehdev_festival_festival_api_festival:
 
 ehdev_festival_festival_api_stage:
     resource:     "@EHDevFestivalBasicsBundle/Controller/Api/Rest/StageController.php"
+    type:         rest
+    prefix:       api/rest/{version}/
+    requirements:
+        version:  latest|v1
+        _format:  json
+    defaults:
+        version:  latest
+
+ehdev_festival_security_area_api:
+    resource:     "@EHDevFestivalBasicsBundle/Controller/Api/Rest/SecurityAreaController.php"
     type:         rest
     prefix:       api/rest/{version}/
     requirements:

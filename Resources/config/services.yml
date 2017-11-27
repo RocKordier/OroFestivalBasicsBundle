@@ -1,8 +1,10 @@
 parameters:
     ehdev.festival.entity.festival.class: EHDev\FestivalBasicsBundle\Entity\Festival
     ehdev.festival.entity.stage.class: EHDev\FestivalBasicsBundle\Entity\Stage
+    ehdev.festival.entity.security_area.class: EHDev\FestivalBasicsBundle\Entity\SecurityArea
     ehdev.festival.festival.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     ehdev.festival.stage.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+    ehdev.festival.security_area.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     ehdev.festival.event.detailviewlistener.class: EHDev\FestivalBasicsBundle\EventListener\AbstractFestivalDetailViewListener
 
 services:
@@ -18,6 +20,13 @@ services:
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
             - %ehdev.festival.entity.stage.class%
+            - "@doctrine.orm.entity_manager"
+
+    ehdev.festival.security_area.manager:
+        class: %ehdev.festival.security_area.manager.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %ehdev.festival.entity.security_area.class%
             - "@doctrine.orm.entity_manager"
 
     ehdev.festival.event.detailviewlistener:

@@ -1,0 +1,55 @@
+datagrids:
+    ehdev-festival-security-area-grid:
+        extended_entity_name: "%ehdev.festival.entity.security_area.class%"
+        acl_resource: ehdev_festival_security_area_view
+        source:
+            type: orm
+            query:
+                select:
+                    - sa.id
+                    - sa.name
+                    - sa.createdAt
+                    - sa.updatedAt
+                from:
+                    - { table: "%ehdev.festival.entity.security_area.class%", alias: sa }
+        columns:
+            id:
+                label:         ehdev.festivalbasics.security_area.id.label
+            name:
+                frontend_type: string
+                label:         ehdev.festivalbasics.security_area.name.label
+            createdAt:
+                frontend_type: date
+                label:         ehdev.festivalbasics.security_area.createdat.label
+            updatedAt:
+                frontend_type: date
+                label:         ehdev.festivalbasics.security_area.updatedat.label
+        properties:
+            id: ~
+            update_link:
+                type:       url
+                route:      ehdev_festival_security_area_update
+                params:     [ id ]
+            delete_link:
+                type: url
+                route: oro_api_delete_security_area
+                params: [ id ]
+        actions:
+            update:
+                type: dialog
+                label: oro.grid.action.update
+                icon: edit
+                link: update_link
+                widgetOptions:
+                    reload-grid-name: ehdev-festival-security-area-grid
+                    options:
+                        dialogOptions:
+                            title:  "@translator->trans(ehdev.festivalbasics.securityarea.widget.edit.title)"
+                            modal:  true
+                            width:  700
+            delete:
+                type:          delete
+                acl_resource:  ehdev_festival_security_area_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
