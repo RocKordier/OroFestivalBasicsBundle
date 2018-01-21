@@ -4,20 +4,39 @@
     "homepage": "https://github.com/RocKordier/OroFestivalBasicsBundle",
     "keywords": ["Oro Platform", "Symfony2", "Basics", "Music", "Festival"],
     "license": "OSL-3.0",
-    "version": "0.0.3",
     "authors": [
         {
             "name": "[RocKordier] Eric Hertwig",
             "homepage": "http://eric-hertwig.de"
         }
     ],
+    "repositories": {
+        "oro": {
+            "type": "composer",
+            "url": "https://packagist.orocrm.com"
+        },
+        "asset-packagist": {
+            "type": "composer",
+            "url": "https://asset-packagist.orocrm.com"
+        }
+    },
     "autoload": {
         "psr-4": {
-            "EHDev\\FestivalBasicsBundle\\": ""
+            "EHDev\\FestivalBasicsBundle\\": ["src/", "tests/"]
         }
     },
     "require": {
+        "php": ">=7.0",
         "oro/platform": "~2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5",
+        "ehdev/ciutility": "^0.0.1"
+    },
+    "config" : {
+        "fxp-asset" : {
+            "enabled" : false
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
