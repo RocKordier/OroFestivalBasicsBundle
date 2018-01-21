@@ -37,6 +37,7 @@ class FestivalController extends Controller
      * )
      *
      * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
+     * @return array
      */
     public function viewAction(Festival $festival): array
     {
@@ -55,7 +56,7 @@ class FestivalController extends Controller
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function createAction()
+    public function createAction(): array
     {
         return $this->update($this->getManager()->createEntity());
     }
@@ -71,8 +72,12 @@ class FestivalController extends Controller
      *      permission="EDIT",
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
+     *
+     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
+     * @return array
+     *
      */
-    public function updateAction(Festival $entity)
+    public function updateAction(Festival $entity): array
     {
         return $this->update($entity);
     }
@@ -88,7 +93,7 @@ class FestivalController extends Controller
      *
      * @return array
      */
-    public function infoAction(Festival $festival)
+    public function infoAction(Festival $festival): array
     {
         return [
             'entity' => $festival,
@@ -106,7 +111,7 @@ class FestivalController extends Controller
      *
      * @return array
      */
-    public function stageAction(Festival $festival)
+    public function stageAction(Festival $festival): array
     {
         return [
             'entity' => $festival,
@@ -118,7 +123,7 @@ class FestivalController extends Controller
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    protected function update(Festival $entity)
+    protected function update(Festival $entity): array
     {
         return $this->get('oro_form.model.update_handler')->update(
             $entity,
