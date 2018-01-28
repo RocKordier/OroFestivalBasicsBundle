@@ -69,6 +69,22 @@ class Festival extends ExtendFestival
     protected $stages;
 
     /**
+     * @var SecurityArea[]
+     *
+     * @ORM\ManyToMany(targetEntity="SecurityArea")
+     * @ORM\JoinTable(name="ehdev_fwb_secarea2festival",
+     *      joinColumns={@ORM\JoinColumn(name="festival_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="secare_id", referencedColumnName="id", onDelete="CASCADE")}
+     * )
+     */
+    protected $securityAreas;
+
+    public function __construct()
+    {
+        $this->securityAreas = [];
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -172,5 +188,23 @@ class Festival extends ExtendFestival
     public function removeStage(Stage $stage)
     {
         $this->stages->removeElement($stage);
+    }
+
+    /**
+     * @return SecurityArea[]
+     */
+    public function getSecurityAreas()
+    {
+        return $this->securityAreas;
+    }
+
+    /**
+     * @param SecurityArea[] $securityAreas
+     * @return Festival
+     */
+    public function setSecurityAreas($securityAreas): Festival
+    {
+        $this->securityAreas = $securityAreas;
+        return $this;
     }
 }

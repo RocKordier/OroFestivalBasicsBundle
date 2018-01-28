@@ -2,7 +2,9 @@
 namespace EHDev\FestivalBasicsBundle\Form\Type;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;
+use EHDev\FestivalBasicsBundle\Entity\SecurityArea;
 use Oro\Bundle\FormBundle\Form\Type\OroDateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -63,6 +65,16 @@ class FestivalType extends AbstractType
                 IntegerType::class,
                 [
                     'label' => self::LABEL_PREFIX.'max_guests.label',
+                ]
+            )
+            ->add(
+                'securityAreas',
+                EntityType::class,
+                [
+                    'class' => SecurityArea::class,
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false,
                 ]
             );
     }
