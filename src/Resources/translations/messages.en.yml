@@ -15,8 +15,10 @@ ehdev:
             updatedat.label: Updated
             id.label: Id
             owner.label: Owner
+            organization.label: Organization
             stages.label: Stages
             security_areas.label: Security Areas
+            is_active.label: Active?
             widget:
                 edit.title: Edit Festival
                 create.title: Create Festival
@@ -36,6 +38,9 @@ ehdev:
             description.label: Description
             createdat.label: Created
             updatedat.label: Updated
+            festival.label: Festival
+            owner.label: Owner
+            organization.label: Organization
             widget:
                 edit.title: Edit Stage
                 create.title: Create Stage

@@ -6,6 +6,8 @@ use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_0\InitialFWTable;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_1\AddOrganization;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2\InitialStageTable;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_3\CreateSecurityArea;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_4\AddSecAreaFestivalRelation;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_5\AddActiveFlag;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
@@ -16,7 +18,7 @@ class EHDevFestivalBasicsBundleInstaller implements Installation
      */
     public function getMigrationVersion(): string
     {
-        return 'v1_3';
+        return 'v1_5';
     }
 
     public function up(Schema $schema, QueryBag $queries)
@@ -35,5 +37,11 @@ class EHDevFestivalBasicsBundleInstaller implements Installation
 
         /** v1_3 */
         CreateSecurityArea::createEhdevFwbSecurityAreaTable($schema);
+
+        /** v1_4 */
+        AddSecAreaFestivalRelation::createEhdevFwbSecarea2festivalTable($schema);
+
+        /** v1_5 */
+        AddActiveFlag::addField($schema);
     }
 }

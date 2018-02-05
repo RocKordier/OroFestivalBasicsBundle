@@ -69,6 +69,13 @@ class Festival extends ExtendFestival
     protected $stages;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", name="is_active")
+     */
+    protected $isActive = false;
+
+    /**
      * @var SecurityArea[]
      *
      * @ORM\ManyToMany(targetEntity="SecurityArea")
@@ -205,6 +212,24 @@ class Festival extends ExtendFestival
     public function setSecurityAreas($securityAreas): Festival
     {
         $this->securityAreas = $securityAreas;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * @param bool $isActive
+     * @return Festival
+     */
+    public function setIsActive(bool $isActive): Festival
+    {
+        $this->isActive = $isActive;
         return $this;
     }
 }

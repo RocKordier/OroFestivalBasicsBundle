@@ -4,11 +4,17 @@
 <div class="widget-content">
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
+            {% set isActive %}
+            {% include '@EHDevBasics/Datagrid/boolean.html.twig' with {
+                value: entity.isActive
+            } %}
+            {% endset %}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.id.label'|trans, entity.id) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.name.label'|trans, entity.name) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.start_date.label'|trans, entity.startDate|date('Y-m-d')) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.end_date.label'|trans, entity.endDate|date('Y-m-d')) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.max_guests.label'|trans, entity.maxGuests) }}
+            {{ UI.renderHtmlProperty('ehdev.festivalbasics.festival.is_active.label'|trans, isActive) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.security_areas.label'|trans, entity.securityAreas|join(', ')) }}
         </div>
         <div class="responsive-block">

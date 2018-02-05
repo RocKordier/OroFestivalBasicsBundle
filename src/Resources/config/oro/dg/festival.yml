@@ -11,6 +11,7 @@ datagrids:
                     - fw.startDate
                     - fw.endDate
                     - fw.maxGuests
+                    - fw.isActive
                     - fw.createdAt
                     - fw.updatedAt
                 from:
@@ -30,6 +31,9 @@ datagrids:
             maxGuests:
                 frontend_type: integer
                 label:         ehdev.festivalbasics.festival.max_guests.label
+            isActive:
+                frontend_type: boolean
+                label:         ehdev.festivalbasics.festival.is_active.label
             createdAt:
                 frontend_type: date
                 label:         ehdev.festivalbasics.festival.createdat.label
