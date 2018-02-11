@@ -62,7 +62,7 @@ class SecurityAreaController extends Controller
 
     protected function update(SecurityArea $entity): array
     {
-        return $this->get('oro_form.model.update_handler')->update(
+        return $this->get('oro_form.update_handler')->update(
             $entity,
             $this->get('ehdev.securityarea.form'),
             $this->get('translator')->trans('ehdev.festivalbasics.securityarea.saved.message')

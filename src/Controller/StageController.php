@@ -66,13 +66,13 @@ class StageController extends Controller
     }
 
     /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
+     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $entity
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     protected function update(Stage $entity)
     {
-        return $this->get('oro_form.model.update_handler')->update(
+        return $this->get('oro_form.update_handler')->update(
             $entity,
             $this->get('ehdev.stage.form'),
             $this->get('translator')->trans('ehdev.festivalbasics.stage.saved.message')

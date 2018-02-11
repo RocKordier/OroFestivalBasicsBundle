@@ -125,7 +125,7 @@ class FestivalController extends Controller
      */
     protected function update(Festival $entity): array
     {
-        return $this->get('oro_form.model.update_handler')->update(
+        return $this->get('oro_form.update_handler')->update(
             $entity,
             $this->get('ehdev.festival.form'),
             $this->get('translator')->trans('ehdev.festivalbasics.festival.saved.message')
