@@ -5,4 +5,8 @@ use Doctrine\ORM\EntityRepository;
 
 class FestivalRepository extends EntityRepository
 {
+    public function findActiveFestivals()
+    {
+        return $this->findBy(['isActive' => true]);
+    }
 }
