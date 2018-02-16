@@ -28,7 +28,7 @@
     "require": {
         "php": ">=7.0",
         "oro/platform": "~2.3",
-        "ehdev/oro-basics-bundle": "^0.0.8"
+        "ehdev/oro-basics-bundle": "^0.0.9"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",

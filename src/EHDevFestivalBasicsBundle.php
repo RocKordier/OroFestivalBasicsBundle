@@ -3,6 +3,4 @@ namespace EHDev\FestivalBasicsBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EHDevFestivalBasicsBundle extends Bundle
-{
-}
+class EHDevFestivalBasicsBundle extends Bundle {}
