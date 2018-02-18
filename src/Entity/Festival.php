@@ -88,6 +88,8 @@ class Festival extends ExtendFestival
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->securityAreas = [];
     }
 
