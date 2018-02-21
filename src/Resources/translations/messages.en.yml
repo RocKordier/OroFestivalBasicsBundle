@@ -11,14 +11,15 @@ ehdev:
             start_date.label: Start Date
             end_date.label: End Date
             max_guests.label: Max Guests
-            createdat.label: Created
-            updatedat.label: Updated
+            created_at.label: Created
+            updated_at.label: Updated
             id.label: Id
             owner.label: Owner
             organization.label: Organization
             stages.label: Stages
             security_areas.label: Security Areas
             is_active.label: Active?
+            serialized_data.label: Serialized Data
             widget:
                 edit.title: Edit Festival
                 create.title: Create Festival
@@ -36,11 +37,12 @@ ehdev:
             id.label: Id
             name.label: Name
             description.label: Description
-            createdat.label: Created
-            updatedat.label: Updated
+            created_at.label: Created
+            updated_at.label: Updated
             festival.label: Festival
             owner.label: Owner
             organization.label: Organization
+            serialized_data.label: Serialized Data
             widget:
                 edit.title: Edit Stage
                 create.title: Create Stage
@@ -54,8 +56,9 @@ ehdev:
             id.label: Id
             name.label: Name
             description.label: Description
-            createdat.label: Created
-            updatedat.label: Updated
+            created_at.label: Created
+            updated_at.label: Updated
+            serialized_data.label: Serialized Data
             saved.message: SecurityArea saved
             widget:
                 edit.title: Edit SecurityArea
