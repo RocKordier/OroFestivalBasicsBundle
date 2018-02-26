@@ -64,3 +64,7 @@ ehdev:
                 edit.title: Edit SecurityArea
                 create.title: Create SecurityArea
                 info.title: SecurityArea
+
+        system_configuration:
+            groups:
+                festival.title: Festival Settings

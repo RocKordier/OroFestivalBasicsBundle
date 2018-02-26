@@ -1,0 +1,5 @@
+system_configuration:
+    groups:
+        ehdev_festival_settings:
+            icon: fa-music
+            title: ehdev.festivalbasics.system_configuration.groups.festival.title
