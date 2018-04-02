@@ -36,10 +36,10 @@ datagrids:
                 label:         ehdev.festivalbasics.festival.is_active.label
             createdAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.festival.createdat.label
+                label:         ehdev.festivalbasics.festival.created_at.label
             updatedAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.festival.updatedat.label
+                label:         ehdev.festivalbasics.festival.updated_at.label
         properties:
             id: ~
             view_link:
