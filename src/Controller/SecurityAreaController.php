@@ -82,7 +82,7 @@ class SecurityAreaController
         return $this->updateHandlerFacade->update(
             $entity,
             $this->formFactory->create(SecurityAreaType::class, $entity),
-            $this->translator->trans('ehdev.festivalbasics.festival.saved.message')
+            $this->translator->trans('ehdev.festivalbasics.securityarea.saved.message')
         );
     }
 }
