@@ -19,14 +19,6 @@ class FestivalType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * @return string
-     */
     public function getBlockPrefix()
     {
         return 'ehdev_festival';

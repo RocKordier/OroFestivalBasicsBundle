@@ -2,32 +2,18 @@ parameters:
     ehdev.festival.entity.festival.class: EHDev\FestivalBasicsBundle\Entity\Festival
     ehdev.festival.entity.stage.class: EHDev\FestivalBasicsBundle\Entity\Stage
     ehdev.festival.entity.security_area.class: EHDev\FestivalBasicsBundle\Entity\SecurityArea
-    ehdev.festival.festival.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
-    ehdev.festival.stage.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
-    ehdev.festival.security_area.manager.class: Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
     ehdev.festival.event.detailviewlistener.class: EHDev\FestivalBasicsBundle\EventListener\AbstractFestivalDetailViewListener
 
 services:
-    ehdev.festival.festival.manager:
-        class: %ehdev.festival.festival.manager.class%
-        parent: oro_soap.manager.entity_manager.abstract
-        arguments:
-            - %ehdev.festival.entity.festival.class%
-            - "@doctrine.orm.entity_manager"
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
 
-    ehdev.festival.stage.manager:
-        class: %ehdev.festival.stage.manager.class%
-        parent: oro_soap.manager.entity_manager.abstract
-        arguments:
-            - %ehdev.festival.entity.stage.class%
-            - "@doctrine.orm.entity_manager"
-
-    ehdev.festival.security_area.manager:
-        class: %ehdev.festival.security_area.manager.class%
-        parent: oro_soap.manager.entity_manager.abstract
-        arguments:
-            - %ehdev.festival.entity.security_area.class%
-            - "@doctrine.orm.entity_manager"
+    EHDev\FestivalBasicsBundle\Controller\:
+        public: true
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
 
     ehdev.festival.event.detailviewlistener:
         abstract: true
@@ -35,3 +21,14 @@ services:
             - '@request_stack'
             - '@translator'
             - "@doctrine.orm.entity_manager"
+
+    ehdev.festival.form.autocomplete.festival.search_handler:
+        parent: oro_form.autocomplete.search_handler
+        public: true
+        autowire: false
+        autoconfigure: false
+        arguments:
+            - EHDev\FestivalBasicsBundle\Entity\Festival
+            - ["name"]
+        tags:
+            - { name: oro_form.autocomplete.search_handler, alias: ehdev_festival, acl_resource: ehdev_festival_festival_view }

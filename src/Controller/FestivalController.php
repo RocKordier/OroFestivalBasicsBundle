@@ -2,18 +2,35 @@
 namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EHDev\FestivalBasicsBundle\Form\Type\FestivalType;
+use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/festival")
  */
-class FestivalController extends Controller
+class FestivalController
 {
+    private $updateHandlerFacade;
+    private $translator;
+    private $formFactory;
+
+    public function __construct(
+        UpdateHandlerFacade $updateHandlerFacade,
+        TranslatorInterface $translator,
+        FormFactoryInterface $formFactory
+    ) {
+        $this->updateHandlerFacade = $updateHandlerFacade;
+        $this->translator = $translator;
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * Index
      * @Route("/", name="ehdev_festival_festival_index")
@@ -58,7 +75,7 @@ class FestivalController extends Controller
      */
     public function createAction(): array
     {
-        return $this->update($this->getManager()->createEntity());
+        return $this->update(new Festival());
     }
 
     /**
@@ -125,15 +142,10 @@ class FestivalController extends Controller
      */
     protected function update(Festival $entity): array
     {
-        return $this->get('oro_form.update_handler')->update(
+        return $this->updateHandlerFacade->update(
             $entity,
-            $this->get('ehdev.festival.form'),
-            $this->get('translator')->trans('ehdev.festivalbasics.festival.saved.message')
+            $this->formFactory->create(FestivalType::class, $entity),
+            $this->translator->trans('ehdev.festivalbasics.festival.saved.message')
         );
-    }
-
-    protected function getManager()
-    {
-        return $this->get('ehdev.festival.festival.manager');
     }
 }

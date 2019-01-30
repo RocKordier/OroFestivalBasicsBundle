@@ -18,14 +18,6 @@ class StageType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
-     * @return string
-     */
     public function getBlockPrefix()
     {
         return 'ehdev_stage';
@@ -55,7 +47,7 @@ class StageType extends AbstractType
             )
             ->add(
                 'festival',
-                OroEntitySelectOrCreateInlineType::NAME,
+                OroEntitySelectOrCreateInlineType::class,
                 [
                     'required'           => true,
                     'autocomplete_alias' => 'ehdev_festival',

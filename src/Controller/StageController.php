@@ -1,19 +1,35 @@
 <?php
 namespace EHDev\FestivalBasicsBundle\Controller;
 
-use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\Stage;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use EHDev\FestivalBasicsBundle\Form\Type\StageType;
+use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/stage")
  */
-class StageController extends Controller
+class StageController
 {
+    private $updateHandlerFacade;
+    private $translator;
+    private $formFactory;
+
+    public function __construct(
+        UpdateHandlerFacade $updateHandlerFacade,
+        TranslatorInterface $translator,
+        FormFactoryInterface $formFactory
+    ) {
+        $this->updateHandlerFacade = $updateHandlerFacade;
+        $this->translator = $translator;
+        $this->formFactory = $formFactory;
+    }
+
     /**
      * Index
      * @Route("/", name="ehdev_festival_stage_index")
@@ -45,7 +61,7 @@ class StageController extends Controller
      */
     public function createAction()
     {
-        return $this->update($this->getManager()->createEntity());
+        return $this->update(new Stage());
     }
 
     /**
@@ -72,15 +88,10 @@ class StageController extends Controller
      */
     protected function update(Stage $entity)
     {
-        return $this->get('oro_form.update_handler')->update(
+        return $this->updateHandlerFacade->update(
             $entity,
-            $this->get('ehdev.stage.form'),
-            $this->get('translator')->trans('ehdev.festivalbasics.stage.saved.message')
+            $this->formFactory->create(StageType::class, $entity),
+            $this->translator->trans('ehdev.festivalbasics.stage.saved.message')
         );
-    }
-
-    protected function getManager()
-    {
-        return $this->get('ehdev.festival.stage.manager');
     }
 }
