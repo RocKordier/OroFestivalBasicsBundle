@@ -1,10 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\BasicsBundle\Entity\Traits\BUOwnerTrait;
 use EHDev\FestivalBasicsBundle\Model\ExtendStage;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository")
@@ -26,12 +29,10 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  *    "organization_column_name"="organization_id"
  *  }
  * })
- *
- * @package EHDev\FestivalBasicsBundle\Entity
  */
 class Stage extends ExtendStage
 {
-    use BUOwnerTrait;
+    use BusinessUnitAwareTrait;
 
     /**
      * @var string
@@ -48,7 +49,7 @@ class Stage extends ExtendStage
 
     /**
      * @var Festival
-     * 
+     *
      * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
      * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
      */
@@ -103,14 +104,14 @@ class Stage extends ExtendStage
     }
 
     /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
+     * @param Festival $festival
      *
      * @return Stage
      */
     public function setFestival(Festival $festival)
     {
         $this->festival = $festival;
-        
+
         return $this;
     }
 }

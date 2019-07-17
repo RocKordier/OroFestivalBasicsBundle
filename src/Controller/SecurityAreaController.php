@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\FestivalBasicsBundle\Entity\SecurityArea;
 use EHDev\FestivalBasicsBundle\Form\Type\SecurityAreaType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;

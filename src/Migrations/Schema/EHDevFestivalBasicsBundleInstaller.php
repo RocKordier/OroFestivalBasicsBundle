@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
@@ -23,25 +26,25 @@ class EHDevFestivalBasicsBundleInstaller implements Installation
 
     public function up(Schema $schema, QueryBag $queries)
     {
-        /** v1_0 */
+        /* v1_0 */
         InitialFWTable::createEhdevFwbFestivalTable($schema);
         InitialFWTable::addEhdevFwbFestivalForeignKeys($schema);
 
-        /** v1_1 */
+        /* v1_1 */
         AddOrganization::addOrganization($schema);
         AddOrganization::updateOwnership($queries);
 
-        /** v1_2 */
+        /* v1_2 */
         InitialStageTable::createEhdevFwbStageTable($schema);
         InitialStageTable::addEhdevFwbStageForeignKeys($schema);
 
-        /** v1_3 */
+        /* v1_3 */
         CreateSecurityArea::createEhdevFwbSecurityAreaTable($schema);
 
-        /** v1_4 */
+        /* v1_4 */
         AddSecAreaFestivalRelation::createEhdevFwbSecarea2festivalTable($schema);
 
-        /** v1_5 */
+        /* v1_5 */
         AddActiveFlag::addField($schema);
     }
 }

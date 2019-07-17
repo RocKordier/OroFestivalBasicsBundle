@@ -1,14 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\BasicsBundle\Entity\Traits\BUOwnerTrait;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 
 /**
- * Class Festival
- *
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
  * @ORM\Table(name="ehdev_fwb_festival")
  * @Config(defaultValues={
@@ -32,7 +33,7 @@ use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
  */
 class Festival extends ExtendFestival
 {
-    use BUOwnerTrait;
+    use BusinessUnitAwareTrait;
 
     /**
      * @var string
@@ -41,13 +42,13 @@ class Festival extends ExtendFestival
     protected $name;
 
     /**
-     * @var \DateTime $created
+     * @var \DateTime
      * @ORM\Column(type="datetime", name="start_date")
      */
     protected $startDate;
 
     /**
-     * @var \DateTime $created
+     * @var \DateTime
      * @ORM\Column(type="datetime", name="end_date")
      */
     protected $endDate;
@@ -209,11 +210,13 @@ class Festival extends ExtendFestival
 
     /**
      * @param SecurityArea[] $securityAreas
+     *
      * @return Festival
      */
     public function setSecurityAreas($securityAreas): Festival
     {
         $this->securityAreas = $securityAreas;
+
         return $this;
     }
 
@@ -227,11 +230,13 @@ class Festival extends ExtendFestival
 
     /**
      * @param bool $isActive
+     *
      * @return Festival
      */
     public function setIsActive(bool $isActive): Festival
     {
         $this->isActive = $isActive;
+
         return $this;
     }
 }

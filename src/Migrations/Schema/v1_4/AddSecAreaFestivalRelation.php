@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_4;
 
 use Doctrine\DBAL\Schema\Schema;

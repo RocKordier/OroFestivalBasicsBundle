@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Form\Type;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;
@@ -25,7 +28,6 @@ class FestivalType extends AbstractType
     }
 
     /**
-     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -64,7 +66,7 @@ class FestivalType extends AbstractType
                 'isActive',
                 CheckboxType::class,
                 [
-                    'label' => self::LABEL_PREFIX.'is_active.label'
+                    'label' => self::LABEL_PREFIX.'is_active.label',
                 ]
             )
             ->add(

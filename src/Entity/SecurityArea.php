@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +22,7 @@ class SecurityArea extends ExtendSecurityArea
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $name = '';
 
     /**
      * @var string|null
@@ -30,23 +33,25 @@ class SecurityArea extends ExtendSecurityArea
     /**
      * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
+     *
      * @return SecurityArea
      */
     public function setName($name): SecurityArea
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getDescription(): ?string
     {
@@ -54,12 +59,14 @@ class SecurityArea extends ExtendSecurityArea
     }
 
     /**
-     * @param null|string $description
+     * @param string|null $description
+     *
      * @return SecurityArea
      */
-    public function setDescription($description): SecurityArea
+    public function setDescription(?string $description): SecurityArea
     {
         $this->description = $description;
+
         return $this;
     }
 

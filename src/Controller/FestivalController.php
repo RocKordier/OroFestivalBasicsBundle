@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;
@@ -6,7 +9,6 @@ use EHDev\FestivalBasicsBundle\Form\Type\FestivalType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -32,7 +34,6 @@ class FestivalController
     }
 
     /**
-     * Index
      * @Route("/", name="ehdev_festival_festival_index")
      * @AclAncestor("ehdev_festival_festival_view")
      *
@@ -54,6 +55,7 @@ class FestivalController
      * )
      *
      * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
+     *
      * @return array
      */
     public function viewAction(Festival $festival): array
@@ -79,7 +81,6 @@ class FestivalController
     }
 
     /**
-     * Update festival form
      * @Route("/update/{id}", name="ehdev_festival_festival_update", requirements={"id"="\d+"})
      *
      * @Template
@@ -91,8 +92,8 @@ class FestivalController
      * )
      *
      * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
-     * @return array
      *
+     * @return array
      */
     public function updateAction(Festival $entity): array
     {
@@ -100,8 +101,6 @@ class FestivalController
     }
 
     /**
-     * Info
-     *
      * @Route("/widget/info/{id}", name="ehdev_festival_festival_widget_info", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
@@ -118,8 +117,6 @@ class FestivalController
     }
 
     /**
-     * Stage widget
-     *
      * @Route("/widget/stages/{id}", name="ehdev_festival_festival_widget_stages", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
@@ -135,11 +132,6 @@ class FestivalController
         ];
     }
 
-    /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
-     *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
     protected function update(Festival $entity): array
     {
         return $this->updateHandlerFacade->update(

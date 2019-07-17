@@ -1,17 +1,15 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
-use EHDev\FestivalBasicsBundle\Migrations\Schema\EHDevFestivalBasicsBundleInstaller;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class InitialStageTable implements Migration
 {
-    /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function up(Schema $schema, QueryBag $queries)
     {
         self::createEhdevFwbStageTable($schema);

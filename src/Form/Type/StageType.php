@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Form\Type;
 
 use EHDev\FestivalBasicsBundle\Entity\Stage;
@@ -12,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StageType extends AbstractType
 {
-    const LABEL_PREFIX    = 'ehdev.festivalbasics.stage.';
+    const LABEL_PREFIX = 'ehdev.festivalbasics.stage.';
     const LABEL_PREFIX_FW = 'ehdev.festivalbasics.festival.';
 
     /**
@@ -24,7 +26,6 @@ class StageType extends AbstractType
     }
 
     /**
-     *
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
@@ -49,10 +50,10 @@ class StageType extends AbstractType
                 'festival',
                 OroEntitySelectOrCreateInlineType::class,
                 [
-                    'required'           => true,
+                    'required' => true,
                     'autocomplete_alias' => 'ehdev_festival',
-                    'create_enabled'     => false,
-                    'grid_name'          => 'ehdev-festival-festival-grid',
+                    'create_enabled' => false,
+                    'grid_name' => 'ehdev-festival-festival-grid',
                     'configs' => [
                         'placeholder' => 'ehdev.festivalbasics.festival.form.placeholder.choose',
                     ],

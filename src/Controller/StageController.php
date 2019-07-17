@@ -1,11 +1,13 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\FestivalBasicsBundle\Entity\Stage;
 use EHDev\FestivalBasicsBundle\Form\Type\StageType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -31,7 +33,6 @@ class StageController
     }
 
     /**
-     * Index
      * @Route("/", name="ehdev_festival_stage_index")
      * @Acl(
      *      id="ehdev_festival_stage_view",
@@ -48,8 +49,6 @@ class StageController
     }
 
     /**
-     * Create Stage
-     *
      * @Route("/create", name="ehdev_festival_stage_create")
      * @Template("@EHDevFestivalBasics/Stage/update.html.twig")
      * @Acl(
@@ -65,7 +64,6 @@ class StageController
     }
 
     /**
-     * Update Stage
      * @Route("/update/{id}", name="ehdev_festival_stage_update", requirements={"id"="\d+"})
      *
      * @Template

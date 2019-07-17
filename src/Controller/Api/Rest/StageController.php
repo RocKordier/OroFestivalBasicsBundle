@@ -1,18 +1,18 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Controller\Api\Rest;
 
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-
+use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\HttpFoundation\Response;
-
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-
 use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 /**
  * @RouteResource("stage")
@@ -21,7 +21,7 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 class StageController extends RestController implements ClassResourceInterface
 {
     /**
-     * REST DELETE
+     * REST DELETE.
      *
      * @param int $id
      *
@@ -35,6 +35,7 @@ class StageController extends RestController implements ClassResourceInterface
      *      permission="DELETE",
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
+     *
      * @return Response
      */
     public function deleteAction($id)
@@ -42,25 +43,22 @@ class StageController extends RestController implements ClassResourceInterface
         return $this->handleDeleteRequest($id);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getManager()
+    public function getManager(): ApiEntityManager
     {
-        return $this->get('ehdev.festival.stage.manager');
+        $service = $this->get('ehdev.festival.stage.manager');
+
+        if ($service instanceof ApiEntityManager) {
+            return $service;
+        }
+
+        throw new ServiceNotFoundException('ehdev.festival.stage.manager');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getForm()
     {
         throw new \BadMethodCallException('Form is not available.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFormHandler()
     {
         throw new \BadMethodCallException('FormHandler is not available.');

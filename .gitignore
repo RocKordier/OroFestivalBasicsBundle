@@ -7,3 +7,5 @@ build/
 /nbproject/
 /components
 composer.lock
+/bin
+.php_cs.cache

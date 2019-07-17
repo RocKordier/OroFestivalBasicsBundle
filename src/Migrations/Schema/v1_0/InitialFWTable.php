@@ -1,28 +1,21 @@
 <?php
+
+declare(strict_types=1);
+
 namespace EHDev\FestivalBasicsBundle\Migrations\Schema\v1_0;
 
 use Doctrine\DBAL\Schema\Schema;
-use EHDev\FestivalBasicsBundle\Migrations\Schema\EHDevFestivalBasicsBundleInstaller;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class InitialFWTable implements Migration
 {
-    /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function up(Schema $schema, QueryBag $queries)
     {
         self::createEhdevFwbFestivalTable($schema);
         self::addEhdevFwbFestivalForeignKeys($schema);
     }
 
-    /**
-     * Create ehdev_fwb_festival table
-     *
-     * @param Schema $schema
-     */
     public static function createEhdevFwbFestivalTable(Schema $schema)
     {
         $table = $schema->createTable('ehdev_fwb_festival');
@@ -38,11 +31,6 @@ class InitialFWTable implements Migration
         $table->setPrimaryKey(['id']);
     }
 
-    /**
-     * Add ehdev_fwb_festival foreign keys.
-     *
-     * @param Schema $schema
-     */
     public static function addEhdevFwbFestivalForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('ehdev_fwb_festival');

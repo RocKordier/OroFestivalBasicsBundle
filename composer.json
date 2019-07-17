@@ -26,17 +26,29 @@
         }
     },
     "require": {
+        "php": ">=7.2",
         "oro/platform": "~3.1.0",
         "ehdev/oro-basics-bundle": "~1.0.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",
-        "ehdev/ciutility": "^0.0.1"
+        "ehdev/ciutility": "^0.0.1",
+        "phpstan/phpstan-shim": "^0.11.1",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpstan/phpstan-symfony": "^0.11.6"
     },
     "config" : {
+        "bin-dir": "bin",
         "fxp-asset" : {
             "enabled" : false
         }
+    },
+    "scripts": {
+        "stan": "bin/phpstan analyze --memory-limit=512M -c phpstan.neon",
+        "fixer": "bin/php-cs-fixer fix --dry-run -v --diff --allow-risky=yes",
+        "ci": [
+            "@stan", "@fixer"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
