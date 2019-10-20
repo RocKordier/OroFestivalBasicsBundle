@@ -44,6 +44,7 @@ class StageType extends AbstractType
                 OroRichTextType::class,
                 [
                     'label' => self::LABEL_PREFIX.'description.label',
+                    'required' => false,
                 ]
             )
             ->add(

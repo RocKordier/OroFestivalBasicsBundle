@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendStage;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository")
@@ -37,6 +38,7 @@ class Stage extends ExtendStage
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     protected $name;
 
@@ -52,6 +54,7 @@ class Stage extends ExtendStage
      *
      * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
      * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
+     * @Assert\NotNull()
      */
     private $festival;
 
