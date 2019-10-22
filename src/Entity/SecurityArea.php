@@ -7,6 +7,7 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendSecurityArea;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,6 +22,7 @@ class SecurityArea extends ExtendSecurityArea
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name = '';
 

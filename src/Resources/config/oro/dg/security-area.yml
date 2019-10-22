@@ -14,16 +14,16 @@ datagrids:
                     - { table: "%ehdev.festival.entity.security_area.class%", alias: sa }
         columns:
             id:
-                label:         ehdev.festivalbasics.security_area.id.label
+                label:         ehdev.festivalbasics.securityarea.id.label
             name:
                 frontend_type: string
-                label:         ehdev.festivalbasics.security_area.name.label
+                label:         ehdev.festivalbasics.securityarea.name.label
             createdAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.security_area.createdat.label
+                label:         ehdev.festivalbasics.securityarea.created_at.label
             updatedAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.security_area.updatedat.label
+                label:         ehdev.festivalbasics.securityarea.updated_at.label
         properties:
             id: ~
             update_link:

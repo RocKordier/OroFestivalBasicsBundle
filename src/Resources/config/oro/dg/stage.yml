@@ -30,10 +30,10 @@ datagrids:
                 label:         ehdev.festivalbasics.festival.entity_label
             createdAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.stage.createdat.label
+                label:         ehdev.festivalbasics.stage.created_at.label
             updatedAt:
                 frontend_type: date
-                label:         ehdev.festivalbasics.stage.updatedat.label
+                label:         ehdev.festivalbasics.stage.updated_at.label
         properties:
             id: ~
             update_link:

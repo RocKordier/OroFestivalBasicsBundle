@@ -7,7 +7,9 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\FormBundle\Validator\Constraints\EntityClass;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
@@ -38,24 +40,29 @@ class Festival extends ExtendFestival
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="255")
+     * @Assert\NotBlank()
      */
     protected $name;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", name="start_date")
+     * @Assert\NotBlank()
      */
     protected $startDate;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", name="end_date")
+     * @Assert\NotBlank()
      */
     protected $endDate;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
+     * @Assert\NotNull()
      */
     protected $maxGuests;
 

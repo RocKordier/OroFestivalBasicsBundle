@@ -68,16 +68,6 @@ class FestivalType extends AbstractType
                 [
                     'label' => self::LABEL_PREFIX.'is_active.label',
                 ]
-            )
-            ->add(
-                'securityAreas',
-                EntityType::class,
-                [
-                    'class' => SecurityArea::class,
-                    'multiple' => true,
-                    'expanded' => true,
-                    'required' => false,
-                ]
             );
     }
 
