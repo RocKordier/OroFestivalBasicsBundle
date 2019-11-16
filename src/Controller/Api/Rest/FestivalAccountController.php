@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller\Api\Rest;
 
-use EHDev\FestivalBasicsBundle\ApiManager\StageApiManager;
-use EHDev\FestivalBasicsBundle\Entity\Stage;
+use EHDev\FestivalBasicsBundle\ApiManager\FestivalAccountApiManager;
+use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -16,14 +16,14 @@ use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @RouteResource("stage")
+ * @RouteResource("festival_account")
  * @NamePrefix("oro_api_")
  */
-class StageController extends RestController implements ClassResourceInterface
+class FestivalAccountController extends RestController implements ClassResourceInterface
 {
     private $apiManager;
 
-    public function __construct(StageApiManager $manager)
+    public function __construct(FestivalAccountApiManager $manager)
     {
         $this->apiManager = $manager;
     }
@@ -34,14 +34,14 @@ class StageController extends RestController implements ClassResourceInterface
      * @param int $id
      *
      * @ApiDoc(
-     *      description="Delete Stage",
+     *      description="Delete Festival",
      *      resource=true
      * )
      * @Acl(
-     *      id="ehdev_festival_stage_delete",
+     *      id="ehdev_festival_festival_account_delete",
      *      type="entity",
      *      permission="DELETE",
-     *      class="EHDevFestivalBasicsBundle:Stage"
+     *      class="EHDevFestivalBasicsBundle:FestivalAccount"
      * )
      *
      * @return Response

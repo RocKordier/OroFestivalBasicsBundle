@@ -80,8 +80,6 @@ class StageController
     }
 
     /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $entity
-     *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
     protected function update(Stage $entity)

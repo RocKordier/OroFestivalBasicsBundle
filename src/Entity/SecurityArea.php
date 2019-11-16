@@ -32,9 +32,6 @@ class SecurityArea extends ExtendSecurityArea
      */
     private $description;
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -42,8 +39,6 @@ class SecurityArea extends ExtendSecurityArea
 
     /**
      * @param string $name
-     *
-     * @return SecurityArea
      */
     public function setName($name): SecurityArea
     {
@@ -52,19 +47,11 @@ class SecurityArea extends ExtendSecurityArea
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string|null $description
-     *
-     * @return SecurityArea
-     */
     public function setDescription(?string $description): SecurityArea
     {
         $this->description = $description;

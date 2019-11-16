@@ -64,7 +64,17 @@ ehdev:
                 edit.title: Edit SecurityArea
                 create.title: Create SecurityArea
                 info.title: SecurityArea
-
-        system_configuration:
+        festivalaccount:
+            create_entity: Create Festival Acount
+            entity_label: Festival Account
+            update_entity: Update Festival Account
+            entity_plural_label: Festival Accounts
+            serialized_data.label: Serialized Data
+            id.label: Id
+            name.label: Name
+            created_at.label: Created At
+            updated_at.label: Updated At
+            saved.message: Festival Account saved
+            owner.label: Owner
             groups:
                 festival.title: Festival Settings
