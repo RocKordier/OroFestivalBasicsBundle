@@ -104,8 +104,6 @@ class Stage extends ExtendStage
     }
 
     /**
-     * @param Festival $festival
-     *
      * @return Stage
      */
     public function setFestival(Festival $festival)

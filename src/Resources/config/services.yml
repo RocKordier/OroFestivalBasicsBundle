@@ -10,6 +10,10 @@ services:
         autowire: true
         autoconfigure: true
 
+    EHDev\FestivalBasicsBundle\:
+        resource: '../../*'
+        exclude: '../../{DependencyInjection,Entity,Migrations,Model,Resources,EHDevFestivalBasicsBundle.php}'
+
     EHDev\FestivalBasicsBundle\Controller\:
         public: true
         resource: '../../Controller'

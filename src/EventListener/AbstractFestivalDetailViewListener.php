@@ -26,10 +26,6 @@ abstract class AbstractFestivalDetailViewListener
 
     /**
      * AbstractFestivalDetailViewListener constructor.
-     *
-     * @param \Symfony\Component\HttpFoundation\RequestStack     $requestStack
-     * @param \Symfony\Component\Translation\TranslatorInterface $translator
-     * @param \Doctrine\ORM\EntityManager                        $entityManager
      */
     public function __construct(
         RequestStack $requestStack,

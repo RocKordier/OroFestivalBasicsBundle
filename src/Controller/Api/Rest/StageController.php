@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller\Api\Rest;
 
-use Nelmio\ApiDocBundle\Annotation\ApiDoc;
-use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
-use Symfony\Component\HttpFoundation\Response;
+use EHDev\FestivalBasicsBundle\ApiManager\StageApiManager;
+use EHDev\FestivalBasicsBundle\Entity\Stage;
 use FOS\RestBundle\Controller\Annotations\NamePrefix;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Oro\Bundle\SoapBundle\Controller\Api\Rest\RestController;
+use Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @RouteResource("stage")
@@ -20,6 +21,13 @@ use Oro\Bundle\SecurityBundle\Annotation\Acl;
  */
 class StageController extends RestController implements ClassResourceInterface
 {
+    private $apiManager;
+
+    public function __construct(StageApiManager $manager)
+    {
+        $this->apiManager = $manager;
+    }
+
     /**
      * REST DELETE.
      *
@@ -45,13 +53,7 @@ class StageController extends RestController implements ClassResourceInterface
 
     public function getManager(): ApiEntityManager
     {
-        $service = $this->get('ehdev.festival.stage.manager');
-
-        if ($service instanceof ApiEntityManager) {
-            return $service;
-        }
-
-        throw new ServiceNotFoundException('ehdev.festival.stage.manager');
+        return $this->apiManager;
     }
 
     public function getForm()

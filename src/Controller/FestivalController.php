@@ -7,8 +7,8 @@ namespace EHDev\FestivalBasicsBundle\Controller;
 use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Form\Type\FestivalType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
-use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -53,10 +53,6 @@ class FestivalController
      *      permission="VIEW",
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
-     *
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
-     *
-     * @return array
      */
     public function viewAction(Festival $festival): array
     {
@@ -90,10 +86,6 @@ class FestivalController
      *      permission="EDIT",
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
-     *
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $entity
-     *
-     * @return array
      */
     public function updateAction(Festival $entity): array
     {
@@ -104,10 +96,6 @@ class FestivalController
      * @Route("/widget/info/{id}", name="ehdev_festival_festival_widget_info", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
-     *
-     * @param \EHDev\FestivalBasicsBundle\Entity\Festival $festival
-     *
-     * @return array
      */
     public function infoAction(Festival $festival): array
     {
@@ -120,10 +108,6 @@ class FestivalController
      * @Route("/widget/stages/{id}", name="ehdev_festival_festival_widget_stages", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
-     *
-     * @param Festival $festival
-     *
-     * @return array
      */
     public function stageAction(Festival $festival): array
     {

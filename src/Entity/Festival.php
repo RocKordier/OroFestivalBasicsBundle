@@ -217,8 +217,6 @@ class Festival extends ExtendFestival
 
     /**
      * @param SecurityArea[] $securityAreas
-     *
-     * @return Festival
      */
     public function setSecurityAreas($securityAreas): Festival
     {
@@ -227,19 +225,11 @@ class Festival extends ExtendFestival
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->isActive;
     }
 
-    /**
-     * @param bool $isActive
-     *
-     * @return Festival
-     */
     public function setIsActive(bool $isActive): Festival
     {
         $this->isActive = $isActive;
