@@ -23,21 +23,24 @@ use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
  *      @ORM\UniqueConstraint(name="unq_festival_account_name", columns={"name"})
  *  }
  * )
- * @Config(
- *      defaultValues={
- *          "entity"={"icon"="fa-th-list"},
- *          "grid"={"default"="ehdev-festival-festival-account-grid"},
- *          "form"= {"grid_name"="ehdev-festival-festival-account-grid"},
- *          "ownership"={
- *              "owner_type"="USER",
- *              "owner_field_name"="owner",
- *              "owner_column_name"="user_owner_id",
- *              "organization_field_name"="organization",
- *              "organization_column_name"="organization_id"
- *          },
- *          "tag"={"enabled"=true}
- *      }
- * )
+ * @Config(defaultValues={
+ *  "entity"={"icon"="fa-th-list"},
+ *  "grid"={"default"="ehdev-festival-festival-account-grid"},
+ *  "form"= {"grid_name"="ehdev-festival-festival-account-grid"},
+ *  "security"={
+ *      "type"="ACL",
+ *      "group_name"="",
+ *      "category"="ehdev_festival_festival"
+ *  },
+ *  "ownership"={
+ *    "owner_type"="BUSINESS_UNIT",
+ *    "owner_field_name"="owner",
+ *    "owner_column_name"="business_unit_owner_id",
+ *    "organization_field_name"="organization",
+ *    "organization_column_name"="organization_id"
+ *  },
+ *  "tag"={"enabled"=true}
+ * })
  */
 class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterface, OrganizationAwareInterface
 {
@@ -53,7 +56,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
     }
 
     /**
-     * @var integer|null
+     * @var int|null
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -76,17 +79,11 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      */
     protected $festivals;
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
@@ -113,9 +110,6 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
         $this->festivals = $festivals;
     }
 
-    /**
-     * @param Festival $festival
-     */
     public function addFestival(Festival $festival): void
     {
         if (!$this->festivals->contains($festival)) {

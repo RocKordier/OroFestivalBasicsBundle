@@ -32,3 +32,13 @@ ehdev_festival_security_area_api:
         _format:  json
     defaults:
         version:  latest
+
+ehdev_festival_festival_account_api:
+    resource:     "@EHDevFestivalBasicsBundle/Controller/Api/Rest/FestivalAccountController.php"
+    type:         rest
+    prefix:       api/rest/{version}/
+    requirements:
+        version:  latest|v1
+        _format:  json
+    defaults:
+        version:  latest

@@ -1,4 +1,5 @@
 imports:
     - { resource: 'dg/festival.yml' }
+    - { resource: 'dg/festival_account.yml' }
     - { resource: 'dg/stage.yml' }
     - { resource: 'dg/security-area.yml' }

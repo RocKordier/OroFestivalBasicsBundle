@@ -1,0 +1,74 @@
+{% extends 'OroUIBundle:actions:view.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% oro_title_set({params : {"%entity.name%": entity.name|default('N/A') }}) %}
+
+{% block navButtons %}
+    {% if is_granted('ehdev_festival_festival_account_update') %}
+        {% set dialogTitle = 'ehdev.festivalbasics.festivalaccount.update_entity'|trans %}
+        {{ UI.clientButton({
+            'dataUrl': path('ehdev_festival_festival_account_update', {id: entity.id}),
+            'aCss': 'no-hash',
+            'iCss': 'fa-refresh',
+            'dataId': null,
+            'title' : dialogTitle,
+            'label' : dialogTitle,
+            'widget' : {
+                'type' : 'dialog',
+                'multiple' : false,
+                'options' : {
+                    'stateEnabled': false,
+                    'dialogOptions' : {
+                        'title' : dialogTitle,
+                        'allowMaximize': false,
+                        'allowMinimize': false,
+                        'dblclick': 'maximize',
+                        'maximizedHeightDecreaseBy': 'minimize-bar',
+                        'width': 500
+                    }
+                }
+            }
+        })
+        }}
+    {% endif %}
+{% endblock %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+    'entity':      entity,
+    'indexPath':   path('ehdev_festival_festival_index'),
+    'indexLabel':  'ehdev.festivalbasics.festivalaccount.entity_plural_label'|trans,
+    'entityTitle': entity.name|default('N/A'),
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set id = 'festival-account-detail-view' %}
+
+    {% set festivalAccountInfos %}
+        {{ oro_widget_render({
+            'widgetType': 'block',
+            'alias': 'festival-account-info-widget',
+            'wid': 'festival-account-info-widget',
+            'title': '',
+            'url': path('ehdev_festival_festival_aount_widget_info', {id: entity.id})
+        }) }}
+    {% endset %}
+
+
+    {% set dataBlocks = [
+    {
+        'title': 'ehdev.festivalbasics.festival.widget.info.title'|trans,
+        'subblocks': [{
+            'title' : 'ehdev.festivalbasics.festival.widget.info.subtitle'|trans,
+            'data' : [festivalAccountInfos]
+        }]
+    },
+    ] %}
+
+    {% set data = {'dataBlocks': dataBlocks} %}
+
+    {{ parent() }}
+{% endblock content_data %}

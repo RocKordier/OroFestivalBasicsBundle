@@ -1,0 +1,51 @@
+datagrids:
+    ehdev-festival-festival-account-grid:
+        extended_entity_name: EHDevFestivalBasicsBundle:FestivalAccount
+        acl_resource: ehdev_festival_festival_account_view
+        options:
+            entityHint: ehdev.festivalbasics.festivalaccount.id.label
+        source:
+            type: orm
+            query:
+                select:
+                    - fwa.id
+                    - fwa.name
+                    - fwa.createdAt
+                    - fwa.updatedAt
+                from:
+                    - { table: EHDevFestivalBasicsBundle:FestivalAccount, alias: fwa }
+        columns:
+            id:
+                label:         ehdev.festivalbasics.festivalaccount.id.label
+            name:
+                frontend_type: string
+                label:         ehdev.festivalbasics.festivalaccount.name.label
+            createdAt:
+                frontend_type: date
+                label:         ehdev.festivalbasics.festivalaccount.created_at.label
+            updatedAt:
+                frontend_type: date
+                label:         ehdev.festivalbasics.festivalaccount.updated_at.label
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: ehdev_festival_festival_account_view
+                params: [ id ]
+            delete_link:
+                type: url
+                route: oro_api_delete_festival_account
+                params: [ id ]
+        actions:
+            view:
+                type: navigate
+                label: oro.grid.action.view
+                icon: eye
+                link: view_link
+                rowAction: true
+            delete:
+                type:          delete
+                acl_resource:  ehdev_festival_festival_account_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
