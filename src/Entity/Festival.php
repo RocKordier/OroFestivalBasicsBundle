@@ -87,6 +87,13 @@ class Festival extends ExtendFestival
      */
     protected $securityAreas;
 
+    /**
+     * @var FestivalAccount|null
+     * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="festivals",cascade={"persist"})
+     * @ORM\JoinColumn(name="festival_account_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $festivalAccount;
+
     public function __construct()
     {
         parent::__construct();
@@ -238,5 +245,15 @@ class Festival extends ExtendFestival
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    public function getFestivalAccount(): ?FestivalAccount
+    {
+        return $this->festivalAccount;
+    }
+
+    public function setFestivalAccount(FestivalAccount $festivalAccount): void
+    {
+        $this->festivalAccount = $festivalAccount;
     }
 }
