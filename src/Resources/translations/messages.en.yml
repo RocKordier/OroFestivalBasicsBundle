@@ -76,5 +76,6 @@ ehdev:
             updated_at.label: Updated At
             saved.message: Festival Account saved
             owner.label: Owner
+        system_configuration:
             groups:
                 festival.title: Festival Settings
