@@ -6,6 +6,9 @@ namespace EHDev\FestivalBasicsBundle\Controller;
 
 use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
+use EHDev\FestivalBasicsBundle\Form\DataObject\AddFestivalAccountDOT;
+use EHDev\FestivalBasicsBundle\Form\FormHandler\FestivalAccountAddFestivalHandler;
+use EHDev\FestivalBasicsBundle\Form\Type\FestivalAccountAddFestivalType;
 use EHDev\FestivalBasicsBundle\Form\Type\FestivalAccountType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
@@ -23,15 +26,18 @@ class FestivalAccountController
     private $updateHandlerFacade;
     private $translator;
     private $formFactory;
+    private $accountAddFestivalHandler;
 
     public function __construct(
         UpdateHandlerFacade $updateHandlerFacade,
         TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        FestivalAccountAddFestivalHandler $accountAddFestivalHandler
     ) {
         $this->updateHandlerFacade = $updateHandlerFacade;
         $this->translator = $translator;
         $this->formFactory = $formFactory;
+        $this->accountAddFestivalHandler = $accountAddFestivalHandler;
     }
 
     /**
@@ -98,6 +104,25 @@ class FestivalAccountController
     public function updateAction(FestivalAccount $entity): array
     {
         return $this->update($entity);
+    }
+
+    /**
+     * @Route("/{id}/add_festival", name="ehdev_festival_festival_account_add", requirements={"id"="\d+"})
+     *
+     * @Template
+     * @AclAncestor("ehdev_festival_festival_account_update")
+     */
+    public function addFestivalAction(FestivalAccount $festivalAccount): array
+    {
+        $model = new AddFestivalAccountDOT();
+        $model->setFestivalAccount($festivalAccount);
+        return array_merge($this->updateHandlerFacade->update(
+            $model,
+            $this->formFactory->create(FestivalAccountAddFestivalType::class, $model),
+            $this->translator->trans('ehdev.festivalbasics.festivalaccount.form.add_festival.saved_message'),
+            null,
+            $this->accountAddFestivalHandler
+        ), ['festivalAccount' => $festivalAccount]);
     }
 
     protected function update(FestivalAccount $entity): array

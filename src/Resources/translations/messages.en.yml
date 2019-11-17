@@ -81,6 +81,11 @@ ehdev:
                     title: Festival Overview
                     subtitle: Infos
                     no_data_found: No Festivals found
+                    add_festival: Add Festival
+            form:
+                placeholder:
+                    choose: Choose Festival Account
+                add_festival.saved_message: Festival added
         system_configuration:
             groups:
                 festival.title: Festival Settings

@@ -2,17 +2,41 @@
 {% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
 
 <div class="widget-content">
-    <div class="row-fluid form-horizontal">
-        <div>
-
-        </div>
+    <div class="row-fluid title">
+        {% set dialogTitle = 'ehdev.festivalbasics.festivalaccount.widget.festivals.add_festival'|trans %}
+        {{ UI.clientButton({
+            'dataUrl': path('ehdev_festival_festival_account_add', {'id': entity.id}),
+            'aCss': 'no-hash',
+            'iCss': 'fa-plus',
+            'dataId': null,
+            'title' : dialogTitle,
+            'label' : dialogTitle,
+            'widget' : {
+                'type' : 'dialog',
+                'multiple' : false,
+                'options' : {
+                    'stateEnabled': false,
+                    'dialogOptions' : {
+                        'title' : dialogTitle,
+                        'allowMaximize': true,
+                        'allowMinimize': true,
+                        'dblclick': 'maximize',
+                        'maximizedHeightDecreaseBy': 'minimize-bar',
+                        'width': 500
+                    }
+                }
+            }
+        })
+        }}
+    </div>
+    <div class="row-fluid">
         <div>
             {% set tabs = [] %}
             {% for festival in entity.festivals %}
                 {% set tabs = tabs|merge([
                     {
-                        'alias': 'festival-account-festivals-widget-festival-info' ~ festival.id,
-                        'widgetType': 'festival-info',
+                        'alias': 'festival-account-festivals-widget-festival-info-' ~ festival.id,
+                        'widgetType': 'block',
                         'label': festival.name,
                         'url': path('ehdev_festival_festival_widget_info', {'id': festival.id})
                     }
@@ -22,10 +46,6 @@
             {% if (tabs|length == 0) %}
                 <div class="no-data">
                     {{ 'ehdev.festivalbasics.festivalaccount.widget.festivals.no_data_found'|trans }}
-                </div>
-            {% elseif (tabs|length == 1) %}
-                <div class="widget-content festivalaccount-festival-info">
-                    {{ oro_widget_render(tabs[0]) }}
                 </div>
             {% else %}
                 {% if not isMobileVersion() %}

@@ -10,25 +10,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class FestivalAddFestivalAccountType extends AbstractType
+class FestivalAccountAddFestivalType extends AbstractType
 {
     public function getBlockPrefix(): string
     {
-        return 'ehdev_festival_festival_add_festival_account';
+        return 'ehdev_festival_festival_account_add_festival';
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-            'festivalAccount',
+            'festival',
             OroEntitySelectOrCreateInlineType::class,
             [
                 'required' => true,
-                'autocomplete_alias' => 'ehdev_festival_account',
+                'autocomplete_alias' => 'ehdev_festival',
                 'create_enabled' => false,
-                'grid_name' => 'ehdev-festival-festival-account-grid',
+                'grid_name' => 'ehdev-festival-festival-grid',
                 'configs' => [
-                    'placeholder' => 'ehdev.festivalbasics.festivalaccount.form.placeholder.choose',
+                    'placeholder' => 'ehdev.festivalbasics.festival.form.placeholder.choose',
                 ],
             ]
         );

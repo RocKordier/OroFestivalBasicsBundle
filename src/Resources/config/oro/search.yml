@@ -12,3 +12,17 @@ search:
                 name:                   name
                 target_type:            text
                 target_fields:          [name]
+
+    EHDev\FestivalBasicsBundle\Entity\FestivalAccount:
+        alias: ehdev_festival_account
+        label: ehdev.festivalbasics.festivalaccount.entity_label
+        search_template: EHDevFestivalBasicsBundle:FestivalAccount:searchResult.html.twig
+        route:
+            name: ehdev_festival_festival_account_view
+            parameters:
+                id: id
+        fields:
+            -
+                name: name
+                target_type: text
+                target_fields: [name]
