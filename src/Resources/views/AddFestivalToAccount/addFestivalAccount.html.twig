@@ -1,0 +1,10 @@
+{% extends '@EHDevBasics/Widgets/formWidget.html.twig' %}
+
+{% set pathCreate = path('ehdev_festival_festival_add_festival_account', {'id': festival.id}) %}
+{% set pathUpdate = '' %}
+
+{% block requireAction %}
+    widgetManager.getWidgetInstance('festival-info-widget', function (widget) {
+    widget.render();
+    });
+{% endblock %}

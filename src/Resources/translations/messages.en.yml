@@ -19,7 +19,9 @@ ehdev:
             stages.label: Stages
             security_areas.label: Security Areas
             is_active.label: Active?
+            festival_account.label: Account
             serialized_data.label: Serialized Data
+            add_festivalaccount: Add Festival Account
             widget:
                 edit.title: Edit Festival
                 create.title: Create Festival
@@ -28,6 +30,7 @@ ehdev:
                 stages.title: Stages
             form:
                 placeholder.choose: Choose Festival
+                add_festivalaccount.saved_message: Festival Account added
         stage:
             entity_plural_label: Stages
             entity_label: Stage

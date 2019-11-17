@@ -26,15 +26,15 @@ class FestivalAccountAddFestivalHandler implements FormHandlerInterface
     public function process($data, FormInterface $form, Request $request)
     {
         if ($request->isMethod(Request::METHOD_GET)) {
-            return ;
+            return false;
         }
 
         if (!$data instanceof AddFestivalAccountDOT) {
             throw new \InvalidArgumentException('wrong DataObject given');
         }
 
-        if (!$request->isMethod(Request::METHOD_POST)) {
-            throw new MethodNotAllowedHttpException([Request::METHOD_POST], 'Method not allowed');
+        if (!($request->isMethod(Request::METHOD_POST) || $request->isMethod(Request::METHOD_PUT))) {
+            throw new MethodNotAllowedHttpException([Request::METHOD_POST, Request::METHOD_PUT], 'Method not allowed');
         }
 
         $form->handleRequest($request);

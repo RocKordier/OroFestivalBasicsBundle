@@ -31,6 +31,33 @@
             }
         })
         }}
+
+        {% set dialogTitle = 'ehdev.festivalbasics.festival.add_festivalaccount'|trans %}
+        {{ UI.clientButton({
+            'dataUrl': path('ehdev_festival_festival_add_festival_account', {'id': entity.id}),
+            'aCss': 'no-hash',
+            'iCss': 'fa-plus',
+            'dataId': null,
+            'title' : dialogTitle,
+            'label' : dialogTitle,
+            'widget' : {
+                'type' : 'dialog',
+                'multiple' : false,
+                'options' : {
+                    'stateEnabled': false,
+                    'dialogOptions' : {
+                        'title' : dialogTitle,
+                        'allowMaximize': true,
+                        'allowMinimize': true,
+                        'dblclick': 'maximize',
+                        'maximizedHeightDecreaseBy': 'minimize-bar',
+                        'width': 500
+                    }
+                }
+            }
+        })
+        }}
+
     {% endif %}
 {% endblock %}
 

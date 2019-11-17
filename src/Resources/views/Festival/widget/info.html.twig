@@ -10,6 +10,9 @@
             } %}
             {% endset %}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.id.label'|trans, entity.id) }}
+            {% if entity.festivalAccount is defined %}
+                {{ UI.renderProperty('ehdev.festivalbasics.festival.festival_account.label'|trans, entity.festivalAccount.name) }}
+            {% endif %}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.name.label'|trans, entity.name) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.start_date.label'|trans, entity.startDate|date('Y-m-d')) }}
             {{ UI.renderProperty('ehdev.festivalbasics.festival.end_date.label'|trans, entity.endDate|date('Y-m-d')) }}
