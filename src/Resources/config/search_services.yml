@@ -1,0 +1,12 @@
+services:
+    EHDev\FestivalBasicsBundle\Form\AutocompleteHandler\FestivalSearchHandler:
+        parent: oro_form.autocomplete.search_handler
+        public: true
+        tags:
+            - { name: oro_form.autocomplete.search_handler, alias: ehdev_festival, acl_resource: ehdev_festival_festival_view }
+
+    EHDev\FestivalBasicsBundle\Form\AutocompleteHandler\FestivalAccountSearchHandler:
+        parent: oro_form.autocomplete.search_handler
+        public: true
+        tags:
+            - { name: oro_form.autocomplete.search_handler, alias: ehdev_festival_account, acl_resource: ehdev_festival_festival_view }
