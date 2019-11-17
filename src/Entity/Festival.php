@@ -7,7 +7,6 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\FormBundle\Validator\Constraints\EntityClass;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
