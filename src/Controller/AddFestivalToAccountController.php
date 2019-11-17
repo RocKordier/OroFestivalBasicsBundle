@@ -40,7 +40,7 @@ class AddFestivalToAccountController
     }
 
     /**
-     * @Route("to_account/{id}", name="ehdev_festival_festival_account_add_festival", requirements={"id"="\d+"})
+     * @Route("/to_account/{id}", name="ehdev_festival_festival_account_add_festival", requirements={"id"="\d+"})
      *
      * @Template()
      * @AclAncestor("ehdev_festival_festival_account_update")
@@ -60,7 +60,7 @@ class AddFestivalToAccountController
     }
 
     /**
-     * @Route("to_festival/{id}", name="ehdev_festival_festival_add_festival_account", requirements={"id"="\d+"})
+     * @Route("account/to_festival/{id}", name="ehdev_festival_festival_add_festival_account", requirements={"id"="\d+"})
      *
      * @Template()
      * @AclAncestor("ehdev_festival_festival_update")
