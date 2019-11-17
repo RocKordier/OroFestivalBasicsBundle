@@ -3,7 +3,7 @@ datagrids:
         extended_entity_name: EHDevFestivalBasicsBundle:FestivalAccount
         acl_resource: ehdev_festival_festival_account_view
         options:
-            entityHint: ehdev.festivalbasics.festivalaccount.id.label
+            entityHint: ehdev.festivalbasics.festivalaccount.entity_plural_label
         source:
             type: orm
             query:

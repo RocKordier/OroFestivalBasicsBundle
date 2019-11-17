@@ -58,11 +58,11 @@ class FestivalAccountController
     }
 
     /**
-     * @Route("/widget/info/{id}", name="ehdev_festival_festival_aount_widget_info", requirements={"id"="\d+"})
+     * @Route("/widget/festivals/{id}", name="ehdev_festival_festival_account_widget_festivals", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_account_view")
      * @Template
      */
-    public function infoAction(FestivalAccount $festivalAccount): array
+    public function festivalsAction(FestivalAccount $festivalAccount): array
     {
         return [
             'entity' => $festivalAccount,
@@ -92,7 +92,7 @@ class FestivalAccountController
      *      id="ehdev_festival_festival_account_update",
      *      type="entity",
      *      permission="EDIT",
-     *      class="EHDevFestivalBasicsBundle:FestivalAccout"
+     *      class="EHDevFestivalBasicsBundle:FestivalAccount"
      * )
      */
     public function updateAction(FestivalAccount $entity): array

@@ -76,6 +76,11 @@ ehdev:
             updated_at.label: Updated At
             saved.message: Festival Account saved
             owner.label: Owner
+            widget:
+                festivals:
+                    title: Festival Overview
+                    subtitle: Infos
+                    no_data_found: No Festivals found
         system_configuration:
             groups:
                 festival.title: Festival Settings

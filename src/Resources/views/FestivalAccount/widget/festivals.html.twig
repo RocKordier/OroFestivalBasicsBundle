@@ -1,0 +1,46 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+
+<div class="widget-content">
+    <div class="row-fluid form-horizontal">
+        <div>
+
+        </div>
+        <div>
+            {% set tabs = [] %}
+            {% for festival in entity.festivals %}
+                {% set tabs = tabs|merge([
+                    {
+                        'alias': 'festival-account-festivals-widget-festival-info' ~ festival.id,
+                        'widgetType': 'festival-info',
+                        'label': festival.name,
+                        'url': path('ehdev_festival_festival_widget_info', {'id': festival.id})
+                    }
+                ]) %}
+            {% endfor %}
+
+            {% if (tabs|length == 0) %}
+                <div class="no-data">
+                    {{ 'ehdev.festivalbasics.festivalaccount.widget.festivals.no_data_found'|trans }}
+                </div>
+            {% elseif (tabs|length == 1) %}
+                <div class="widget-content festivalaccount-festival-info">
+                    {{ oro_widget_render(tabs[0]) }}
+                </div>
+            {% else %}
+                {% if not isMobileVersion() %}
+                    {% set tabsOptions = {
+                        verticalTabs: true,
+                        useDropdown: false,
+                        subtitle: 'ehdev.festivalbasics.festival.entity_label'|trans
+                    }%}
+                {% endif %}
+                {{ tabPanel(tabs, tabsOptions|default({})) }}
+            {% endif %}
+
+        </div>
+        <div class="responsive-block">
+            {{ entityConfig.renderDynamicFields(entity) }}
+        </div>
+    </div>
+</div>

@@ -47,23 +47,23 @@
 {% block content_data %}
     {% set id = 'festival-account-detail-view' %}
 
-    {% set festivalAccountInfos %}
+    {% set festivalAccountFestivals %}
         {{ oro_widget_render({
             'widgetType': 'block',
-            'alias': 'festival-account-info-widget',
-            'wid': 'festival-account-info-widget',
+            'alias': 'festival-account-festivals-widget',
+            'wid': 'festival-account-festivals-widget',
             'title': '',
-            'url': path('ehdev_festival_festival_aount_widget_info', {id: entity.id})
+            'url': path('ehdev_festival_festival_account_widget_festivals', {id: entity.id})
         }) }}
     {% endset %}
 
 
     {% set dataBlocks = [
     {
-        'title': 'ehdev.festivalbasics.festival.widget.info.title'|trans,
+        'title': 'ehdev.festivalbasics.festivalaccount.widget.festivals.title'|trans,
         'subblocks': [{
-            'title' : 'ehdev.festivalbasics.festival.widget.info.subtitle'|trans,
-            'data' : [festivalAccountInfos]
+            'title' : 'ehdev.festivalbasics.festivalaccount.widget.festivals.subtitle'|trans,
+            'data' : [festivalAccountFestivals]
         }]
     },
     ] %}
