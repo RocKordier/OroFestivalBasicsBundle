@@ -2,23 +2,19 @@ services:
     EHDev\FestivalBasicsBundle\ApiManager\FestivalAccountApiManager:
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
-            $class: EHDev\FestivalBasicsBundle\Entity\FestivalAccount
             $om: '@Doctrine\Common\Persistence\ObjectManager'
 
     EHDev\FestivalBasicsBundle\ApiManager\FestivalApiManager:
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
-            $class: EHDev\FestivalBasicsBundle\Entity\Festival
             $om: '@Doctrine\Common\Persistence\ObjectManager'
 
     EHDev\FestivalBasicsBundle\ApiManager\SecurityAreaApiManager:
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
-            $class: EHDev\FestivalBasicsBundle\Entity\SecurityArea
             $om: '@Doctrine\Common\Persistence\ObjectManager'
 
     EHDev\FestivalBasicsBundle\ApiManager\StageApiManager:
         parent: oro_soap.manager.entity_manager.abstract
         arguments:
-            $class: EHDev\FestivalBasicsBundle\Entity\Stage
             $om: '@Doctrine\Common\Persistence\ObjectManager'
