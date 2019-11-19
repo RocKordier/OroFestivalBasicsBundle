@@ -12,17 +12,35 @@ use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_3\CreateSecurityArea;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_4\AddSecAreaFestivalRelation;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_5\AddActiveFlag;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_6\AddFestivalAccount;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_7\AddActivities;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
+use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
+use Oro\Bundle\CommentBundle\Migration\Extension\CommentExtension;
+use Oro\Bundle\CommentBundle\Migration\Extension\CommentExtensionAwareInterface;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-class EHDevFestivalBasicsBundleInstaller implements Installation
+class EHDevFestivalBasicsBundleInstaller implements Installation, CommentExtensionAwareInterface, ActivityExtensionAwareInterface
 {
+    private $commentExtension;
+    private $activitieExtension;
+
+    public function setCommentExtension(CommentExtension $commentExtension)
+    {
+        $this->commentExtension = $commentExtension;
+    }
+
+    public function setActivityExtension(ActivityExtension $activityExtension)
+    {
+        $this->activitieExtension = $activityExtension;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function getMigrationVersion(): string
     {
-        return 'v1_6';
+        return 'v1_7';
     }
 
     public function up(Schema $schema, QueryBag $queries)
@@ -51,5 +69,9 @@ class EHDevFestivalBasicsBundleInstaller implements Installation
         /* v1_6 */
         AddFestivalAccount::addFestivalAccountTable($schema);
         AddFestivalAccount::addFestivalAccountOnFestival($schema);
+
+        /* v1_7 */
+        AddActivities::addComment($this->commentExtension, $schema);
+        AddActivities::addActivities($this->activitieExtension, $schema);
     }
 }
