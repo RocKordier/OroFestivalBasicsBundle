@@ -227,12 +227,12 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
     {
         return $this->country ? $this->country->getIso2Code() : '';
     }
-    
+
     public function getRegionText(): ?string
     {
         return $this->regionText;
     }
-    
+
     public function setRegionText(?string $regionText): void
     {
         $this->regionText = $regionText;

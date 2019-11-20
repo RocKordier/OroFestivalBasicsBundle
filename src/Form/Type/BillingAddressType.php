@@ -10,7 +10,6 @@ use Oro\Bundle\AddressBundle\Form\EventListener\AddressCountryAndRegionSubscribe
 use Oro\Bundle\AddressBundle\Form\Type\CountryType;
 use Oro\Bundle\AddressBundle\Form\Type\RegionType;
 use Oro\Bundle\FormBundle\Form\Extension\StripTagsExtension;
-use Oro\Bundle\UserBundle\Form\Type\UserSelectType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -23,6 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BillingAddressType extends AbstractType
 {
     const LABEL_PREFIX = 'ehdev.festivalbasics.billingaddress.';
+
+    private $countryAndRegionSubscriber;
 
     public function __construct(AddressCountryAndRegionSubscriber $eventListener)
     {
@@ -47,7 +48,6 @@ class BillingAddressType extends AbstractType
                 'disabled' => true,
             ]
         );
-
         $builder->add(
             'label',
             TextType::class,
@@ -56,8 +56,7 @@ class BillingAddressType extends AbstractType
                     'label' => 'oro.address.label.label',
                     StripTagsExtension::OPTION_NAME => true,
                 ]
-
-            );
+        );
         $builder->add(
             'organization',
             TextType::class,
@@ -89,7 +88,6 @@ class BillingAddressType extends AbstractType
             'postalCode',
             TextType::class,
             [
-
                 'required' => false,
                 'label' => 'oro.address.postal_code.label',
                 StripTagsExtension::OPTION_NAME => true,
@@ -117,7 +115,7 @@ class BillingAddressType extends AbstractType
             RegionType::class,
             [
                 'required' => false,
-                'label' => 'oro.address.region.label'
+                'label' => 'oro.address.region.label',
             ]
         );
         $builder->add(
