@@ -40,14 +40,14 @@ class Stage extends ExtendStage
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     /**
      * @var Festival
@@ -56,7 +56,7 @@ class Stage extends ExtendStage
      * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
-    private $festival;
+    protected $festival;
 
     /**
      * @return string

@@ -47,25 +47,25 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName = '';
+    protected $firstName = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName = '';
+    protected $lastName = '';
 
     /**
      * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    private $profession;
+    protected $profession;
 
     /**
      * @var FestivalAccount
@@ -73,7 +73,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="contacts")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $owner;
+    protected $owner;
 
     /**
      * @var string
@@ -87,7 +87,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      *      }
      * )
      */
-    private $email;
+    protected $email;
 
     /**
      * @var ContactEmail[]|Collection
@@ -96,7 +96,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      *    mappedBy="owner", cascade={"all"}, orphanRemoval=true
      * )
      */
-    private $emails;
+    protected $emails;
 
     /**
      * @var bool

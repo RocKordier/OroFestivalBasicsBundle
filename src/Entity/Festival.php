@@ -42,28 +42,28 @@ class Festival extends ExtendFestival
      * @Assert\Length(max="255")
      * @Assert\NotBlank()
      */
-    private $name;
+    protected $name;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", name="start_date")
      * @Assert\NotBlank()
      */
-    private $startDate;
+    protected $startDate;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", name="end_date")
      * @Assert\NotBlank()
      */
-    private $endDate;
+    protected $endDate;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
      * @Assert\NotNull()
      */
-    private $maxGuests;
+    protected $maxGuests;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -73,14 +73,14 @@ class Festival extends ExtendFestival
      *      cascade={"all"}, orphanRemoval=true
      * )
      */
-    private $stages;
+    protected $stages;
 
     /**
      * @var bool
      *
      * @ORM\Column(type="boolean", name="is_active")
      */
-    private $isActive = false;
+    protected $isActive = false;
 
     /**
      * @var SecurityArea[]
@@ -91,14 +91,14 @@ class Festival extends ExtendFestival
      *      inverseJoinColumns={@ORM\JoinColumn(name="secare_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    private $securityAreas;
+    protected $securityAreas;
 
     /**
      * @var FestivalAccount|null
      * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="festivals",cascade={"persist"})
      * @ORM\JoinColumn(name="festival_account_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $festivalAccount;
+    protected $festivalAccount;
 
     public function __construct()
     {

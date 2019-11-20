@@ -64,13 +64,13 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $name = '';
+    protected $name = '';
 
     /**
      * @var Festival[]|Collection
@@ -79,7 +79,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      *     mappedBy="festivalAccount"
      * )
      */
-    private $festivals;
+    protected $festivals;
 
     /**
      * @var Contact[]|Collection
@@ -88,14 +88,14 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      *     mappedBy="owner"
      * )
      */
-    private $contacts;
+    protected $contacts;
 
     /**
      * @var BillingAddress|null
      *
      * @ORM\OneToOne(targetEntity="BillingAddress", mappedBy="owner")
      */
-    private $billingAddress;
+    protected $billingAddress;
 
     /**
      * @var User|null

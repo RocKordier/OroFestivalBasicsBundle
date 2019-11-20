@@ -31,7 +31,7 @@ class ContactEmail extends ExtendContactEmail implements EmailInterface, DatesAw
      * @ORM\ManyToOne(targetEntity="Contact", inversedBy="emails")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $owner;
+    protected $owner;
 
     public function getEmailField()
     {

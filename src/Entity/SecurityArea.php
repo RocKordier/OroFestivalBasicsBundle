@@ -24,13 +24,13 @@ class SecurityArea extends ExtendSecurityArea
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $name = '';
+    protected $name = '';
 
     /**
      * @var string|null
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private $description;
+    protected $description;
 
     public function getName(): string
     {
