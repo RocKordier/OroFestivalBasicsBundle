@@ -40,14 +40,14 @@ class Stage extends ExtendStage
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    protected $name;
+    private $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected $description;
+    private $description;
 
     /**
      * @var Festival
