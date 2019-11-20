@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Form\Type;
 
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
+use Oro\Bundle\UserBundle\Form\Type\UserSelectType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,13 @@ class FestivalAccountType extends AbstractType
             TextType::class,
             [
                 'label' => self::LABEL_PREFIX.'name.label',
+            ]
+        );
+        $builder->add(
+            'accountManager',
+            UserSelectType::class,
+            [
+                'label' => self::LABEL_PREFIX.'accountmanager.label',
             ]
         );
     }
