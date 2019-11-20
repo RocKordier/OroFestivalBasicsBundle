@@ -13,6 +13,7 @@ use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_4\AddSecAreaFestivalRelation
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_5\AddActiveFlag;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_6\AddFestivalAccount;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_7\AddActivities;
+use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_8\AddFestivalContact;
 use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtension;
 use Oro\Bundle\ActivityBundle\Migration\Extension\ActivityExtensionAwareInterface;
 use Oro\Bundle\CommentBundle\Migration\Extension\CommentExtension;
@@ -40,7 +41,7 @@ class EHDevFestivalBasicsBundleInstaller implements Installation, CommentExtensi
      */
     public function getMigrationVersion(): string
     {
-        return 'v1_7';
+        return 'v1_8';
     }
 
     public function up(Schema $schema, QueryBag $queries)
@@ -73,5 +74,12 @@ class EHDevFestivalBasicsBundleInstaller implements Installation, CommentExtensi
         /* v1_7 */
         AddActivities::addComment($this->commentExtension, $schema);
         AddActivities::addActivities($this->activitieExtension, $schema);
+
+        /* v1_8 */
+        AddFestivalContact::addFestivalContact($schema);
+        AddFestivalContact::addFestivalBillingAddress($schema);
+        AddFestivalContact::addContactEmail($schema);
+        AddFestivalContact::addForeignKeys($schema);
+        AddFestivalContact::modifyFestivalAccount($schema);
     }
 }

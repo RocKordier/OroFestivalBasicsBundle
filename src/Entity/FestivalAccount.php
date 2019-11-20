@@ -14,6 +14,7 @@ use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\OrganizationBundle\Entity\OrganizationAwareInterface;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
+use Oro\Bundle\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalAccountRepository")
@@ -53,6 +54,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
         parent::__construct();
 
         $this->festivals = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     /**
@@ -62,7 +64,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @var string
@@ -77,7 +79,31 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
      *     mappedBy="festivalAccount"
      * )
      */
-    protected $festivals;
+    private $festivals;
+
+    /**
+     * @var Contact[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="EHDev\FestivalBasicsBundle\Entity\Contact",
+     *     mappedBy="owner"
+     * )
+     */
+    private $contacts;
+
+    /**
+     * @var BillingAddress|null
+     *
+     * @ORM\OneToOne(targetEntity="BillingAddress", mappedBy="owner")
+     */
+    private $billingAddress;
+
+    /**
+     * @var User|null
+     *
+     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="account_manager_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $accountManager;
 
     public function getId(): ?int
     {
@@ -116,5 +142,25 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
             $this->festivals->add($festival);
             $festival->setFestivalAccount($this);
         }
+    }
+
+    public function getBillingAddress(): ?BillingAddress
+    {
+        return $this->billingAddress;
+    }
+
+    public function setBillingAddress(?BillingAddress $billingAddress): void
+    {
+        $this->billingAddress = $billingAddress;
+    }
+
+    public function getAccountManager(): ?User
+    {
+        return $this->accountManager;
+    }
+
+    public function setAccountManager(?User $accountManager): void
+    {
+        $this->accountManager = $accountManager;
     }
 }
