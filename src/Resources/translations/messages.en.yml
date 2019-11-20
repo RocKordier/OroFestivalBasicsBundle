@@ -89,6 +89,20 @@ ehdev:
                 placeholder:
                     choose: Choose Festival Account
                 add_festival.saved_message: Festival added
+        billingaddress:
+            entity_label: Billing Address
+            entity_plural_label: Billing Addresses
+            city.label: City
+            country.label: Country
+            id.label: Id
+            label.label: Label
+            organization.label: Organization
+            owner.label: Festival Account
+            postal_code.label: Postalcode
+            region.label: Region
+            street.label: Street
+            street2.label: Street 2
+            update_entity: Update Billing Address
         system_configuration:
             groups:
                 festival.title: Festival Settings

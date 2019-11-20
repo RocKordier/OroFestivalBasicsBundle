@@ -1,6 +1,8 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+{% import 'OroTagBundle::macros.html.twig' as tags %}
 
 {% oro_title_set({params : {"%entity.name%": entity.name|default('N/A') }}) %}
 
@@ -32,6 +34,43 @@
         })
         }}
     {% endif %}
+
+    {% if is_granted('') %}
+        {% set dialogTitle = 'ehdev.festivalbasics.billingaddress.update_entity'|trans %}
+
+        {% if entity.billingAddress is null %}
+            {% set path = path('ehdev_festival_billingaddress_create', {id: entity.id}) %}
+        {% else %}
+            {% set path = path('ehdev_festival_billingaddress_update', {id: entity.billingAddress.id}) %}
+        {% endif %}
+
+        {{ UI.clientButton({
+            'dataUrl': path,
+            'aCss': 'no-hash',
+            'iCss': 'fa-refresh',
+            'dataId': null,
+            'title' : dialogTitle,
+            'label' : dialogTitle,
+            'widget' : {
+                'type' : 'dialog',
+                'multiple' : false,
+                'options' : {
+                    'stateEnabled': false,
+                    'dialogOptions' : {
+                        'title' : dialogTitle,
+                        'allowMaximize': false,
+                        'allowMinimize': false,
+                        'dblclick': 'maximize',
+                        'maximizedHeightDecreaseBy': 'minimize-bar',
+                        'width': 500
+                    }
+                }
+            }
+        })
+        }}
+    {% endif %}
+
+    {{ parent() }}
 {% endblock %}
 
 {% block pageHeader %}
@@ -57,16 +96,22 @@
         }) }}
     {% endset %}
 
+    {% set additionalData %}
 
-    {% set dataBlocks = [
-    {
+    {% endset %}
+
+    {% set dataBlocks = [{
         'title': 'ehdev.festivalbasics.festivalaccount.widget.festivals.title'|trans,
         'subblocks': [{
             'title' : 'ehdev.festivalbasics.festivalaccount.widget.festivals.subtitle'|trans,
             'data' : [festivalAccountFestivals]
         }]
-    },
-    ] %}
+    }, {
+        'title': 'ehdev.festivalbasics.festivalaccount.widget.additional_data.title'|trans,
+        'subblocks': [{
+            'data' : [additionalData]
+        }]
+    }] %}
 
     {% set data = {'dataBlocks': dataBlocks} %}
 

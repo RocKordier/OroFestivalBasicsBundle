@@ -12,7 +12,6 @@ use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\FormBundle\Entity\EmptyItem;
-use Oro\Bundle\LocaleBundle\Model\AddressInterface;
 
 /**
  * @ORM\Table("ehdev_fwb_billing_address")
@@ -26,7 +25,7 @@ use Oro\Bundle\LocaleBundle\Model\AddressInterface;
  * )
  * @ORM\Entity
  */
-class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem, AddressInterface
+class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem
 {
     use DatesAwareTrait;
 
@@ -43,7 +42,7 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
      * @ORM\OneToOne(targetEntity="FestivalAccount", inversedBy="billingAddress")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
-    private $owner;
+    protected $owner;
 
     /**
      * @var int|null
@@ -52,42 +51,42 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="label", type="string", length=255, nullable=true)
      */
-    private $label;
+    protected $label;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="street", type="string", length=500, nullable=true)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="street2", type="string", length=500, nullable=true)
      */
-    private $street2;
+    protected $street2;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
      */
-    private $postalCode;
+    protected $postalCode;
 
     /**
      * @var Country|null
@@ -95,7 +94,7 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Country")
      * @ORM\JoinColumn(name="country_code", referencedColumnName="iso2_code")
      */
-    private $country;
+    protected $country;
 
     /**
      * @var Region|null
@@ -103,14 +102,21 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Region")
      * @ORM\JoinColumn(name="region_code", referencedColumnName="combined_code")
      */
-    private $region;
+    protected $region;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="region_text", type="string", length=255, nullable=true)
+     */
+    protected $regionText;
 
     /**
      * @var string|null
      *
      * @ORM\Column(name="organization", type="string", length=255, nullable=true)
      */
-    private $organization;
+    protected $organization;
 
     public function setOwner(FestivalAccount $owner)
     {
@@ -221,6 +227,16 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
     {
         return $this->country ? $this->country->getIso2Code() : '';
     }
+    
+    public function getRegionText(): ?string
+    {
+        return $this->regionText;
+    }
+    
+    public function setRegionText(?string $regionText): void
+    {
+        $this->regionText = $regionText;
+    }
 
     public function __toString()
     {
@@ -248,6 +264,7 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
             && empty($this->street2)
             && empty($this->city)
             && empty($this->region)
+            && empty($this->regionText)
             && empty($this->country)
             && empty($this->postalCode);
     }
