@@ -79,12 +79,19 @@ ehdev:
             updated_at.label: Updated At
             saved.message: Festival Account saved
             owner.label: Owner
+            fesitvals.labal: Festivals
+            organization.label: Organization
+            updated_by.label: Updated By
+            accountmanager.label: Account Manager
             widget:
                 festivals:
                     title: Festival Overview
                     subtitle: Infos
                     no_data_found: No Festivals found
                     add_festival: Add Festival
+                additional_data:
+                    title: Additional Data
+                    subtitle: ~
             form:
                 placeholder:
                     choose: Choose Festival Account
@@ -103,6 +110,18 @@ ehdev:
             street.label: Street
             street2.label: Street 2
             update_entity: Update Billing Address
+        contact:
+            entity_label: Contact
+            entity_plural_label: Contacts
+            email.label: E-Mail
+            emails.label: E-Mails
+            first_name.label: First Name
+            id.label: Id
+            last_name.label: Last Name
+            owner.label: Festival Account
+            primary.label: Primary
+            profession.label: Profession
+            saved.message: Contact Saved
         system_configuration:
             groups:
                 festival.title: Festival Settings
