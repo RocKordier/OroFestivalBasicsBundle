@@ -1,2 +1,3 @@
 bundles:
-    - { name: EHDev\FestivalBasicsBundle\EHDevFestivalBasicsBundle, priority: 10 }
+    # needs to be loaded after Oro CalendarBundle's priority: 101
+    - { name: EHDev\FestivalBasicsBundle\EHDevFestivalBasicsBundle, priority: 102 }
