@@ -1,8 +1,15 @@
 {% import 'OroUIBundle::macros.html.twig' as UI %}
-{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
-
+{% import 'OroUserBundle::macros.html.twig' as USER %}
 <div class="widget-content">
-    <div class="row-fluid title">
+    <div class="row-fluid">
+        <div class="responsive-block">
+            {% if entity.accountManager  %}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.festivalaccount.accountmanager.label'|trans, USER.render_user_name(entity.accountManager)) }}
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    <div class="row-fluid">
         {% set dialogTitle = 'ehdev.festivalbasics.festivalaccount.widget.festivals.add_festival'|trans %}
         {{ UI.clientButton({
             'dataUrl': path('ehdev_festival_festival_account_add_festival', {'id': entity.id}),
@@ -28,8 +35,7 @@
             }
         })
         }}
-    </div>
-    <div class="row-fluid">
+
         <div>
             {% set tabs = [] %}
             {% for festival in entity.festivals %}
@@ -51,16 +57,12 @@
                 {% if not isMobileVersion() %}
                     {% set tabsOptions = {
                         verticalTabs: true,
-                        useDropdown: false,
-                        subtitle: 'ehdev.festivalbasics.festival.entity_label'|trans
+                        useDropdown: false
                     }%}
                 {% endif %}
                 {{ tabPanel(tabs, tabsOptions|default({})) }}
             {% endif %}
-
         </div>
-        <div class="responsive-block">
-            {{ entityConfig.renderDynamicFields(entity) }}
-        </div>
+        <hr>
     </div>
 </div>
