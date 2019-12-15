@@ -35,41 +35,6 @@
         }}
     {% endif %}
 
-    {% if is_granted('') %}
-        {% set dialogTitle = 'ehdev.festivalbasics.billingaddress.update_entity'|trans %}
-
-        {% if entity.billingAddress is null %}
-            {% set path = path('ehdev_festival_billingaddress_create', {id: entity.id}) %}
-        {% else %}
-            {% set path = path('ehdev_festival_billingaddress_update', {id: entity.billingAddress.id}) %}
-        {% endif %}
-
-        {{ UI.clientButton({
-            'dataUrl': path,
-            'aCss': 'no-hash',
-            'iCss': 'fa-refresh',
-            'dataId': null,
-            'title' : dialogTitle,
-            'label' : dialogTitle,
-            'widget' : {
-                'type' : 'dialog',
-                'multiple' : false,
-                'options' : {
-                    'stateEnabled': false,
-                    'dialogOptions' : {
-                        'title' : dialogTitle,
-                        'allowMaximize': false,
-                        'allowMinimize': false,
-                        'dblclick': 'maximize',
-                        'maximizedHeightDecreaseBy': 'minimize-bar',
-                        'width': 500
-                    }
-                }
-            }
-        })
-        }}
-    {% endif %}
-
     {{ parent() }}
 {% endblock %}
 
