@@ -12,20 +12,42 @@ datagrids:
                     - fwa.name
                     - fwa.createdAt
                     - fwa.updatedAt
+                    - CONCAT_WS(' ', own.firstName, own.lastName) as ownerName
+                    - own.id as owner
                 from:
                     - { table: EHDevFestivalBasicsBundle:FestivalAccount, alias: fwa }
+                join:
+                    left:
+                        - { join: fwa.accountManager, alias: own }
         columns:
             id:
                 label:         ehdev.festivalbasics.festivalaccount.id.label
             name:
                 frontend_type: string
                 label:         ehdev.festivalbasics.festivalaccount.name.label
+            ownerName:
+                label: Account Manager
             createdAt:
                 frontend_type: date
                 label:         ehdev.festivalbasics.festivalaccount.created_at.label
             updatedAt:
                 frontend_type: date
                 label:         ehdev.festivalbasics.festivalaccount.updated_at.label
+        sorters:
+            columns:
+                name:
+                    data_name: name
+                ownerName:
+                    data_name: ownerName
+        filters:
+            columns:
+                owner:
+                    type: choice-tree
+                    label: Account Manager
+                    data_name: fwa.accountManager
+                    autocomplete_alias: assigned_to_organization_users
+                    renderedPropertyName: 'fullName'
+                    className: 'Oro\Bundle\UserBundle\Entity\User'
         properties:
             id: ~
             view_link:
