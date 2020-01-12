@@ -70,12 +70,14 @@
         'subblocks': [{
             'title' : 'ehdev.festivalbasics.festivalaccount.widget.festivals.subtitle'|trans,
             'data' : [festivalAccountFestivals]
-        }]
+        }],
+        'priority': 0
     }, {
         'title': 'ehdev.festivalbasics.festivalaccount.widget.additional_data.title'|trans,
         'subblocks': [{
             'data' : [additionalData]
-        }]
+        }],
+        'priority': 100
     }] %}
 
     {% set data = {'dataBlocks': dataBlocks} %}
