@@ -23,7 +23,6 @@ class FestivalAccountController
     private $updateHandlerFacade;
     private $translator;
     private $formFactory;
-    private $accountAddFestivalHandler;
 
     public function __construct(
         UpdateHandlerFacade $updateHandlerFacade,

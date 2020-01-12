@@ -75,7 +75,7 @@ class BillingAddressController
                 $this->formFactory->create(BillingAddressType::class, $entity),
                 $this->translator->trans('ehdev.festivalbasics.billingaddress.saved.message')
             ),
-            ['festivalAccont' => $entity->getOwner()]
+            ['festivalAccount' => $entity->getOwner()]
         );
     }
 }
