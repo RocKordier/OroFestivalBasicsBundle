@@ -1,6 +1,6 @@
 datagrids:
     ehdev-festival-festival-account-grid:
-        extended_entity_name: EHDevFestivalBasicsBundle:FestivalAccount
+        extended_entity_name: EHDev\FestivalBasicsBundle\Entity\FestivalAccount
         acl_resource: ehdev_festival_festival_account_view
         options:
             entityHint: ehdev.festivalbasics.festivalaccount.entity_plural_label
