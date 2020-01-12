@@ -10,17 +10,8 @@
         </div>
         <div class="responsive-block">
 <h4>{{ 'ehdev.festivalbasics.billingaddress.entity_label'|trans }}</h4>
-            {% if entity.billingAddress %}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.label.label'|trans, entity.billingAddress.label|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.organization.label'|trans, entity.billingAddress.organization|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.street.label'|trans, entity.billingAddress.street|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.street2.label'|trans, entity.billingAddress.street2|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.postal_code.label'|trans, entity.billingAddress.postalCode|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.city.label'|trans, entity.billingAddress.city|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.country.label'|trans, entity.billingAddress.country|default('')) }}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.region.label'|trans, entity.billingAddress.region|default('')) }}
-            {% endif %}
-            {% if is_granted('') %}
+
+            {% set billingAddressButton %}
                 {% set dialogTitle = 'ehdev.festivalbasics.billingaddress.update_entity'|trans %}
 
                 {% if entity.billingAddress is null %}
@@ -53,6 +44,18 @@
                     }
                 })
                 }}
+            {% endset %}
+
+            {{ UI.renderHtmlProperty('', billingAddressButton|raw ) }}
+            {% if entity.billingAddress %}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.label.label'|trans, entity.billingAddress.label|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.organization.label'|trans, entity.billingAddress.organization|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.street.label'|trans, entity.billingAddress.street|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.street2.label'|trans, entity.billingAddress.street2|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.postal_code.label'|trans, entity.billingAddress.postalCode|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.city.label'|trans, entity.billingAddress.city|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.country.label'|trans, entity.billingAddress.country|default('')) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.billingaddress.region.label'|trans, entity.billingAddress.region|default('')) }}
             {% endif %}
         </div>
     </div>
