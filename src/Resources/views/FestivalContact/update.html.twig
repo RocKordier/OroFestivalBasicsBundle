@@ -6,6 +6,10 @@
 {% endif %}
 
 {% block requireAction %}
+
+    {% if iscreate is defined %}
+        mediator.execute('refreshPage');
+    {% endif %}
     widgetManager.getWidgetInstanceByAlias(
         'festival-account-contact-widget-festival-info-{{ form.vars.value.id }}',
         function (widget) {

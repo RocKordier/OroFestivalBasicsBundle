@@ -154,7 +154,7 @@
     <div class="row-fluid">
         {{ buttonAddFestival }}
 
-        {{ dataGrid.renderGrid('ehdev-festival-account-festival-grid', { festivalAccount: entity}, { cssClass: 'inner-grid' }) }}
+        {{ dataGrid.renderGrid('ehdev-festival-account-festival-grid', { festivalAccount: entity.id}, { cssClass: 'inner-grid' }) }}
 
 
         {#        {% if (tabsFestival|length == 0) %}#}

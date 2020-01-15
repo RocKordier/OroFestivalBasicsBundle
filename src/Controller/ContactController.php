@@ -49,7 +49,7 @@ class ContactController
      */
     public function createAction(FestivalAccount $festivalAccount): array
     {
-        return $this->update(new Contact($festivalAccount));
+        return array_merge($this->update(new Contact($festivalAccount)), ['iscreate' => true]);
     }
 
     /**

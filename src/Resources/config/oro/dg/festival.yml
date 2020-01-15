@@ -85,8 +85,11 @@ datagrids:
         acl_resource: ehdev_festival_festival_view
         source:
             query:
+                join:
+                    left:
+                        - { join: fw.festivalAccount, alias: fva }
                 where:
                     and:
-                        - fw.festivalAccount = :festivalAccount
+                        - fva.id = :festivalAccount
             bind_parameters:
                 - festivalAccount
