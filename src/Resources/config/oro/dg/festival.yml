@@ -52,7 +52,7 @@ datagrids:
                 params:     [ id ]
             delete_link:
                 type: url
-                route: oro_api_delete_festival
+                route: ehdev_festival_festival_delete
                 params: [ id ]
         actions:
             view:

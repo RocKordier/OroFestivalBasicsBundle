@@ -15,7 +15,6 @@ class EHDevFestivalBasicsExtension extends Extension
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('manager_services.yml');
         $loader->load('search_services.yml');
     }
 }
