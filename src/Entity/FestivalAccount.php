@@ -163,4 +163,20 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
     {
         $this->accountManager = $accountManager;
     }
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    /**
+     * @param Collection|Contact[] $contacts
+     */
+    public function setContacts($contacts): void
+    {
+        $this->contacts = $contacts;
+    }
 }

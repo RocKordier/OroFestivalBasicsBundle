@@ -79,3 +79,14 @@ datagrids:
                 label:         oro.grid.action.delete
                 icon:          trash
                 link:          delete_link
+
+    ehdev-festival-account-festival-grid:
+        extends: ehdev-festival-festival-grid
+        acl_resource: ehdev_festival_festival_view
+        source:
+            query:
+                where:
+                    and:
+                        - fw.festivalAccount = :festivalAccount
+            bind_parameters:
+                - festivalAccount

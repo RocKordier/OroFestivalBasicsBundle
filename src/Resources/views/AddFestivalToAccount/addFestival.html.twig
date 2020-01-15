@@ -4,7 +4,5 @@
 {% set pathUpdate = '' %}
 
 {% block requireAction %}
-    widgetManager.getWidgetInstance('festival-account-festivals-widget', function (widget) {
-    widget.render();
-    });
+    mediator.trigger('datagrid:doRefresh:ehdev-festival-account-festival-grid');
 {% endblock %}

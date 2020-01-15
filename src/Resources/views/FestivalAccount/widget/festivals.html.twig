@@ -1,50 +1,141 @@
 {% import 'OroUIBundle::macros.html.twig' as UI %}
 {% import 'OroUserBundle::macros.html.twig' as USER %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% set addContactButton %}
+    {{ UI.clientButton({
+        'dataUrl': path('ehdev_festival_contact_create', {id: entity.id}),
+        'aCss': 'no-hash',
+        'iCss': 'fa-plus',
+        'dataId': null,
+        'title' : 'Add Contact',
+        'label' : 'Add Contact',
+        'widget' : {
+            'type' : 'dialog',
+            'multiple' : false,
+            'options' : {
+                'stateEnabled': false,
+                'dialogOptions' : {
+                    'title' : 'Add Contact',
+                    'allowMaximize': false,
+                    'allowMinimize': false,
+                    'dblclick': 'maximize',
+                    'maximizedHeightDecreaseBy': 'minimize-bar',
+                    'width': 500
+                }
+            }
+        }
+    }) }}
+{% endset %}
+
+{% set billingAddressButton %}
+    {% set dialogTitle = 'ehdev.festivalbasics.billingaddress.update_entity'|trans %}
+    {% if entity.billingAddress is null %}
+        {% set path = path('ehdev_festival_billingaddress_create', {id: entity.id}) %}
+    {% else %}
+        {% set path = path('ehdev_festival_billingaddress_update', {id: entity.billingAddress.id}) %}
+    {% endif %}
+
+    {{ UI.clientLink({
+        'dataUrl': path,
+        'aCss': 'no-hash',
+        'dataId': null,
+        'title' : dialogTitle,
+        'label' : dialogTitle,
+        'widget' : {
+            'type' : 'dialog',
+            'multiple' : false,
+            'options' : {
+                'stateEnabled': false,
+                'dialogOptions' : {
+                    'title' : dialogTitle,
+                    'allowMaximize': false,
+                    'allowMinimize': false,
+                    'dblclick': 'maximize',
+                    'maximizedHeightDecreaseBy': 'minimize-bar',
+                    'width': 500
+                }
+            }
+        }
+    }) }}
+{% endset %}
+
+{% set buttonAddFestival %}
+    {% set dialogTitle = 'ehdev.festivalbasics.festivalaccount.widget.festivals.add_festival'|trans %}
+    {{ UI.clientButton({
+        'dataUrl': path('ehdev_festival_festival_account_add_festival', {'id': entity.id}),
+        'aCss': 'no-hash',
+        'iCss': 'fa-plus',
+        'dataId': null,
+        'title' : dialogTitle,
+        'label' : dialogTitle,
+        'widget' : {
+            'type' : 'dialog',
+            'multiple' : false,
+            'options' : {
+                'stateEnabled': false,
+                'dialogOptions' : {
+                    'title' : dialogTitle,
+                    'allowMaximize': true,
+                    'allowMinimize': true,
+                    'dblclick': 'maximize',
+                    'maximizedHeightDecreaseBy': 'minimize-bar',
+                    'width': 500
+                }
+            }
+        }
+    }) }}
+{% endset %}
+
+{% set tabsContact = [] %}
+{% for contact in entity.contacts %}
+    {% set tabsContact = tabsContact|merge([
+        {
+            'alias': 'festival-account-contact-widget-festival-info-' ~ contact.id,
+            'widgetType': 'block',
+            'label': contact.firstName ~ ' ' ~ contact.lastName,
+            'url': path('ehdev_festival_contact_view', {'id': contact.id})
+        }
+    ]) %}
+{% endfor %}
+
+{#{% set tabsFestival = [] %}#}
+{#{% for festival in entity.festivals %}#}
+{#    {% set tabsFestival = tabsFestival|merge([#}
+{#        {#}
+{#            'alias': 'festival-account-festivals-widget-festival-info-' ~ festival.id,#}
+{#            'widgetType': 'block',#}
+{#            'label': festival.name,#}
+{#            'url': path('ehdev_festival_festival_widget_info', {'id': festival.id})#}
+{#        }#}
+{#    ]) %}#}
+{#{% endfor %}#}
+
+
 <div class="widget-content">
     <div class="row-fluid">
         <div class="responsive-block">
-            &nbsp;
             {% if entity.accountManager  %}
                 {{ UI.renderHtmlProperty('ehdev.festivalbasics.festivalaccount.accountmanager.label'|trans, USER.render_user_name(entity.accountManager)) }}
             {% endif %}
-        </div>
-        <div class="responsive-block">
-<h4>{{ 'ehdev.festivalbasics.billingaddress.entity_label'|trans }}</h4>
-
-            {% set billingAddressButton %}
-                {% set dialogTitle = 'ehdev.festivalbasics.billingaddress.update_entity'|trans %}
-
-                {% if entity.billingAddress is null %}
-                    {% set path = path('ehdev_festival_billingaddress_create', {id: entity.id}) %}
-                {% else %}
-                    {% set path = path('ehdev_festival_billingaddress_update', {id: entity.billingAddress.id}) %}
+            {{ addContactButton }}
+            {% if (tabsContact|length == 0) %}
+                <div class="no-data">
+                    {{ 'ehdev.festivalbasics.contact.widget.contacts.no_data_found'|trans }}
+                </div>
+            {% else %}
+                {% if not isMobileVersion() %}
+                    {% set tabsOptions = {
+                        verticalTabs: true,
+                        useDropdown: false
+                    }%}
                 {% endif %}
+                {{ tabPanel(tabsContact, tabsOptions|default({})) }}
+            {% endif %}
+        </div>
 
-                {{ UI.clientButton({
-                    'dataUrl': path,
-                    'aCss': 'no-hash',
-                    'iCss': 'fa-refresh',
-                    'dataId': null,
-                    'title' : dialogTitle,
-                    'label' : dialogTitle,
-                    'widget' : {
-                        'type' : 'dialog',
-                        'multiple' : false,
-                        'options' : {
-                            'stateEnabled': false,
-                            'dialogOptions' : {
-                                'title' : dialogTitle,
-                                'allowMaximize': false,
-                                'allowMinimize': false,
-                                'dblclick': 'maximize',
-                                'maximizedHeightDecreaseBy': 'minimize-bar',
-                                'width': 500
-                            }
-                        }
-                    }
-                })
-                }}
-            {% endset %}
+        <div class="responsive-block">
+            <h4>{{ 'ehdev.festivalbasics.billingaddress.entity_label'|trans }}</h4>
 
             {{ UI.renderHtmlProperty('', billingAddressButton|raw ) }}
             {% if entity.billingAddress %}
@@ -59,60 +150,25 @@
             {% endif %}
         </div>
     </div>
-    <hr>
+
     <div class="row-fluid">
-        {% set dialogTitle = 'ehdev.festivalbasics.festivalaccount.widget.festivals.add_festival'|trans %}
-        {{ UI.clientButton({
-            'dataUrl': path('ehdev_festival_festival_account_add_festival', {'id': entity.id}),
-            'aCss': 'no-hash',
-            'iCss': 'fa-plus',
-            'dataId': null,
-            'title' : dialogTitle,
-            'label' : dialogTitle,
-            'widget' : {
-                'type' : 'dialog',
-                'multiple' : false,
-                'options' : {
-                    'stateEnabled': false,
-                    'dialogOptions' : {
-                        'title' : dialogTitle,
-                        'allowMaximize': true,
-                        'allowMinimize': true,
-                        'dblclick': 'maximize',
-                        'maximizedHeightDecreaseBy': 'minimize-bar',
-                        'width': 500
-                    }
-                }
-            }
-        }) }}
+        {{ buttonAddFestival }}
 
-        <div>
-            {% set tabs = [] %}
-            {% for festival in entity.festivals %}
-                {% set tabs = tabs|merge([
-                    {
-                        'alias': 'festival-account-festivals-widget-festival-info-' ~ festival.id,
-                        'widgetType': 'block',
-                        'label': festival.name,
-                        'url': path('ehdev_festival_festival_widget_info', {'id': festival.id})
-                    }
-                ]) %}
-            {% endfor %}
+        {{ dataGrid.renderGrid('ehdev-festival-account-festival-grid', { festivalAccount: entity}, { cssClass: 'inner-grid' }) }}
 
-            {% if (tabs|length == 0) %}
-                <div class="no-data">
-                    {{ 'ehdev.festivalbasics.festivalaccount.widget.festivals.no_data_found'|trans }}
-                </div>
-            {% else %}
-                {% if not isMobileVersion() %}
-                    {% set tabsOptions = {
-                        verticalTabs: true,
-                        useDropdown: false
-                    }%}
-                {% endif %}
-                {{ tabPanel(tabs, tabsOptions|default({})) }}
-            {% endif %}
-        </div>
-        <hr>
+
+        {#        {% if (tabsFestival|length == 0) %}#}
+{#            <div class="no-data">#}
+{#                {{ 'ehdev.festivalbasics.festivalaccount.widget.festivals.no_data_found'|trans }}#}
+{#            </div>#}
+{#        {% else %}#}
+{#            {% if not isMobileVersion() %}#}
+{#                {% set tabsOptions = {#}
+{#                    verticalTabs: true,#}
+{#                    useDropdown: false#}
+{#                }%}#}
+{#            {% endif %}#}
+{#            {{ tabPanel(tabsFestival, tabsOptions|default({})) }}#}
+{#        {% endif %}#}
     </div>
 </div>

@@ -1,0 +1,35 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+
+{% set editButton %}
+    {{ UI.clientLink({
+        'dataUrl': path('ehdev_festival_contact_update', {id : contact.id}),
+        'aCss': 'no-hash',
+        'label' : 'Update Contact',
+        'widget' : {
+            'type' : 'dialog',
+            'multiple' : false,
+            'options' : {
+                'dialogOptions' : {
+                    'title' : 'Update Contact',
+                    'allowMaximize': true,
+                    'allowMinimize': true,
+                    'dblclick': 'maximize',
+                    'maximizedHeightDecreaseBy': 'minimize-bar',
+                    'width': 600
+                }
+            }
+        },
+    }) }}
+{% endset %}
+<div class="widget-content">
+    <div class="row-fluid form-horizontal">
+        <div class="responsive-block">
+            {{ UI.renderHtmlProperty('', editButton) }}
+            {{ UI.renderHtmlProperty('First Name'|trans, contact.firstName) }}
+            {{ UI.renderHtmlProperty('Last Name'|trans, contact.lastName) }}
+            {{ UI.renderHtmlProperty('Profession'|trans, contact.profession) }}
+            {{ UI.renderHtmlProperty('Mails'|trans, contact.emails|join(', ')) }}
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@ class ContactEmail extends ExtendContactEmail implements EmailInterface, DatesAw
 {
     use DatesAwareTrait;
 
-    public function __construct(?string $eMail)
+    public function __construct(?string $eMail = '')
     {
         parent::__construct($eMail);
     }

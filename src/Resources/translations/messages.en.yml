@@ -122,6 +122,9 @@ ehdev:
             primary.label: Primary
             profession.label: Profession
             saved.message: Contact Saved
+            widget:
+                contacts:
+                    no_data_found: No Contacts found
         system_configuration:
             groups:
                 festival.title: Festival Settings

@@ -1,0 +1,15 @@
+{% extends '@EHDevBasics/Widgets/formWidget.html.twig' %}
+
+{% set pathCreate = path('ehdev_festival_contact_create', {id: festivalAccount.id}) %}
+{% if form.vars.value.id is not null %}
+    {% set pathUpdate = path('ehdev_festival_contact_update', { id: form.vars.value.id}) %}
+{% endif %}
+
+{% block requireAction %}
+    widgetManager.getWidgetInstanceByAlias(
+        'festival-account-contact-widget-festival-info-{{ form.vars.value.id }}',
+        function (widget) {
+            widget.render();
+        }
+    );
+{% endblock %}
