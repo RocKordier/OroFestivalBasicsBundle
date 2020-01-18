@@ -33,7 +33,7 @@ class FestivalAccountType extends AbstractType
             'accountManager',
             UserSelectType::class,
             [
-                'label' => self::LABEL_PREFIX.'accountmanager.label',
+                'label' => self::LABEL_PREFIX.'account_manager.label',
             ]
         );
     }

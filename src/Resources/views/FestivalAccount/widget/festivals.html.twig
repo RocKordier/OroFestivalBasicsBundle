@@ -116,7 +116,7 @@
     <div class="row-fluid">
         <div class="responsive-block">
             {% if entity.accountManager  %}
-                {{ UI.renderHtmlProperty('ehdev.festivalbasics.festivalaccount.accountmanager.label'|trans, USER.render_user_name(entity.accountManager)) }}
+                {{ UI.renderHtmlProperty('ehdev.festivalbasics.festivalaccount.account_manager.label'|trans, USER.render_user_name(entity.accountManager)) }}
             {% endif %}
             {{ addContactButton }}
             {% if (tabsContact|length == 0) %}

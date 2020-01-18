@@ -82,7 +82,10 @@ ehdev:
             fesitvals.labal: Festivals
             organization.label: Organization
             updated_by.label: Updated By
-            accountmanager.label: Account Manager
+            account_manager.label: Account Manager
+            billing_address.label: Billing Address
+            contacts.label: Contacts
+            festivals.label: Festivals
             widget:
                 festivals:
                     title: Festival Overview
