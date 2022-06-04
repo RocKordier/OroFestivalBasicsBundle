@@ -14,8 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StageType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.stage.';
-    const LABEL_PREFIX_FW = 'ehdev.festivalbasics.festival.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.stage.';
+    public const LABEL_PREFIX_FW = 'ehdev.festivalbasics.festival.';
 
     /**
      * @return string

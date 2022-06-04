@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  "tag"={"enabled"=true}
  * })
  */
-class SecurityArea extends ExtendSecurityArea
+class SecurityArea extends ExtendSecurityArea implements \Stringable
 {
     /**
      * @var string

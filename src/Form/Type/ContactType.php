@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.contact.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.contact.';
 
     public function getBlockPrefix()
     {

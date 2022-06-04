@@ -8,11 +8,11 @@ use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 use EHDev\FestivalBasicsBundle\Entity\SecurityArea;
 use EHDev\FestivalBasicsBundle\Entity\Stage;
+use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Oro\Bundle\SecurityBundle\Annotation\Acl;
 
 /**
  * @Route("/api/delete")

@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FestivalAccountType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.festivalaccount.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.festivalaccount.';
 
     public function getBlockPrefix()
     {

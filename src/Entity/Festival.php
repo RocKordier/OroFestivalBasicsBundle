@@ -118,7 +118,7 @@ class Festival extends ExtendFestival
     /**
      * @param string $name
      *
-     * @return Festival
+     * @return self
      */
     public function setName($name)
     {
@@ -138,7 +138,7 @@ class Festival extends ExtendFestival
     /**
      * @param \DateTime $startDate
      *
-     * @return Festival
+     * @return self
      */
     public function setStartDate($startDate)
     {
@@ -158,7 +158,7 @@ class Festival extends ExtendFestival
     /**
      * @param \DateTime $endDate
      *
-     * @return Festival
+     * @return self
      */
     public function setEndDate($endDate)
     {
@@ -178,7 +178,7 @@ class Festival extends ExtendFestival
     /**
      * @param int $maxGuests
      *
-     * @return Festival
+     * @return self
      */
     public function setMaxGuests($maxGuests)
     {

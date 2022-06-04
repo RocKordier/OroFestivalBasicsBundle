@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SecurityAreaType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.securityarea.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.securityarea.';
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

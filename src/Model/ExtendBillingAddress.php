@@ -6,7 +6,5 @@ namespace EHDev\FestivalBasicsBundle\Model;
 
 class ExtendBillingAddress
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 }

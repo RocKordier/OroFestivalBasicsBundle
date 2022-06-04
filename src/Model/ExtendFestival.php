@@ -8,7 +8,5 @@ use EHDev\BasicsBundle\Entity\Base;
 
 class ExtendFestival extends Base
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 }

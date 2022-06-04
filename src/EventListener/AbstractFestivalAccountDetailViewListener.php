@@ -37,9 +37,6 @@ abstract class AbstractFestivalAccountDetailViewListener
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @return FestivalAccount
-     */
     public function getFestivalAccount(): FestivalAccount
     {
         if (!($this->requestStack->getCurrentRequest() instanceof Request)) {

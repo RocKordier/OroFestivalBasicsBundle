@@ -25,7 +25,7 @@ use Oro\Bundle\FormBundle\Entity\EmptyItem;
  * )
  * @ORM\Entity
  */
-class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem
+class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem, \Stringable
 {
     use DatesAwareTrait;
 

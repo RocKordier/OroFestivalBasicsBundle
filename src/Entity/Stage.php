@@ -69,7 +69,7 @@ class Stage extends ExtendStage
     /**
      * @param string $name
      *
-     * @return Stage
+     * @return self
      */
     public function setName($name)
     {
@@ -89,7 +89,7 @@ class Stage extends ExtendStage
     /**
      * @param string $description
      *
-     * @return Stage
+     * @return self
      */
     public function setDescription($description)
     {
@@ -107,7 +107,7 @@ class Stage extends ExtendStage
     }
 
     /**
-     * @return Stage
+     * @return self
      */
     public function setFestival(Festival $festival)
     {

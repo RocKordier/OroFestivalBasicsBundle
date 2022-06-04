@@ -15,7 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FestivalType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.festival.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.festival.';
 
     /**
      * @return string

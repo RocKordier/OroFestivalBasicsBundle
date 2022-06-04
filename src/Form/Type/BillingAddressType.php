@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BillingAddressType extends AbstractType
 {
-    const LABEL_PREFIX = 'ehdev.festivalbasics.billingaddress.';
+    public const LABEL_PREFIX = 'ehdev.festivalbasics.billingaddress.';
 
     private $countryAndRegionSubscriber;
 

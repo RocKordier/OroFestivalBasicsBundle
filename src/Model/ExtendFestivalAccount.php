@@ -6,7 +6,5 @@ namespace EHDev\FestivalBasicsBundle\Model;
 
 class ExtendFestivalAccount
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 }

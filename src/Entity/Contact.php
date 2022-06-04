@@ -148,7 +148,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
     public function addEmail(ContactEmail $email): void
     {
         if (!$this->emails->contains($email)) {
-            //don't allow more than one primary email
+            // don't allow more than one primary email
             if ($email->isPrimary() && $this->getPrimaryEmail()) {
                 $email->setPrimary(false);
             }

@@ -8,7 +8,5 @@ use EHDev\BasicsBundle\Entity\Base;
 
 class ExtendStage extends Base
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 }
