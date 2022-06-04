@@ -4,42 +4,42 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller;
 
+use EHDev\BasicsBundle\Controller\ResponseTrait;
 use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Form\Type\FestivalType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
-/**
- * @Route("/festival")
- */
+#[Route('/festival')]
 class FestivalController
 {
+    use ResponseTrait;
+
     public function __construct(
         private readonly UpdateHandlerFacade $updateHandlerFacade,
         private readonly TranslatorInterface $translator,
-        private readonly FormFactoryInterface $formFactory
+        private readonly FormFactoryInterface $formFactory,
+        /** @phpstan-ignore-next-line */
+        private readonly Environment $twig,
     ) {}
 
     /**
-     * @Route("/", name="ehdev_festival_festival_index")
      * @AclAncestor("ehdev_festival_festival_view")
-     *
-     * @Template
      */
-    public function indexAction(): array
+    #[Route('/', name: 'ehdev_festival_festival_index')]
+    public function indexAction(): Response
     {
-        return [];
+        return $this->constructResponse([], '@EHDevFestivalBasics/Festival/index.html.twig');
     }
 
     /**
-     * @Route("/view/{id}", name="ehdev_festival_festival_view", requirements={"id"="\d+"})
-     * @Template
      * @Acl(
      *      id="ehdev_festival_festival_view",
      *      type="entity",
@@ -47,16 +47,16 @@ class FestivalController
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function viewAction(Festival $festival): array
+    #[Route('/view/{id}', name: 'ehdev_festival_festival_view', requirements: ['id' => '\d+'])]
+    public function viewAction(Festival $festival): Response
     {
-        return [
-            'entity' => $festival,
-        ];
+        return $this->constructResponse(
+            ['entity' => $festival],
+            '@EHDevFestivalBasics/Festival/view.html.twig',
+        );
     }
 
     /**
-     * @Route("/create", name="ehdev_festival_festival_create")
-     * @Template("@EHDevFestivalBasics/Festival/update.html.twig")
      * @Acl(
      *      id="ehdev_festival_festival_create",
      *      type="entity",
@@ -64,15 +64,16 @@ class FestivalController
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function createAction(): array|RedirectResponse
+    #[Route('/create', name: 'ehdev_festival_festival_create')]
+    public function createAction(): Response
     {
-        return $this->update(new Festival());
+        return $this->constructResponse(
+            $this->update(new Festival()),
+            '@EHDevFestivalBasics/Festival/update.html.twig',
+        );
     }
 
     /**
-     * @Route("/update/{id}", name="ehdev_festival_festival_update", requirements={"id"="\d+"})
-     *
-     * @Template
      * @Acl(
      *      id="ehdev_festival_festival_update",
      *      type="entity",
@@ -80,33 +81,37 @@ class FestivalController
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function updateAction(Festival $entity): array|RedirectResponse
+    #[Route('/update/{id}', name: 'ehdev_festival_festival_update', requirements: ['id' => '\d+'])]
+    public function updateAction(Festival $entity): Response
     {
-        return $this->update($entity);
+        return $this->constructResponse(
+            $this->update($entity),
+            '@EHDevFestivalBasics/Festival/update.html.twig',
+        );
     }
 
     /**
-     * @Route("/widget/info/{id}", name="ehdev_festival_festival_widget_info", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
-     * @Template
      */
-    public function infoAction(Festival $festival): array
+    #[Route('/widget/info/{id}', name: 'ehdev_festival_festival_widget_info', requirements: ['id' => '\d+'])]
+    public function infoAction(Festival $festival): Response
     {
-        return [
-            'entity' => $festival,
-        ];
+        return $this->constructResponse(
+            ['entity' => $festival],
+            '@EHDevFestivalBasics/Festival/widget/info.html.twig',
+        );
     }
 
     /**
-     * @Route("/widget/stages/{id}", name="ehdev_festival_festival_widget_stages", requirements={"id"="\d+"})
      * @AclAncestor("ehdev_festival_festival_view")
-     * @Template
      */
-    public function stageAction(Festival $festival): array|RedirectResponse
+    #[Route('/widget/stages/{id}', name: 'ehdev_festival_festival_widget_stages', requirements: ['id' => '\d+'])]
+    public function stageAction(Festival $festival): Response
     {
-        return [
-            'entity' => $festival,
-        ];
+        return $this->constructResponse(
+            ['entity' => $festival],
+            '@EHDevFestivalBasics/Festival/widget/stage.html.twig',
+        );
     }
 
     protected function update(Festival $entity): array|RedirectResponse

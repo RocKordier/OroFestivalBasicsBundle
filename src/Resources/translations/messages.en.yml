@@ -113,6 +113,8 @@ ehdev:
             street.label: Street
             street2.label: Street 2
             update_entity: Update Billing Address
+            saved:
+                message: Billing Address saved
         contact:
             entity_label: Contact
             entity_plural_label: Contacts

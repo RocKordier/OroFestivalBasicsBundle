@@ -4,33 +4,33 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller;
 
+use EHDev\BasicsBundle\Controller\ResponseTrait;
 use EHDev\FestivalBasicsBundle\Entity\Contact;
-use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 use EHDev\FestivalBasicsBundle\Form\Type\ContactType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
-/**
- * @Route("/festival_account/contact")
- */
+#[Route('/festival_account/contact')]
 class ContactController
 {
+    use ResponseTrait;
+
     public function __construct(
         private readonly UpdateHandlerFacade $updateHandlerFacade,
         private readonly TranslatorInterface $translator,
-        private readonly FormFactoryInterface $formFactory
+        private readonly FormFactoryInterface $formFactory,
+        /** @phpstan-ignore-next-line  */
+        private readonly Environment $twig,
     ) {}
 
     /**
-     * @Route("/create/{id}", name="ehdev_festival_contact_create", requirements={"id"="\d+"})
-     *
-     * @Template("@EHDevFestivalBasics/FestivalContact/update.html.twig")
      * @Acl(
      *      id="ehdev_festival_contact_create",
      *      type="entity",
@@ -38,20 +38,19 @@ class ContactController
      *      class="EHDevFestivalBasicsBundle:Contact"
      * )
      */
-    public function createAction(FestivalAccount $festivalAccount): array|RedirectResponse
+    #[Route('/create/{id}', name: 'ehdev_festival_contact_create', requirements: ['id' => '\d+'])]
+    public function createAction(FestivalAccount $festivalAccount): Response
     {
         $response = $this->update(new Contact($festivalAccount));
 
-        if (is_array($response)) {
-            $response = array_merge($response, ['iscreate' => true]);
-        }
-
-        return $response;
+        return $this->constructResponse(
+            $response,
+            'EHDevFestivalBasicsBundle:FestivalContact:update.html.twig',
+            ['iscreate' => true, 'festivalAccount' => $festivalAccount],
+        );
     }
 
     /**
-     * @Route("/view/{id}", name="ehdev_festival_contact_view", requirements={"id"="\d+"})
-     * @Template("@EHDevFestivalBasics/FestivalContact/info.html.twig")
      * @Acl(
      *      id="ehdev_festival_contact_view",
      *      type="entity",
@@ -59,15 +58,16 @@ class ContactController
      *      class="EHDevFestivalBasicsBundle:Contact"
      * )
      */
-    public function viewContactAction(Contact $contact): array
+    #[Route('/view/{id}', name: 'ehdev_festival_contact_view', requirements: ['id' => '\d+'])]
+    public function viewContactAction(Contact $contact): Response
     {
-        return ['contact' => $contact];
+        return $this->constructResponse(
+            ['contact' => $contact, 'festivalAccount' => $contact->getOwner()],
+            'EHDevFestivalBasicsBundle:FestivalContact:info.html.twig',
+        );
     }
 
     /**
-     * @Route("/update/{id}", name="ehdev_festival_contact_update", requirements={"id"="\d+"})
-     *
-     * @Template("@EHDevFestivalBasics/FestivalContact/update.html.twig")
      * @Acl(
      *      id="ehdev_festival_contact_update",
      *      type="entity",
@@ -75,24 +75,21 @@ class ContactController
      *      class="EHDevFestivalBasicsBundle:Contact"
      * )
      */
-    public function updateAction(Contact $entity): array|RedirectResponse
+    #[Route('/update/{id}', name: 'ehdev_festival_contact_update', requirements: ['id' => '\d+'])]
+    public function updateAction(Contact $entity): Response
     {
-        return $this->update($entity);
+        return $this->constructResponse(
+            $this->update($entity),
+            'EHDevFestivalBasicsBundle:FestivalContact:update.html.twig',
+        );
     }
 
     protected function update(Contact $entity): array|RedirectResponse
     {
-        $response = $this->updateHandlerFacade->update(
+        return $this->updateHandlerFacade->update(
             $entity,
             $this->formFactory->create(ContactType::class, $entity),
-            $this->translator->trans('ehdev.festivalbasics.contact.saved.message')
-        );
-
-        if ($response instanceof RedirectResponse) {
-            return $response;
-        }
-
-        return array_merge($response, ['festivalAccount' => $entity->getOwner()]
+            $this->translator->trans('ehdev.festivalbasics.contact.saved.message'),
         );
     }
 }

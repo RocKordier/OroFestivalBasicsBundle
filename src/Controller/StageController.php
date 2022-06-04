@@ -4,46 +4,46 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller;
 
+use EHDev\BasicsBundle\Controller\ResponseTrait;
 use EHDev\FestivalBasicsBundle\Entity\Stage;
 use EHDev\FestivalBasicsBundle\Form\Type\StageType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
-/**
- * @Route("/stage")
- */
+#[Route('/stage')]
 class StageController
 {
+    use ResponseTrait;
+
     public function __construct(
         private readonly UpdateHandlerFacade $updateHandlerFacade,
         private readonly TranslatorInterface $translator,
-        private readonly FormFactoryInterface $formFactory
+        private readonly FormFactoryInterface $formFactory,
+        /** @phpstan-ignore-next-line */
+        private readonly Environment $twig,
     ) {}
 
     /**
-     * @Route("/", name="ehdev_festival_stage_index")
      * @Acl(
      *      id="ehdev_festival_stage_view",
      *      type="entity",
      *      permission="VIEW",
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
-     *
-     * @Template
      */
-    public function indexAction(): array
+    #[Route('/', name: 'ehdev_festival_stage_index')]
+    public function indexAction(): Response
     {
-        return [];
+        return $this->constructResponse([], '@EHDevFestivalBasics/Stage/index.html.twig');
     }
 
     /**
-     * @Route("/create", name="ehdev_festival_stage_create")
-     * @Template("@EHDevFestivalBasics/Stage/update.html.twig")
      * @Acl(
      *      id="ehdev_festival_stage_create",
      *      type="entity",
@@ -51,15 +51,16 @@ class StageController
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
      */
-    public function createAction(): array|RedirectResponse
+    #[Route('/create', name: 'ehdev_festival_stage_create')]
+    public function createAction(): Response
     {
-        return $this->update(new Stage());
+        return $this->constructResponse(
+            $this->update(new Stage()),
+            '@EHDevFestivalBasics/Stage/update.html.twig',
+        );
     }
 
     /**
-     * @Route("/update/{id}", name="ehdev_festival_stage_update", requirements={"id"="\d+"})
-     *
-     * @Template
      * @Acl(
      *      id="ehdev_festival_stage_update",
      *      type="entity",
@@ -67,9 +68,13 @@ class StageController
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
      */
-    public function updateAction(Stage $entity): array|RedirectResponse
+    #[Route('/update/{id}', name: 'ehdev_festival_stage_update', requirements: ['id' => '\d+'])]
+    public function updateAction(Stage $entity): Response
     {
-        return $this->update($entity);
+        return $this->constructResponse(
+            $this->update($entity),
+            '@EHDevFestivalBasics/Stage/update.html.twig',
+        );
     }
 
     protected function update(Stage $entity): array|RedirectResponse

@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeleteController
 {
     public function __construct(
-        private readonly ManagerRegistry $registry
+        private readonly ManagerRegistry $registry,
     ) {}
 
     /**

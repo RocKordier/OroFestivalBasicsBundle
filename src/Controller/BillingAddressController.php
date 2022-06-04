@@ -4,36 +4,37 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller;
 
+use EHDev\BasicsBundle\Controller\ResponseTrait;
 use EHDev\FestivalBasicsBundle\Entity\BillingAddress;
-use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 use EHDev\FestivalBasicsBundle\Form\Type\BillingAddressType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
-/**
- * @Route("/festival_account/billing_address")
- */
+#[Route('/festival_account/billing_address')]
 class BillingAddressController
 {
+    use ResponseTrait;
+
     public function __construct(
         private readonly UpdateHandlerFacade $updateHandlerFacade,
         private readonly TranslatorInterface $translator,
-        private readonly FormFactoryInterface $formFactory
+        private readonly FormFactoryInterface $formFactory,
+        /** @phpstan-ignore-next-line  */
+        private readonly Environment $twig,
     ) {}
 
     /**
-     * @Route("{id}/create", name="ehdev_festival_billingaddress_create")
-     * @Template("@EHDevFestivalBasics/BillingAddress/update.html.twig")
      * @AclAncestor("ehdev_festival_billing_address_update")
      */
-    public function createAction(FestivalAccount $festivalAccount): array|RedirectResponse
+    #[Route('{id}/create', name: 'ehdev_festival_billingaddress_create')]
+    public function createAction(FestivalAccount $festivalAccount): Response
     {
         $billingAddress = new BillingAddress($festivalAccount);
 
@@ -45,9 +46,6 @@ class BillingAddressController
     }
 
     /**
-     * @Route("/update/{id}", name="ehdev_festival_billingaddress_update", requirements={"id"="\d+"})
-     *
-     * @Template
      * @Acl(
      *      id="ehdev_festival_billing_address_update",
      *      type="entity",
@@ -55,12 +53,13 @@ class BillingAddressController
      *      class="EHDevFestivalBasicsBundle:BillingAddress"
      * )
      */
-    public function updateAction(BillingAddress $entity): array|RedirectResponse
+    #[Route('/update/{id}', name: 'ehdev_festival_billingaddress_update', requirements: ['id' => '\d+'])]
+    public function updateAction(BillingAddress $entity): Response
     {
         return $this->update($entity);
     }
 
-    protected function update(BillingAddress $entity): array|RedirectResponse
+    protected function update(BillingAddress $entity): Response
     {
         $response = $this->updateHandlerFacade->update(
             $entity,
@@ -68,11 +67,10 @@ class BillingAddressController
             $this->translator->trans('ehdev.festivalbasics.billingaddress.saved.message')
         );
 
-        if ($response instanceof RedirectResponse) {
-            return $response;
-        }
-
-        return array_merge($response, ['festivalAccount' => $entity->getOwner()]
+        return $this->constructResponse(
+            $response,
+            'EHDevFestivalBasicsBundle:BillingAddress:update.html.twig',
+            ['festivalAccount' => $entity->getOwner()],
         );
     }
 }

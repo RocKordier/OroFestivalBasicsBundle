@@ -66,7 +66,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="contacts")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected ?FestivalAccount $owner;
+    protected FestivalAccount $owner;
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
@@ -117,7 +117,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         $this->lastName = $lastName;
     }
 
-    public function getOwner(): ?FestivalAccount
+    public function getOwner(): FestivalAccount
     {
         return $this->owner;
     }
