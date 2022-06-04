@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
@@ -37,194 +39,137 @@ class Festival extends ExtendFestival
     use BusinessUnitAwareTrait;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(max="255")
      * @Assert\NotBlank()
      */
-    protected $name;
+    protected string $name = '';
 
     /**
-     * @var \DateTime
      * @ORM\Column(type="datetime", name="start_date")
      * @Assert\NotBlank()
      */
-    protected $startDate;
+    protected ?\DateTime $startDate = null;
 
     /**
-     * @var \DateTime
      * @ORM\Column(type="datetime", name="end_date")
      * @Assert\NotBlank()
      */
-    protected $endDate;
+    protected ?\DateTime $endDate = null;
 
     /**
-     * @var int
      * @ORM\Column(type="integer")
      * @Assert\NotNull()
      */
-    protected $maxGuests;
+    protected int $maxGuests = 0;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
      * @ORM\OneToMany(
      *      targetEntity="EHDev\FestivalBasicsBundle\Entity\Stage", mappedBy="festival",
      *      cascade={"all"}, orphanRemoval=true
      * )
      */
-    protected $stages;
+    protected Collection $stages;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", name="is_active")
      */
-    protected $isActive = false;
+    protected bool $isActive = false;
 
     /**
-     * @var SecurityArea[]
-     *
      * @ORM\ManyToMany(targetEntity="SecurityArea")
      * @ORM\JoinTable(name="ehdev_fwb_secarea2festival",
      *      joinColumns={@ORM\JoinColumn(name="festival_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="secare_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
-    protected $securityAreas;
+    protected Collection $securityAreas;
 
     /**
-     * @var FestivalAccount|null
      * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="festivals",cascade={"persist"})
      * @ORM\JoinColumn(name="festival_account_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $festivalAccount;
+    protected ?FestivalAccount $festivalAccount = null;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->securityAreas = [];
+        $this->securityAreas = new ArrayCollection();
+        $this->stages = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getStartDate()
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @param \DateTime $startDate
-     *
-     * @return self
-     */
-    public function setStartDate($startDate)
+    public function setStartDate(\DateTime $startDate): self
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    /**
-     * @return \DateTime
-     */
-    public function getEndDate()
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
 
-    /**
-     * @param \DateTime $endDate
-     *
-     * @return self
-     */
-    public function setEndDate($endDate)
+    public function setEndDate(\DateTime $endDate): self
     {
         $this->endDate = $endDate;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaxGuests()
+    public function getMaxGuests(): int
     {
         return $this->maxGuests;
     }
 
-    /**
-     * @param int $maxGuests
-     *
-     * @return self
-     */
-    public function setMaxGuests($maxGuests)
+    public function setMaxGuests(int $maxGuests): self
     {
         $this->maxGuests = $maxGuests;
 
         return $this;
     }
 
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getStages()
+    public function getStages(): Collection
     {
         return $this->stages;
     }
 
-    /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $stage
-     */
-    public function addStage(Stage $stage)
+    public function addStage(Stage $stage): void
     {
         if (!$this->stages->contains($stage)) {
             $this->stages->add($stage);
         }
     }
 
-    /**
-     * @param \EHDev\FestivalBasicsBundle\Entity\Stage $stage
-     */
-    public function removeStage(Stage $stage)
+    public function removeStage(Stage $stage): void
     {
         $this->stages->removeElement($stage);
     }
 
-    /**
-     * @return SecurityArea[]
-     */
-    public function getSecurityAreas()
+    public function getSecurityAreas(): Collection
     {
         return $this->securityAreas;
     }
 
-    /**
-     * @param SecurityArea[] $securityAreas
-     */
-    public function setSecurityAreas($securityAreas): Festival
+    public function setSecurityAreas(Collection $securityAreas): self
     {
         $this->securityAreas = $securityAreas;
 
@@ -236,7 +181,7 @@ class Festival extends ExtendFestival
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): Festival
+    public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
 

@@ -24,28 +24,25 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class EHDevFestivalBasicsBundleInstaller implements Installation, CommentExtensionAwareInterface, ActivityExtensionAwareInterface
 {
-    private $commentExtension;
-    private $activitieExtension;
+    private CommentExtension $commentExtension;
+    private ActivityExtension $activitieExtension;
 
-    public function setCommentExtension(CommentExtension $commentExtension)
+    public function setCommentExtension(CommentExtension $commentExtension): void
     {
         $this->commentExtension = $commentExtension;
     }
 
-    public function setActivityExtension(ActivityExtension $activityExtension)
+    public function setActivityExtension(ActivityExtension $activityExtension): void
     {
         $this->activitieExtension = $activityExtension;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMigrationVersion(): string
     {
         return 'v1_9';
     }
 
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         /* v1_0 */
         InitialFWTable::createEhdevFwbFestivalTable($schema);

@@ -17,7 +17,7 @@ class FestivalAccountAddFestivalType extends AbstractType
         return 'ehdev_festival_festival_account_add_festival';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'festival',
@@ -34,7 +34,7 @@ class FestivalAccountAddFestivalType extends AbstractType
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('data_class', AddFestivalAccountDOT::class);
     }

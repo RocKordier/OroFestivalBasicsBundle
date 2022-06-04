@@ -41,43 +41,34 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
     }
 
     /**
-     * @var int|null
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
-     * @var string
      * @ORM\Column(name="first_name", type="string", length=255)
      */
-    protected $firstName = '';
+    protected string $firstName = '';
 
     /**
-     * @var string
      * @ORM\Column(name="last_name", type="string", length=255)
      */
-    protected $lastName = '';
+    protected string $lastName = '';
 
     /**
-     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
-    protected $profession;
+    protected ?string $profession;
 
     /**
-     * @var FestivalAccount
-     *
      * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="contacts")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $owner;
+    protected ?FestivalAccount $owner;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @ConfigField(
      *      defaultValues={
@@ -87,23 +78,19 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
      *      }
      * )
      */
-    protected $email;
+    protected string $email;
 
     /**
-     * @var ContactEmail[]|Collection
-     *
      * @ORM\OneToMany(targetEntity="ContactEmail",
      *    mappedBy="owner", cascade={"all"}, orphanRemoval=true
      * )
      */
-    protected $emails;
+    protected Collection $emails;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(name="is_primary", type="boolean", nullable=true)
      */
-    protected $primary = false;
+    protected bool $primary = false;
 
     public function getId(): ?int
     {
@@ -130,7 +117,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         $this->lastName = $lastName;
     }
 
-    public function getOwner(): FestivalAccount
+    public function getOwner(): ?FestivalAccount
     {
         return $this->owner;
     }
@@ -165,9 +152,6 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         }
     }
 
-    /**
-     * @return Collection|ContactEmail[]
-     */
     public function getEmails(): Collection
     {
         return $this->emails;
@@ -175,12 +159,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
 
     public function getEmail(): ?string
     {
-        $primaryEmail = $this->getPrimaryEmail();
-        if (!$primaryEmail) {
-            return null;
-        }
-
-        return $primaryEmail->getEmail();
+        return $this->getPrimaryEmail()?->getEmail();
     }
 
     public function hasEmail(ContactEmail $email): bool
@@ -192,6 +171,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
     {
         $result = null;
 
+        /** @var ContactEmail $email */
         foreach ($this->getEmails() as $email) {
             if ($email->isPrimary()) {
                 $result = $email;
@@ -202,10 +182,11 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         return $result;
     }
 
-    public function setPrimaryEmail(ContactEmail $email)
+    public function setPrimaryEmail(ContactEmail $email): void
     {
         if ($this->hasEmail($email)) {
             $email->setPrimary(true);
+            /** @var ContactEmail $otherEmail */
             foreach ($this->getEmails() as $otherEmail) {
                 if (!$email->isEqual($otherEmail)) {
                     $otherEmail->setPrimary(false);
@@ -214,12 +195,12 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         }
     }
 
-    public function getClass()
+    public function getClass(): string
     {
         return self::class;
     }
 
-    public function getEmailFields()
+    public function getEmailFields(): ?array
     {
         return null;
     }
@@ -229,9 +210,9 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         return $this->primary;
     }
 
-    public function setPrimary($primary)
+    public function setPrimary($value): void
     {
-        $this->primary = $primary;
+        $this->primary = $value;
     }
 
     public function getProfession(): ?string

@@ -15,7 +15,7 @@ class SecurityAreaType extends AbstractType
 {
     public const LABEL_PREFIX = 'ehdev.festivalbasics.securityarea.';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -35,12 +35,8 @@ class SecurityAreaType extends AbstractType
             );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => SecurityArea::class,
-            ]
-        );
+        $resolver->setDefault('data_class', SecurityArea::class);
     }
 }

@@ -12,27 +12,20 @@ use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/festival_account/contact")
  */
 class ContactController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("/create/{id}", name="ehdev_festival_contact_create", requirements={"id"="\d+"})
@@ -45,9 +38,15 @@ class ContactController
      *      class="EHDevFestivalBasicsBundle:Contact"
      * )
      */
-    public function createAction(FestivalAccount $festivalAccount): array
+    public function createAction(FestivalAccount $festivalAccount): array|RedirectResponse
     {
-        return array_merge($this->update(new Contact($festivalAccount)), ['iscreate' => true]);
+        $response = $this->update(new Contact($festivalAccount));
+
+        if (is_array($response)) {
+            $response = array_merge($response, ['iscreate' => true]);
+        }
+
+        return $response;
     }
 
     /**
@@ -76,20 +75,24 @@ class ContactController
      *      class="EHDevFestivalBasicsBundle:Contact"
      * )
      */
-    public function updateAction(Contact $entity): array
+    public function updateAction(Contact $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
 
-    protected function update(Contact $entity): array
+    protected function update(Contact $entity): array|RedirectResponse
     {
-        return array_merge(
-            $this->updateHandlerFacade->update(
-                $entity,
-                $this->formFactory->create(ContactType::class, $entity),
-                $this->translator->trans('ehdev.festivalbasics.contact.saved.message')
-            ),
-            ['festivalAccount' => $entity->getOwner()]
+        $response = $this->updateHandlerFacade->update(
+            $entity,
+            $this->formFactory->create(ContactType::class, $entity),
+            $this->translator->trans('ehdev.festivalbasics.contact.saved.message')
+        );
+
+        if ($response instanceof RedirectResponse) {
+            return $response;
+        }
+
+        return array_merge($response, ['festivalAccount' => $entity->getOwner()]
         );
     }
 }

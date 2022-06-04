@@ -10,13 +10,13 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class InitialFWTable implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::createEhdevFwbFestivalTable($schema);
         self::addEhdevFwbFestivalForeignKeys($schema);
     }
 
-    public static function createEhdevFwbFestivalTable(Schema $schema)
+    public static function createEhdevFwbFestivalTable(Schema $schema): void
     {
         $table = $schema->createTable('ehdev_fwb_festival');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -31,7 +31,7 @@ class InitialFWTable implements Migration
         $table->setPrimaryKey(['id']);
     }
 
-    public static function addEhdevFwbFestivalForeignKeys(Schema $schema)
+    public static function addEhdevFwbFestivalForeignKeys(Schema $schema): void
     {
         $table = $schema->getTable('ehdev_fwb_festival');
         $table->addForeignKeyConstraint(

@@ -10,12 +10,12 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class AddActiveFlag implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::addField($schema);
     }
 
-    public static function addField(Schema $schema)
+    public static function addField(Schema $schema): void
     {
         $table = $schema->getTable('ehdev_fwb_festival');
         $table->addColumn('is_active', 'boolean');

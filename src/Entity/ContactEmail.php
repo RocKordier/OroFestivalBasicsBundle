@@ -20,25 +20,23 @@ class ContactEmail extends ExtendContactEmail implements EmailInterface, DatesAw
 {
     use DatesAwareTrait;
 
-    public function __construct(?string $eMail = '')
+    public function __construct(?string $email = '')
     {
-        parent::__construct($eMail);
+        parent::__construct($email);
     }
 
     /**
-     * @var Contact
-     *
      * @ORM\ManyToOne(targetEntity="Contact", inversedBy="emails")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    protected $owner;
+    protected ?Contact $owner = null;
 
-    public function getEmailField()
+    public function getEmailField(): string
     {
         return 'email';
     }
 
-    public function getEmailOwner(): Contact
+    public function getEmailOwner(): ?Contact
     {
         return $this->getOwner();
     }
@@ -48,7 +46,7 @@ class ContactEmail extends ExtendContactEmail implements EmailInterface, DatesAw
         $this->owner = $owner;
     }
 
-    public function getOwner(): Contact
+    public function getOwner(): ?Contact
     {
         return $this->owner;
     }

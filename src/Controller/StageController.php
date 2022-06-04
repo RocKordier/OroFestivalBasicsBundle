@@ -8,29 +8,22 @@ use EHDev\FestivalBasicsBundle\Entity\Stage;
 use EHDev\FestivalBasicsBundle\Form\Type\StageType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/stage")
  */
 class StageController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("/", name="ehdev_festival_stage_index")
@@ -43,7 +36,7 @@ class StageController
      *
      * @Template
      */
-    public function indexAction()
+    public function indexAction(): array
     {
         return [];
     }
@@ -58,7 +51,7 @@ class StageController
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
      */
-    public function createAction()
+    public function createAction(): array|RedirectResponse
     {
         return $this->update(new Stage());
     }
@@ -74,15 +67,12 @@ class StageController
      *      class="EHDevFestivalBasicsBundle:Stage"
      * )
      */
-    public function updateAction(Stage $entity)
+    public function updateAction(Stage $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
 
-    /**
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    protected function update(Stage $entity)
+    protected function update(Stage $entity): array|RedirectResponse
     {
         return $this->updateHandlerFacade->update(
             $entity,

@@ -16,14 +16,11 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class FestivalAccountAddFestivalHandler implements FormHandlerInterface
 {
-    private $entityManager;
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {}
 
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    public function process($data, FormInterface $form, Request $request)
+    public function process($data, FormInterface $form, Request $request): bool
     {
         if ($request->isMethod(Request::METHOD_GET)) {
             return false;
@@ -47,10 +44,14 @@ class FestivalAccountAddFestivalHandler implements FormHandlerInterface
                 throw new FormException('$data is invalide');
             }
 
-            $this->entityManager->persist($data->getFestival());
-            $this->entityManager->flush();
+            if (($festival = $data->getFestival()) instanceof Festival) {
+                $this->entityManager->persist($festival);
+                $this->entityManager->flush();
+
+                return true;
+            }
         }
 
-        return true;
+        return false;
     }
 }

@@ -10,12 +10,12 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class CreateSecurityArea implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::createEhdevFwbSecurityAreaTable($schema);
     }
 
-    public static function createEhdevFwbSecurityAreaTable(Schema $schema)
+    public static function createEhdevFwbSecurityAreaTable(Schema $schema): void
     {
         $table = $schema->createTable('ehdev_fwb_security_area');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);

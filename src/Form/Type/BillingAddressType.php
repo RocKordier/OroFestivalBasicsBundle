@@ -23,21 +23,18 @@ class BillingAddressType extends AbstractType
 {
     public const LABEL_PREFIX = 'ehdev.festivalbasics.billingaddress.';
 
-    private $countryAndRegionSubscriber;
+    public function __construct(
+        private readonly AddressCountryAndRegionSubscriber $eventListener
+    ) {}
 
-    public function __construct(AddressCountryAndRegionSubscriber $eventListener)
-    {
-        $this->countryAndRegionSubscriber = $eventListener;
-    }
-
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ehdev_festival_billingaddress';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventSubscriber($this->countryAndRegionSubscriber);
+        $builder->addEventSubscriber($this->eventListener);
 
         $builder->add(
             'owner',
@@ -129,17 +126,13 @@ class BillingAddressType extends AbstractType
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => BillingAddress::class,
-                'region_route' => 'oro_api_country_get_regions',
-            ]
-        );
+        $resolver->setDefault('data_class', BillingAddress::class);
+        $resolver->setDefault('region_route', 'oro_api_country_get_regions');
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options): void
     {
         if (!empty($options['region_route'])) {
             $view->vars['region_route'] = $options['region_route'];

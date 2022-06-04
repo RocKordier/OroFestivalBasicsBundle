@@ -36,80 +36,53 @@ class Stage extends ExtendStage
     use BusinessUnitAwareTrait;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    protected $name;
+    protected string $name = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected $description;
+    protected string $description = '';
 
     /**
-     * @var Festival
-     *
      * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
      * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
      * @Assert\NotNull()
      */
-    protected $festival;
+    protected ?Festival $festival = null;
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return self
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return self
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return Festival
-     */
-    public function getFestival()
+    public function getFestival(): ?Festival
     {
         return $this->festival;
     }
 
-    /**
-     * @return self
-     */
-    public function setFestival(Festival $festival)
+    public function setFestival(Festival $festival): self
     {
         $this->festival = $festival;
 

@@ -8,29 +8,22 @@ use EHDev\FestivalBasicsBundle\Entity\SecurityArea;
 use EHDev\FestivalBasicsBundle\Form\Type\SecurityAreaType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/security_area")
  */
 class SecurityAreaController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("/", name="ehdev_festival_security_area_index")
@@ -43,7 +36,7 @@ class SecurityAreaController
      *
      * @Template
      */
-    public function indexAction()
+    public function indexAction(): array
     {
         return [];
     }
@@ -58,7 +51,7 @@ class SecurityAreaController
      *      class="EHDevFestivalBasicsBundle:SecurityArea"
      * )
      */
-    public function createAction(): array
+    public function createAction(): array|RedirectResponse
     {
         return $this->update(new SecurityArea());
     }
@@ -74,12 +67,12 @@ class SecurityAreaController
      *      class="EHDevFestivalBasicsBundle:SecurityArea"
      * )
      */
-    public function updateAction(SecurityArea $entity): array
+    public function updateAction(SecurityArea $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
 
-    protected function update(SecurityArea $entity): array
+    protected function update(SecurityArea $entity): array|RedirectResponse
     {
         return $this->updateHandlerFacade->update(
             $entity,

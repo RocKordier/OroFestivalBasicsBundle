@@ -11,36 +11,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractFestivalDetailViewListener
 {
-    /** @var RequestStack */
-    protected $requestStack;
-
-    /** @var TranslatorInterface */
-    protected $translator;
-
-    /** @var EntityManager */
-    protected $entityManager;
-
-    /**
-     * AbstractFestivalDetailViewListener constructor.
-     */
     public function __construct(
-        RequestStack $requestStack,
-        TranslatorInterface $translator,
-        EntityManager $entityManager
-    ) {
-        $this->requestStack = $requestStack;
-        $this->translator = $translator;
-        $this->entityManager = $entityManager;
-    }
+        private readonly RequestStack $requestStack,
+        private readonly TranslatorInterface $translator,
+        private readonly EntityManager $entityManager
+    ) {}
 
-    /**
-     * @return Festival
-     */
-    public function getFestival()
+    public function getFestival(): Festival
     {
         if (!($this->requestStack->getCurrentRequest() instanceof Request)) {
             throw new BadRequestHttpException('current request does not exist');
@@ -54,5 +35,15 @@ abstract class AbstractFestivalDetailViewListener
         throw new MissingMandatoryParametersException('Festival not found in current request');
     }
 
-    abstract public function onView(BeforeListRenderEvent $event);
+    protected function getTranslator(): TranslatorInterface
+    {
+        return $this->translator;
+    }
+
+    protected function getEntityManager(): EntityManager
+    {
+        return $this->entityManager;
+    }
+
+    abstract public function onView(BeforeListRenderEvent $event): void;
 }

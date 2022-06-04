@@ -10,29 +10,22 @@ use EHDev\FestivalBasicsBundle\Form\Type\FestivalAccountType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/festival_account")
  */
 class FestivalAccountController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("/", name="ehdev_festival_festival_account_index")
@@ -79,7 +72,7 @@ class FestivalAccountController
      *      class="EHDevFestivalBasicsBundle:FestivalAccount"
      * )
      */
-    public function createAction(): array
+    public function createAction(): array|RedirectResponse
     {
         return $this->update(new FestivalAccount());
     }
@@ -95,12 +88,12 @@ class FestivalAccountController
      *      class="EHDevFestivalBasicsBundle:FestivalAccount"
      * )
      */
-    public function updateAction(FestivalAccount $entity): array
+    public function updateAction(FestivalAccount $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
 
-    protected function update(FestivalAccount $entity): array
+    protected function update(FestivalAccount $entity): array|RedirectResponse
     {
         return $this->updateHandlerFacade->update(
             $entity,

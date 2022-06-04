@@ -10,13 +10,13 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class InitialStageTable implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::createEhdevFwbStageTable($schema);
         self::addEhdevFwbStageForeignKeys($schema);
     }
 
-    public static function createEhdevFwbStageTable(Schema $schema)
+    public static function createEhdevFwbStageTable(Schema $schema): void
     {
         $table = $schema->createTable('ehdev_fwb_stage');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -33,7 +33,7 @@ class InitialStageTable implements Migration
         $table->setPrimaryKey(['id']);
     }
 
-    public static function addEhdevFwbStageForeignKeys(Schema $schema)
+    public static function addEhdevFwbStageForeignKeys(Schema $schema): void
     {
         $table = $schema->getTable('ehdev_fwb_stage');
         $table->addForeignKeyConstraint(

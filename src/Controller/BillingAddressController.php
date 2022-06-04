@@ -13,34 +13,27 @@ use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/festival_account/billing_address")
  */
 class BillingAddressController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("{id}/create", name="ehdev_festival_billingaddress_create")
      * @Template("@EHDevFestivalBasics/BillingAddress/update.html.twig")
      * @AclAncestor("ehdev_festival_billing_address_update")
      */
-    public function createAction(FestivalAccount $festivalAccount): array
+    public function createAction(FestivalAccount $festivalAccount): array|RedirectResponse
     {
         $billingAddress = new BillingAddress($festivalAccount);
 
@@ -62,20 +55,24 @@ class BillingAddressController
      *      class="EHDevFestivalBasicsBundle:BillingAddress"
      * )
      */
-    public function updateAction(BillingAddress $entity): array
+    public function updateAction(BillingAddress $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
 
-    protected function update(BillingAddress $entity): array
+    protected function update(BillingAddress $entity): array|RedirectResponse
     {
-        return array_merge(
-            $this->updateHandlerFacade->update(
-                $entity,
-                $this->formFactory->create(BillingAddressType::class, $entity),
-                $this->translator->trans('ehdev.festivalbasics.billingaddress.saved.message')
-            ),
-            ['festivalAccount' => $entity->getOwner()]
+        $response = $this->updateHandlerFacade->update(
+            $entity,
+            $this->formFactory->create(BillingAddressType::class, $entity),
+            $this->translator->trans('ehdev.festivalbasics.billingaddress.saved.message')
+        );
+
+        if ($response instanceof RedirectResponse) {
+            return $response;
+        }
+
+        return array_merge($response, ['festivalAccount' => $entity->getOwner()]
         );
     }
 }

@@ -10,12 +10,12 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class AddSecAreaFestivalRelation implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::createEhdevFwbSecarea2festivalTable($schema);
     }
 
-    public static function createEhdevFwbSecarea2festivalTable(Schema $schema)
+    public static function createEhdevFwbSecarea2festivalTable(Schema $schema): void
     {
         $table = $schema->createTable('ehdev_fwb_secarea2festival');
         $table->addColumn('festival_id', 'integer');

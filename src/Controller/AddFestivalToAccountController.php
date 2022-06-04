@@ -14,30 +14,21 @@ use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/add_festival")
  */
 class AddFestivalToAccountController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-    private $accountAddFestivalHandler;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory,
-        FestivalAccountAddFestivalHandler $accountAddFestivalHandler
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-        $this->accountAddFestivalHandler = $accountAddFestivalHandler;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly FestivalAccountAddFestivalHandler $accountAddFestivalHandler
+    ) {}
 
     /**
      * @Route("/to_account/{id}", name="ehdev_festival_festival_account_add_festival", requirements={"id"="\d+"})
@@ -45,18 +36,22 @@ class AddFestivalToAccountController
      * @Template()
      * @AclAncestor("ehdev_festival_festival_account_update")
      */
-    public function addFestivalAction(FestivalAccount $festivalAccount): array
+    public function addFestivalAction(FestivalAccount $festivalAccount): array|RedirectResponse
     {
         $model = new AddFestivalAccountDOT();
         $model->setFestivalAccount($festivalAccount);
 
-        return array_merge(
-            $this->handle(
-                $model,
-                FestivalAccountAddFestivalType::class,
-                'ehdev.festivalbasics.festivalaccount.form.add_festival.saved_message'
-            ), ['festivalAccount' => $festivalAccount]
+        $response = $this->handle(
+            $model,
+            FestivalAccountAddFestivalType::class,
+            'ehdev.festivalbasics.festivalaccount.form.add_festival.saved_message'
         );
+
+        if ($response instanceof RedirectResponse) {
+            return $response;
+        }
+
+        return array_merge($response, ['festivalAccount' => $festivalAccount]);
     }
 
     /**
@@ -65,7 +60,7 @@ class AddFestivalToAccountController
      * @Template()
      * @AclAncestor("ehdev_festival_festival_update")
      */
-    public function addFestivalAccountAction(Festival $festival): array
+    public function addFestivalAccountAction(Festival $festival): array|RedirectResponse
     {
         $model = new AddFestivalAccountDOT();
         $model->setFestival($festival);
@@ -74,16 +69,20 @@ class AddFestivalToAccountController
             $model->setFestivalAccount($festival->getFestivalAccount());
         }
 
-        return array_merge(
-            $this->handle(
-                $model,
-                FestivalAddFestivalAccountType::class,
-                'ehdev.festivalbasics.festival.form.add_festivalaccount.saved_message'
-            ), ['festival' => $festival]
+        $response = $this->handle(
+            $model,
+            FestivalAddFestivalAccountType::class,
+            'ehdev.festivalbasics.festival.form.add_festivalaccount.saved_message'
         );
+
+        if ($response instanceof RedirectResponse) {
+            return $response;
+        }
+
+        return array_merge($response, ['festival' => $festival]);
     }
 
-    private function handle(AddFestivalAccountDOT $model, string $formType, string $saveMessage): array
+    private function handle(AddFestivalAccountDOT $model, string $formType, string $saveMessage): array|RedirectResponse
     {
         return $this->updateHandlerFacade->update(
             $model,

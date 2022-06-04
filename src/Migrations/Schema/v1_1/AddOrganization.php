@@ -11,13 +11,13 @@ use Oro\Bundle\SecurityBundle\Migrations\Schema\UpdateOwnershipTypeQuery;
 
 class AddOrganization implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::addOrganization($schema);
         self::updateOwnership($queries);
     }
 
-    public static function addOrganization(Schema $schema)
+    public static function addOrganization(Schema $schema): void
     {
         $table = $schema->getTable('ehdev_fwb_festival');
         $table->addColumn('organization_id', 'integer', ['notnull' => false]);
@@ -30,7 +30,7 @@ class AddOrganization implements Migration
         );
     }
 
-    public static function updateOwnership(QueryBag $queryBag)
+    public static function updateOwnership(QueryBag $queryBag): void
     {
         $queryBag->addQuery(
             new UpdateOwnershipTypeQuery(

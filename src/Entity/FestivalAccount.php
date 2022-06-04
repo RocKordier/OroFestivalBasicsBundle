@@ -58,52 +58,41 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
     }
 
     /**
-     * @var int|null
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * @var Festival[]|Collection
-     *
      * @ORM\OneToMany(targetEntity="EHDev\FestivalBasicsBundle\Entity\Festival",
      *     mappedBy="festivalAccount"
      * )
      */
-    protected $festivals;
+    protected Collection $festivals;
 
     /**
-     * @var Contact[]|Collection
-     *
      * @ORM\OneToMany(targetEntity="EHDev\FestivalBasicsBundle\Entity\Contact",
      *     mappedBy="owner"
      * )
      */
-    protected $contacts;
+    protected Collection $contacts;
 
     /**
-     * @var BillingAddress|null
-     *
      * @ORM\OneToOne(targetEntity="BillingAddress", mappedBy="owner")
      */
-    protected $billingAddress;
+    protected ?BillingAddress $billingAddress;
 
     /**
-     * @var User|null
-     *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="account_manager_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    protected $accountManager;
+    protected ?User $accountManager;
 
     public function getId(): ?int
     {
@@ -167,7 +156,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
     /**
      * @return Collection|Contact[]
      */
-    public function getContacts()
+    public function getContacts(): Collection
     {
         return $this->contacts;
     }
@@ -175,7 +164,7 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
     /**
      * @param Collection|Contact[] $contacts
      */
-    public function setContacts($contacts): void
+    public function setContacts(Collection $contacts): void
     {
         $this->contacts = $contacts;
     }

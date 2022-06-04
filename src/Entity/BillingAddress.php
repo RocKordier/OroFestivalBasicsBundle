@@ -37,88 +37,66 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
     }
 
     /**
-     * @var FestivalAccount
-     *
      * @ORM\OneToOne(targetEntity="FestivalAccount", inversedBy="billingAddress")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
      */
-    protected $owner;
+    protected FestivalAccount $owner;
 
     /**
-     * @var int|null
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="label", type="string", length=255, nullable=true)
      */
-    protected $label;
+    protected ?string $label = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="street", type="string", length=500, nullable=true)
      */
-    protected $street;
+    protected ?string $street = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="street2", type="string", length=500, nullable=true)
      */
-    protected $street2;
+    protected ?string $street2 = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    protected $city;
+    protected ?string $city = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
      */
-    protected $postalCode;
+    protected ?string $postalCode = null;
 
     /**
-     * @var Country|null
-     *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Country")
      * @ORM\JoinColumn(name="country_code", referencedColumnName="iso2_code")
      */
-    protected $country;
+    protected ?Country $country = null;
 
     /**
-     * @var Region|null
-     *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Region")
      * @ORM\JoinColumn(name="region_code", referencedColumnName="combined_code")
      */
-    protected $region;
+    protected ?Region $region = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="region_text", type="string", length=255, nullable=true)
      */
-    protected $regionText;
+    protected ?string $regionText = null;
 
     /**
-     * @var string|null
-     *
      * @ORM\Column(name="organization", type="string", length=255, nullable=true)
      */
-    protected $organization;
+    protected ?string $organization = null;
 
-    public function setOwner(FestivalAccount $owner)
+    public function setOwner(FestivalAccount $owner): void
     {
         $this->owner = $owner;
     }

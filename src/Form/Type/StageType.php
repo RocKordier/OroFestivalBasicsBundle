@@ -17,15 +17,12 @@ class StageType extends AbstractType
     public const LABEL_PREFIX = 'ehdev.festivalbasics.stage.';
     public const LABEL_PREFIX_FW = 'ehdev.festivalbasics.festival.';
 
-    /**
-     * @return string
-     */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ehdev_stage';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -58,12 +55,8 @@ class StageType extends AbstractType
             );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(
-            [
-                'data_class' => Stage::class,
-            ]
-        );
+        $resolver->setDefault('data_class', Stage::class);
     }
 }

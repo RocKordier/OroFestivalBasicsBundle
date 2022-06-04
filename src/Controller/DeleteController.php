@@ -4,24 +4,26 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Controller;
 
+use Doctrine\Persistence\ManagerRegistry;
 use EHDev\FestivalBasicsBundle\Entity\Festival;
 use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 use EHDev\FestivalBasicsBundle\Entity\SecurityArea;
 use EHDev\FestivalBasicsBundle\Entity\Stage;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/api/delete")
  */
-class DeleteController extends Controller
+class DeleteController
 {
+    public function __construct(
+        private readonly ManagerRegistry $registry
+    ) {}
+
     /**
-     * @Route("/festival/{id}/", name="ehdev_festival_festival_delete")
-     * @Method("DELETE")
+     * @Route("/festival/{id}/", name="ehdev_festival_festival_delete", methods={"DELETE"})
      *
      * @Acl(
      *      id="ehdev_festival_festival_delete",
@@ -32,16 +34,15 @@ class DeleteController extends Controller
      */
     public function deleteFestivalAction(Festival $festival): JsonResponse
     {
-        $em = $this->getDoctrine()->getManagerForClass(Festival::class);
-        $em->remove($festival);
-        $em->flush();
+        $em = $this->registry->getManagerForClass(Festival::class);
+        $em?->remove($festival);
+        $em?->flush();
 
         return new JsonResponse();
     }
 
     /**
-     * @Route("/festival_account/{id}/", name="ehdev_festival_festival_account_delete")
-     * @Method("DELETE")
+     * @Route("/festival_account/{id}/", name="ehdev_festival_festival_account_delete", methods={"DELETE"})
      *
      * @Acl(
      *      id="ehdev_festival_festival_account_delete",
@@ -52,16 +53,15 @@ class DeleteController extends Controller
      */
     public function deleteFestivalAccountAction(FestivalAccount $festivalAccount): JsonResponse
     {
-        $em = $this->getDoctrine()->getManagerForClass(FestivalAccount::class);
-        $em->remove($festivalAccount);
-        $em->flush();
+        $em = $this->registry->getManagerForClass(FestivalAccount::class);
+        $em?->remove($festivalAccount);
+        $em?->flush();
 
         return new JsonResponse();
     }
 
     /**
-     * @Route("/security_area/{id}/", name="ehdev_festival_security_area_delete")
-     * @Method("DELETE")
+     * @Route("/security_area/{id}/", name="ehdev_festival_security_area_delete", methods={"DELETE"})
      *
      * @Acl(
      *      id="ehdev_festival_security_area_delete",
@@ -72,16 +72,15 @@ class DeleteController extends Controller
      */
     public function deleteSecurityAreaAction(SecurityArea $securityArea): JsonResponse
     {
-        $em = $this->getDoctrine()->getManagerForClass(SecurityArea::class);
-        $em->remove($securityArea);
-        $em->flush();
+        $em = $this->registry->getManagerForClass(SecurityArea::class);
+        $em?->remove($securityArea);
+        $em?->flush();
 
         return new JsonResponse();
     }
 
     /**
-     * @Route("/festival/{id}/", name="ehdev_festival_stage_delete")
-     * @Method("DELETE")
+     * @Route("/festival/{id}/", name="ehdev_festival_stage_delete", methods={"DELETE"})
      *
      * @Acl(
      *      id="ehdev_festival_stage_delete",
@@ -92,9 +91,9 @@ class DeleteController extends Controller
      */
     public function deleteStageAction(Stage $stage): JsonResponse
     {
-        $em = $this->getDoctrine()->getManagerForClass(Stage::class);
-        $em->remove($stage);
-        $em->flush();
+        $em = $this->registry->getManagerForClass(Stage::class);
+        $em?->remove($stage);
+        $em?->flush();
 
         return new JsonResponse();
     }

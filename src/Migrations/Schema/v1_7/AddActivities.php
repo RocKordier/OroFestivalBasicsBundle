@@ -14,16 +14,16 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class AddActivities implements Migration, CommentExtensionAwareInterface, ActivityExtensionAwareInterface
 {
-    private $commentExtension;
+    private CommentExtension $commentExtension;
 
-    private $activitieExtension;
+    private ActivityExtension $activitieExtension;
 
-    public function setCommentExtension(CommentExtension $commentExtension)
+    public function setCommentExtension(CommentExtension $commentExtension): void
     {
         $this->commentExtension = $commentExtension;
     }
 
-    public function setActivityExtension(ActivityExtension $activityExtension)
+    public function setActivityExtension(ActivityExtension $activityExtension): void
     {
         $this->activitieExtension = $activityExtension;
     }
@@ -34,12 +34,12 @@ class AddActivities implements Migration, CommentExtensionAwareInterface, Activi
         self::addActivities($this->activitieExtension, $schema);
     }
 
-    public static function addComment(CommentExtension $commentExtension, Schema $schema)
+    public static function addComment(CommentExtension $commentExtension, Schema $schema): void
     {
         $commentExtension->addCommentAssociation($schema, 'ehdev_fwb_festival_account');
     }
 
-    public static function addActivities(ActivityExtension $activityExtension, Schema $schema)
+    public static function addActivities(ActivityExtension $activityExtension, Schema $schema): void
     {
         $activityExtension->addActivityAssociation($schema, 'oro_note', 'ehdev_fwb_festival_account', true);
         $activityExtension->addActivityAssociation($schema, 'oro_email', 'ehdev_fwb_festival_account', true);

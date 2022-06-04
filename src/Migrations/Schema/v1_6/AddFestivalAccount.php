@@ -10,7 +10,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
 class AddFestivalAccount implements Migration
 {
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         self::addFestivalAccountTable($schema);
         self::addFestivalAccountOnFestival($schema);

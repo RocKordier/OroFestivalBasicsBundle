@@ -9,20 +9,11 @@ use EHDev\FestivalBasicsBundle\Entity\FestivalAccount;
 
 final class AddFestivalAccountDOT
 {
-    /**
-     * @var int|null
-     */
-    public $id = null;
+    public ?int $id = null;
 
-    /**
-     * @var Festival|null
-     */
-    private $festival = null;
+    private ?Festival $festival = null;
 
-    /**
-     * @var FestivalAccount|null
-     */
-    private $festivalAccount = null;
+    private ?FestivalAccount $festivalAccount = null;
 
     public function getId(): ?int
     {

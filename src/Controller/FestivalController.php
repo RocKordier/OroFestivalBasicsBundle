@@ -9,29 +9,22 @@ use EHDev\FestivalBasicsBundle\Form\Type\FestivalType;
 use Oro\Bundle\FormBundle\Model\UpdateHandlerFacade;
 use Oro\Bundle\SecurityBundle\Annotation\Acl;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/festival")
  */
 class FestivalController
 {
-    private $updateHandlerFacade;
-    private $translator;
-    private $formFactory;
-
     public function __construct(
-        UpdateHandlerFacade $updateHandlerFacade,
-        TranslatorInterface $translator,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->updateHandlerFacade = $updateHandlerFacade;
-        $this->translator = $translator;
-        $this->formFactory = $formFactory;
-    }
+        private readonly UpdateHandlerFacade $updateHandlerFacade,
+        private readonly TranslatorInterface $translator,
+        private readonly FormFactoryInterface $formFactory
+    ) {}
 
     /**
      * @Route("/", name="ehdev_festival_festival_index")
@@ -71,7 +64,7 @@ class FestivalController
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function createAction(): array
+    public function createAction(): array|RedirectResponse
     {
         return $this->update(new Festival());
     }
@@ -87,7 +80,7 @@ class FestivalController
      *      class="EHDevFestivalBasicsBundle:Festival"
      * )
      */
-    public function updateAction(Festival $entity): array
+    public function updateAction(Festival $entity): array|RedirectResponse
     {
         return $this->update($entity);
     }
@@ -109,14 +102,14 @@ class FestivalController
      * @AclAncestor("ehdev_festival_festival_view")
      * @Template
      */
-    public function stageAction(Festival $festival): array
+    public function stageAction(Festival $festival): array|RedirectResponse
     {
         return [
             'entity' => $festival,
         ];
     }
 
-    protected function update(Festival $entity): array
+    protected function update(Festival $entity): array|RedirectResponse
     {
         return $this->updateHandlerFacade->update(
             $entity,

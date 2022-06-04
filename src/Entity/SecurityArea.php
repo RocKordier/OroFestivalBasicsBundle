@@ -20,27 +20,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SecurityArea extends ExtendSecurityArea implements \Stringable
 {
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    protected $name = '';
+    protected string $name = '';
 
     /**
-     * @var string|null
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected $description;
+    protected ?string $description;
 
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName($name): SecurityArea
+    public function setName(string $name): SecurityArea
     {
         $this->name = $name;
 
