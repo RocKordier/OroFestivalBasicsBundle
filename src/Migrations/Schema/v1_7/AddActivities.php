@@ -43,8 +43,5 @@ class AddActivities implements Migration, CommentExtensionAwareInterface, Activi
     {
         $activityExtension->addActivityAssociation($schema, 'oro_note', 'ehdev_fwb_festival_account', true);
         $activityExtension->addActivityAssociation($schema, 'oro_email', 'ehdev_fwb_festival_account', true);
-        $activityExtension->addActivityAssociation($schema, 'orocrm_call', 'ehdev_fwb_festival_account', true);
-        $activityExtension->addActivityAssociation($schema, 'orocrm_task', 'ehdev_fwb_festival_account', true);
-        $activityExtension->addActivityAssociation($schema, 'oro_calendar_event', 'ehdev_fwb_festival_account', true);
     }
 }

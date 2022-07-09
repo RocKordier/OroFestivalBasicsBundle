@@ -70,13 +70,6 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "contact_information"="email"
-     *          }
-     *      }
-     * )
      */
     protected string $email;
 
