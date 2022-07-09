@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\BasicsBundle\Entity\Traits\CreatedUpdatedTrait;
 use EHDev\FestivalBasicsBundle\Model\ExtendSecurityArea;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,6 +20,15 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class SecurityArea extends ExtendSecurityArea implements \Stringable
 {
+    use CreatedUpdatedTrait;
+
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected ?int $id = null;
+
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()

@@ -36,6 +36,13 @@ class Stage extends ExtendStage
     use BusinessUnitAwareTrait;
 
     /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected ?int $id = null;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
