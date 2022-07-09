@@ -7,23 +7,13 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\FestivalBasicsBundle\Entity\Repository\FestivalAccountRepository;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestivalAccount;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\OrganizationBundle\Entity\OrganizationAwareInterface;
-use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Oro\Bundle\UserBundle\Entity\User;
 
 /**
- * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalAccountRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="ehdev_fwb_festival_account",
- *  uniqueConstraints={
- *      @ORM\UniqueConstraint(name="unq_festival_account_name", columns={"name"})
- *  }
- * )
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-festival-account-grid"},
@@ -33,22 +23,16 @@ use Oro\Bundle\UserBundle\Entity\User;
  *      "group_name"="",
  *      "category"="ehdev_festival_festival"
  *  },
- *  "ownership"={
- *    "owner_type"="BUSINESS_UNIT",
- *    "owner_field_name"="owner",
- *    "owner_column_name"="business_unit_owner_id",
- *    "organization_field_name"="organization",
- *    "organization_column_name"="organization_id"
- *  },
  *  "tag"={"enabled"=true}
  * })
  */
-class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterface, OrganizationAwareInterface
+#[ORM\Entity(repositoryClass: FestivalAccountRepository::class)]
+#[ORM\Table('ehdev_fwb_festival_account')]
+#[ORM\UniqueConstraint(name: 'unq_festival_account_name', columns: ['name'])]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
+class FestivalAccount extends ExtendFestivalAccount
 {
-    use UpdatedByAwareTrait;
-    use DatesAwareTrait;
-    use BusinessUnitAwareTrait;
-
     public function __construct()
     {
         parent::__construct();
@@ -57,41 +41,20 @@ class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterfa
         $this->contacts = new ArrayCollection();
     }
 
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $name = '';
 
-    /**
-     * @ORM\OneToMany(targetEntity="EHDev\FestivalBasicsBundle\Entity\Festival",
-     *     mappedBy="festivalAccount"
-     * )
-     */
+    #[ORM\OneToMany(targetEntity: Festival::class, mappedBy: 'festivalAccount')]
     protected Collection $festivals;
 
-    /**
-     * @ORM\OneToMany(targetEntity="EHDev\FestivalBasicsBundle\Entity\Contact",
-     *     mappedBy="owner"
-     * )
-     */
+    #[ORM\OneToMany(targetEntity: Contact::class, mappedBy: 'owner')]
     protected Collection $contacts;
 
-    /**
-     * @ORM\OneToOne(targetEntity="BillingAddress", mappedBy="owner")
-     */
-    protected ?BillingAddress $billingAddress;
+    #[ORM\OneToOne(targetEntity: BillingAddress::class, mappedBy: 'owner')]
+    protected ?BillingAddress $billingAddress = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="account_manager_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: 'account_manager_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     protected ?User $accountManager;
 
     public function getId(): ?int

@@ -25,29 +25,13 @@ class InitialStageTable implements Migration
         $table->addColumn('created_at', 'datetime', ['comment' => '(DC2Type:datetime)']);
         $table->addColumn('updated_at', 'datetime', ['comment' => '(DC2Type:datetime)']);
         $table->addColumn('festival_id', 'integer', ['notnull' => false]);
-        $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
-        $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addIndex(['festival_id'], 'IDX_559E64088AEBAF57', []);
-        $table->addIndex(['business_unit_owner_id'], 'IDX_559E640859294170', []);
-        $table->addIndex(['organization_id'], 'IDX_559E640832C8A3DE', []);
         $table->setPrimaryKey(['id']);
     }
 
     public static function addEhdevFwbStageForeignKeys(Schema $schema): void
     {
         $table = $schema->getTable('ehdev_fwb_stage');
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_business_unit'),
-            ['business_unit_owner_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_organization'),
-            ['organization_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
         $table->addForeignKeyConstraint(
             $schema->getTable('ehdev_fwb_festival'),
             ['festival_id'],

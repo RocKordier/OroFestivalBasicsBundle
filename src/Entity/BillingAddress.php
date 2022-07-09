@@ -8,14 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 use EHDev\FestivalBasicsBundle\Model\ExtendBillingAddress;
 use Oro\Bundle\AddressBundle\Entity\Country;
 use Oro\Bundle\AddressBundle\Entity\Region;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\FormBundle\Entity\EmptyItem;
 
 /**
- * @ORM\Table("ehdev_fwb_billing_address")
- * @ORM\HasLifecycleCallbacks()
  * @Config(
  *       defaultValues={
  *          "entity"={
@@ -23,12 +19,13 @@ use Oro\Bundle\FormBundle\Entity\EmptyItem;
  *          }
  *      }
  * )
- * @ORM\Entity
  */
-class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem, \Stringable
+#[ORM\Entity]
+#[ORM\Table('ehdev_fwb_billing_address')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
+class BillingAddress extends ExtendBillingAddress implements EmptyItem, \Stringable
 {
-    use DatesAwareTrait;
-
     public function __construct(FestivalAccount $festivalAccount)
     {
         parent::__construct();
@@ -36,64 +33,37 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
         $this->owner = $festivalAccount;
     }
 
-    /**
-     * @ORM\OneToOne(targetEntity="FestivalAccount", inversedBy="billingAddress")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
-     */
+    #[ORM\OneToOne(targetEntity: FestivalAccount::class, inversedBy: BillingAddress::class)]
+    #[ORM\JoinColumn(name: 'owner_id', referencedColumnName: 'id')]
     protected FestivalAccount $owner;
 
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
-
-    /**
-     * @ORM\Column(name="label", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected ?string $label = null;
 
-    /**
-     * @ORM\Column(name="street", type="string", length=500, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 500, nullable: true)]
     protected ?string $street = null;
 
-    /**
-     * @ORM\Column(name="street2", type="string", length=500, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 500, nullable: true)]
     protected ?string $street2 = null;
 
-    /**
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected ?string $city = null;
 
-    /**
-     * @ORM\Column(name="postal_code", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'postal_code', type: 'string', length: 255, nullable: true)]
     protected ?string $postalCode = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Country")
-     * @ORM\JoinColumn(name="country_code", referencedColumnName="iso2_code")
-     */
+    #[ORM\ManyToOne(targetEntity: Country::class)]
+    #[ORM\JoinColumn(name: 'country_code', referencedColumnName: 'iso2_code')]
     protected ?Country $country = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\AddressBundle\Entity\Region")
-     * @ORM\JoinColumn(name="region_code", referencedColumnName="combined_code")
-     */
+    #[ORM\ManyToOne(targetEntity: Region::class)]
+    #[ORM\JoinColumn(name: 'region_code', referencedColumnName: 'combined_code', nullable: true)]
     protected ?Region $region = null;
 
-    /**
-     * @ORM\Column(name="region_text", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(name: 'region_text', type: 'string', length: 255, nullable: true)]
     protected ?string $regionText = null;
 
-    /**
-     * @ORM\Column(name="organization", type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     protected ?string $organization = null;
 
     public function setOwner(FestivalAccount $owner): void
@@ -104,11 +74,6 @@ class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface
     public function getOwner(): FestivalAccount
     {
         return $this->owner;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getLabel(): ?string

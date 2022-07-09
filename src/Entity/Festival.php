@@ -7,14 +7,12 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository;
 use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
- * @ORM\Table(name="ehdev_fwb_festival")
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-festival-grid"},
@@ -24,78 +22,46 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "type"="ACL",
  *      "group_name"="",
  *      "category"="ehdev_festival_festival"
- *  },
- *  "ownership"={
- *    "owner_type"="BUSINESS_UNIT",
- *    "owner_field_name"="owner",
- *    "owner_column_name"="business_unit_owner_id",
- *    "organization_field_name"="organization",
- *    "organization_column_name"="organization_id"
  *  }
  * })
  */
+#[ORM\Entity(repositoryClass: FestivalRepository::class)]
+#[ORM\Table('ehdev_fwb_festival')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
 class Festival extends ExtendFestival
 {
-    use BusinessUnitAwareTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="255")
-     * @Assert\NotBlank()
-     */
+    #[Assert\Length(max: 255)]
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $name = '';
 
-    /**
-     * @ORM\Column(type="datetime", name="start_date")
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
+    #[ORM\Column(name: 'start_date', type: 'datetime', nullable: true)]
     protected ?\DateTime $startDate = null;
 
-    /**
-     * @ORM\Column(type="datetime", name="end_date")
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
+    #[ORM\Column(name: 'end_date', type: 'datetime', nullable: true)]
     protected ?\DateTime $endDate = null;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotNull()
-     */
+    #[Assert\NotNull]
+    #[ORM\Column(name: 'maxguests', type: 'integer')]
     protected int $maxGuests = 0;
 
-    /**
-     * @ORM\OneToMany(
-     *      targetEntity="EHDev\FestivalBasicsBundle\Entity\Stage", mappedBy="festival",
-     *      cascade={"all"}, orphanRemoval=true
-     * )
-     */
+    #[ORM\OneToMany(targetEntity: Stage::class, mappedBy: 'festival', cascade: ['all'], orphanRemoval: true)]
     protected Collection $stages;
 
-    /**
-     * @ORM\Column(type="boolean", name="is_active")
-     */
+    #[ORM\Column(type: 'boolean', name: 'is_active')]
     protected bool $isActive = false;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="SecurityArea")
-     * @ORM\JoinTable(name="ehdev_fwb_secarea2festival",
-     *      joinColumns={@ORM\JoinColumn(name="festival_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="secare_id", referencedColumnName="id", onDelete="CASCADE")}
-     * )
-     */
+    #[ORM\ManyToMany(targetEntity: SecurityArea::class)]
+    #[ORM\JoinTable(name: 'ehdev_fwb_secarea2festival')]
+    #[ORM\JoinColumn(name: 'festival_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'secare_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     protected Collection $securityAreas;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="festivals",cascade={"persist"})
-     * @ORM\JoinColumn(name="festival_account_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+    #[ORM\ManyToOne(targetEntity: FestivalAccount::class, inversedBy: 'festivals', cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'festival_account_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     protected ?FestivalAccount $festivalAccount = null;
 
     public function __construct()

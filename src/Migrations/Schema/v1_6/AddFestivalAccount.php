@@ -21,39 +21,11 @@ class AddFestivalAccount implements Migration
         $table = $schema->createTable('ehdev_fwb_festival_account');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255]);
-        $table->addColumn('updated_by_user_id', 'integer', ['notnull' => false]);
-        $table->addColumn('business_unit_owner_id', 'integer', ['notnull' => false]);
-        $table->addColumn('organization_id', 'integer', ['notnull' => false]);
         $table->addColumn('created_at', 'datetime', ['comment' => '(DC2Type:datetime)']);
         $table->addColumn('updated_at', 'datetime', ['comment' => '(DC2Type:datetime)']);
         $table->setPrimaryKey(['id']);
 
-        $table->addIndex(['updated_by_user_id']);
-        $table->addIndex(['business_unit_owner_id']);
-        $table->addIndex(['organization_id']);
-
         $table->addUniqueIndex(['name'], 'unq_festival_account_name');
-
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_user'),
-            ['updated_by_user_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
-
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_business_unit'),
-            ['business_unit_owner_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
-
-        $table->addForeignKeyConstraint(
-            $schema->getTable('oro_organization'),
-            ['organization_id'],
-            ['id'],
-            ['onDelete' => 'SET NULL', 'onUpdate' => null]
-        );
     }
 
     public static function addFestivalAccountOnFestival(Schema $schema): void

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Model;
 
-class ExtendBillingAddress
+use EHDev\BasicsBundle\Entity\Base;
+
+class ExtendBillingAddress extends Base
 {
     public function __construct() {}
 }

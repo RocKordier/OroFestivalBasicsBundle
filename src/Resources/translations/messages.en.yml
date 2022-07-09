@@ -15,7 +15,6 @@ ehdev:
             updated_at.label: Updated
             id.label: Id
             owner.label: Owner
-            organization.label: Organization
             stages.label: Stages
             security_areas.label: Security Areas
             is_active.label: Active?
@@ -44,7 +43,6 @@ ehdev:
             updated_at.label: Updated
             festival.label: Festival
             owner.label: Owner
-            organization.label: Organization
             serialized_data.label: Serialized Data
             widget:
                 edit.title: Edit Stage
@@ -80,7 +78,6 @@ ehdev:
             saved.message: Festival Account saved
             owner.label: Owner
             fesitvals.labal: Festivals
-            organization.label: Organization
             updated_by.label: Updated By
             account_manager.label: Account Manager
             billing_address.label: Billing Address

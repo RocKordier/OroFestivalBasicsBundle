@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository;
 use EHDev\FestivalBasicsBundle\Model\ExtendStage;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository")
- * @ORM\Table(name="ehdev_fwb_stage")
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-flask"},
  *  "grid"={"default"="ehdev-festival-stage-grid"},
@@ -21,43 +19,25 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "type"="ACL",
  *      "group_name"="",
  *      "category"="ehdev_festival_stage"
- *  },
- *  "ownership"={
- *    "owner_type"="BUSINESS_UNIT",
- *    "owner_field_name"="owner",
- *    "owner_column_name"="business_unit_owner_id",
- *    "organization_field_name"="organization",
- *    "organization_column_name"="organization_id"
  *  }
  * })
  */
+#[ORM\Entity(repositoryClass: StageRepository::class)]
+#[ORM\Table('ehdev_fwb_stage')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
 class Stage extends ExtendStage
 {
-    use BusinessUnitAwareTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
+    #[Assert\NotBlank]
+    #[ORM\Column(type: 'string', length: 255)]
     protected string $name = '';
 
-    /**
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    protected string $description = '';
+    #[ORM\Column(type: 'text', nullable: true)]
+    protected ?string $description = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
-     * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
-     * @Assert\NotNull()
-     */
+    #[Assert\NotNull]
+    #[ORM\ManyToOne(targetEntity: Festival::class, inversedBy: 'stages')]
+    #[ORM\JoinColumn(name: 'festival_id', referencedColumnName: 'id')]
     protected ?Festival $festival = null;
 
     public function getName(): string
@@ -77,7 +57,7 @@ class Stage extends ExtendStage
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 

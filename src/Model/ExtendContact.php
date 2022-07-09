@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace EHDev\FestivalBasicsBundle\Model;
 
-class ExtendContact
+use EHDev\BasicsBundle\Entity\Base;
+
+class ExtendContact extends Base
 {
     public function __construct() {}
 }

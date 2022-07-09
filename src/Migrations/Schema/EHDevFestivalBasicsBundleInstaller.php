@@ -6,7 +6,6 @@ namespace EHDev\FestivalBasicsBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_0\InitialFWTable;
-use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_1\AddOrganization;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_2\InitialStageTable;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_3\CreateSecurityArea;
 use EHDev\FestivalBasicsBundle\Migrations\Schema\v1_4\AddSecAreaFestivalRelation;
@@ -47,10 +46,6 @@ class EHDevFestivalBasicsBundleInstaller implements Installation, CommentExtensi
         /* v1_0 */
         InitialFWTable::createEhdevFwbFestivalTable($schema);
         InitialFWTable::addEhdevFwbFestivalForeignKeys($schema);
-
-        /* v1_1 */
-        AddOrganization::addOrganization($schema);
-        AddOrganization::updateOwnership($queries);
 
         /* v1_2 */
         InitialStageTable::createEhdevFwbStageTable($schema);

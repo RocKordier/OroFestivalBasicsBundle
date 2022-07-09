@@ -7,20 +7,15 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\FestivalBasicsBundle\Entity\Repository\ContactRepository;
 use EHDev\FestivalBasicsBundle\Model\ExtendContact;
 use Oro\Bundle\EmailBundle\Entity\EmailOwnerInterface;
 use Oro\Bundle\EmailBundle\Model\EmailHolderInterface;
 use Oro\Bundle\EmailBundle\Model\EmailHolderNameInterface;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
-use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\FormBundle\Entity\PrimaryItem;
 
 /**
- * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\ContactRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="ehdev_fwb_contact")
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-contact-grid"},
@@ -28,10 +23,12 @@ use Oro\Bundle\FormBundle\Entity\PrimaryItem;
  *  "tag"={"enabled"=true}
  * })
  */
-class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderInterface, EmailHolderNameInterface, EmailOwnerInterface, PrimaryItem
+#[ORM\Entity(repositoryClass: ContactRepository::class)]
+#[ORM\Table('ehdev_fwb_contact')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\MappedSuperclass]
+class Contact extends ExtendContact implements EmailHolderInterface, EmailHolderNameInterface, EmailOwnerInterface, PrimaryItem
 {
-    use DatesAwareTrait;
-
     public function __construct(FestivalAccount $owner)
     {
         parent::__construct();
@@ -40,55 +37,27 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
         $this->owner = $owner;
     }
 
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected ?int $id = null;
-
-    /**
-     * @ORM\Column(name="first_name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'first_name', type: 'string', length: 255)]
     protected string $firstName = '';
 
-    /**
-     * @ORM\Column(name="last_name", type="string", length=255)
-     */
+    #[ORM\Column(name: 'last_name', type: 'string', length: 255)]
     protected string $lastName = '';
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected ?string $profession;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    protected ?string $profession = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="FestivalAccount", inversedBy="contacts")
-     * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
-     */
+    #[ORM\ManyToOne(targetEntity: FestivalAccount::class, inversedBy: 'contacts')]
+    #[ORM\JoinColumn(name: 'owner_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     protected FestivalAccount $owner;
 
-    /**
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     */
-    protected string $email;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    protected ?string $email = null;
 
-    /**
-     * @ORM\OneToMany(targetEntity="ContactEmail",
-     *    mappedBy="owner", cascade={"all"}, orphanRemoval=true
-     * )
-     */
+    #[ORM\OneToMany(targetEntity: ContactEmail::class, mappedBy: 'owner', cascade: ['all'], orphanRemoval: true)]
     protected Collection $emails;
 
-    /**
-     * @ORM\Column(name="is_primary", type="boolean", nullable=true)
-     */
+    #[ORM\Column(type: 'boolean', name: 'is_primary')]
     protected bool $primary = false;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getFirstName(): string
     {
