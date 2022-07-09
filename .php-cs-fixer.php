@@ -15,7 +15,6 @@ use PhpCsFixerCustomFixers\Fixer\SingleSpaceAfterStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\SingleSpaceBeforeStatementFixer;
 use PhpCsFixerCustomFixers\Fixer\StringableInterfaceFixer;
 
-
 $finder = Finder::create()
     ->in([__DIR__.'/src',])
 ;
