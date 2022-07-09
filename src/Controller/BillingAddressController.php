@@ -69,7 +69,7 @@ class BillingAddressController
 
         return $this->constructResponse(
             $response,
-            'EHDevFestivalBasicsBundle:BillingAddress:update.html.twig',
+            '@EHDevFestivalBasics/BillingAddress/update.html.twig',
             ['festivalAccount' => $entity->getOwner()],
         );
     }

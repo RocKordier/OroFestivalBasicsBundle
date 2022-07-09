@@ -2,7 +2,7 @@ search:
     EHDev\FestivalBasicsBundle\Entity\Festival:
         alias: ehdev_festival
         label: ehdev.festivalbasics.festival.entity_label
-        search_template: EHDevFestivalBasicsBundle:Festival:searchResult.html.twig
+        search_template: '@EHDevFestivalBasics/Festival/searchResult.html.twig'
         route:
             name: ehdev_festival_festival_view
             parameters:
@@ -16,7 +16,7 @@ search:
     EHDev\FestivalBasicsBundle\Entity\FestivalAccount:
         alias: ehdev_festival_account
         label: ehdev.festivalbasics.festivalaccount.entity_label
-        search_template: EHDevFestivalBasicsBundle:FestivalAccount:searchResult.html.twig
+        search_template: '@EHDevFestivalBasics/FestivalAccount/searchResult.html.twig'
         route:
             name: ehdev_festival_festival_account_view
             parameters:

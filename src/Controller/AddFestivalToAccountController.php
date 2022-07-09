@@ -77,7 +77,7 @@ class AddFestivalToAccountController
 
         return $this->constructResponse(
             $response,
-            'EHDevFestivalBasicsBundle:AddFestivalToAccount:addFestivalAccount.html.twig',
+            '@EHDevFestivalBasics/AddFestivalToAccount/addFestivalAccount.html.twig',
             ['festival' => $festival],
         );
     }
