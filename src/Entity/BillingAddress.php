@@ -33,7 +33,7 @@ class BillingAddress extends ExtendBillingAddress implements EmptyItem, \Stringa
         $this->owner = $festivalAccount;
     }
 
-    #[ORM\OneToOne(targetEntity: FestivalAccount::class, inversedBy: BillingAddress::class)]
+    #[ORM\OneToOne(targetEntity: FestivalAccount::class, inversedBy: 'billingAddress')]
     #[ORM\JoinColumn(name: 'owner_id', referencedColumnName: 'id')]
     protected FestivalAccount $owner;
 
