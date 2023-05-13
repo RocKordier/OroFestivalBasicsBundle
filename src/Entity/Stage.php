@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\BasicsBundle\Entity\Base;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
 use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
@@ -33,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  }
  * })
  */
-class Stage implements ExtendEntityInterface
+class Stage extends Base implements ExtendEntityInterface
 {
     use BusinessUnitAwareTrait;
     use ExtendEntityTrait;

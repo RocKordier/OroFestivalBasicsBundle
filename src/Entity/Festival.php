@@ -7,6 +7,7 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use EHDev\BasicsBundle\Entity\Base;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
 use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
@@ -36,7 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  }
  * })
  */
-class Festival implements ExtendEntityInterface
+class Festival extends Base implements ExtendEntityInterface
 {
     use BusinessUnitAwareTrait;
     use ExtendEntityTrait;
