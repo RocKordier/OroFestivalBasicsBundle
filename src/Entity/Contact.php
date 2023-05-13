@@ -7,7 +7,6 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\FestivalBasicsBundle\Model\ExtendContact;
 use Oro\Bundle\EmailBundle\Entity\EmailOwnerInterface;
 use Oro\Bundle\EmailBundle\Model\EmailHolderInterface;
 use Oro\Bundle\EmailBundle\Model\EmailHolderNameInterface;
@@ -15,6 +14,8 @@ use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
 use Oro\Bundle\FormBundle\Entity\PrimaryItem;
 
 /**
@@ -29,14 +30,13 @@ use Oro\Bundle\FormBundle\Entity\PrimaryItem;
  *  "tag"={"enabled"=true}
  * })
  */
-class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderInterface, EmailHolderNameInterface, EmailOwnerInterface, PrimaryItem
+class Contact implements ExtendEntityInterface, DatesAwareInterface, EmailHolderInterface, EmailHolderNameInterface, EmailOwnerInterface, PrimaryItem
 {
     use DatesAwareTrait;
+    use ExtendEntityTrait;
 
     public function __construct(FestivalAccount $owner)
     {
-        parent::__construct();
-
         $this->emails = new ArrayCollection();
         $this->owner = $owner;
     }

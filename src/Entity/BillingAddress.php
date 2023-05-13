@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\FestivalBasicsBundle\Model\ExtendBillingAddress;
 use Oro\Bundle\AddressBundle\Entity\Country;
 use Oro\Bundle\AddressBundle\Entity\Region;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
 use Oro\Bundle\FormBundle\Entity\EmptyItem;
 
 /**
@@ -27,14 +28,13 @@ use Oro\Bundle\FormBundle\Entity\EmptyItem;
  *
  * @ORM\Entity
  */
-class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem, \Stringable
+class BillingAddress implements ExtendEntityInterface, DatesAwareInterface, EmptyItem, \Stringable
 {
     use DatesAwareTrait;
+    use ExtendEntityTrait;
 
     public function __construct(FestivalAccount $festivalAccount)
     {
-        parent::__construct();
-
         $this->owner = $festivalAccount;
     }
 

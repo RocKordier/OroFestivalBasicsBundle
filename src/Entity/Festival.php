@@ -7,8 +7,9 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\FestivalBasicsBundle\Model\ExtendFestival;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -35,9 +36,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  }
  * })
  */
-class Festival extends ExtendFestival
+class Festival implements ExtendEntityInterface
 {
     use BusinessUnitAwareTrait;
+    use ExtendEntityTrait;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -98,8 +100,6 @@ class Festival extends ExtendFestival
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->securityAreas = new ArrayCollection();
         $this->stages = new ArrayCollection();
     }

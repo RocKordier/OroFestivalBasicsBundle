@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace EHDev\FestivalBasicsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\FestivalBasicsBundle\Model\ExtendSecurityArea;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,8 +19,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  "tag"={"enabled"=true}
  * })
  */
-class SecurityArea extends ExtendSecurityArea implements \Stringable
+class SecurityArea implements ExtendEntityInterface, \Stringable
 {
+    use ExtendEntityTrait;
+
     /**
      * @ORM\Column(type="string", length=255)
      *

@@ -7,11 +7,12 @@ namespace EHDev\FestivalBasicsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use EHDev\FestivalBasicsBundle\Model\ExtendFestivalAccount;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
 use Oro\Bundle\EntityBundle\EntityProperty\UpdatedByAwareTrait;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
 use Oro\Bundle\OrganizationBundle\Entity\OrganizationAwareInterface;
 use Oro\Bundle\OrganizationBundle\Entity\Ownership\BusinessUnitAwareTrait;
 use Oro\Bundle\UserBundle\Entity\User;
@@ -44,16 +45,15 @@ use Oro\Bundle\UserBundle\Entity\User;
  *  "tag"={"enabled"=true}
  * })
  */
-class FestivalAccount extends ExtendFestivalAccount implements DatesAwareInterface, OrganizationAwareInterface
+class FestivalAccount implements ExtendEntityInterface, DatesAwareInterface, OrganizationAwareInterface
 {
     use UpdatedByAwareTrait;
     use DatesAwareTrait;
     use BusinessUnitAwareTrait;
+    use ExtendEntityTrait;
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->festivals = new ArrayCollection();
         $this->contacts = new ArrayCollection();
     }
