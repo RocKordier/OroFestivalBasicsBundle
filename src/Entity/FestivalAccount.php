@@ -24,6 +24,7 @@ use Oro\Bundle\UserBundle\Entity\User;
  *      @ORM\UniqueConstraint(name="unq_festival_account_name", columns={"name"})
  *  }
  * )
+ *
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-festival-account-grid"},

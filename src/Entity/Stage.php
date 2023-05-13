@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\StageRepository")
  * @ORM\Table(name="ehdev_fwb_stage")
+ *
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-flask"},
  *  "grid"={"default"="ehdev-festival-stage-grid"},
@@ -37,6 +38,7 @@ class Stage extends ExtendStage
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      */
     protected string $name = '';
@@ -49,6 +51,7 @@ class Stage extends ExtendStage
     /**
      * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")
      * @ORM\JoinColumn(name="festival_id", referencedColumnName="id")
+     *
      * @Assert\NotNull()
      */
     protected ?Festival $festival = null;

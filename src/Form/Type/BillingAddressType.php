@@ -48,11 +48,11 @@ class BillingAddressType extends AbstractType
         $builder->add(
             'label',
             TextType::class,
-                [
-                    'required' => false,
-                    'label' => 'oro.address.label.label',
-                    StripTagsExtension::OPTION_NAME => true,
-                ]
+            [
+                'required' => false,
+                'label' => 'oro.address.label.label',
+                StripTagsExtension::OPTION_NAME => true,
+            ]
         );
         $builder->add(
             'organization',

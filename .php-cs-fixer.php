@@ -26,6 +26,9 @@ return (new PhpCsFixer\Config())
         '@PSR2' => true,
         '@Symfony' => true,
         'declare_strict_types' => true,
+        'phpdoc_separation' => [
+            'groups' => [['ORM\\*'], ['Assert\\*']]
+        ],
         ConstructorEmptyBracesFixer::name() => true,
         MultilinePromotedPropertiesFixer::name() => true,
         NoDoctrineMigrationsGeneratedCommentFixer::name() => true,

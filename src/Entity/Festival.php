@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\FestivalRepository")
  * @ORM\Table(name="ehdev_fwb_festival")
+ *
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-festival-grid"},
@@ -40,6 +41,7 @@ class Festival extends ExtendFestival
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\Length(max="255")
      * @Assert\NotBlank()
      */
@@ -47,18 +49,21 @@ class Festival extends ExtendFestival
 
     /**
      * @ORM\Column(type="datetime", name="start_date")
+     *
      * @Assert\NotBlank()
      */
     protected ?\DateTime $startDate = null;
 
     /**
      * @ORM\Column(type="datetime", name="end_date")
+     *
      * @Assert\NotBlank()
      */
     protected ?\DateTime $endDate = null;
 
     /**
      * @ORM\Column(type="integer")
+     *
      * @Assert\NotNull()
      */
     protected int $maxGuests = 0;

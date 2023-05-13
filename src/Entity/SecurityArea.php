@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="ehdev_fwb_security_area")
+ *
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-list-alt"},
  *  "tag"={"enabled"=true}
@@ -21,6 +22,7 @@ class SecurityArea extends ExtendSecurityArea implements \Stringable
 {
     /**
      * @ORM\Column(type="string", length=255)
+     *
      * @Assert\NotBlank()
      */
     protected string $name = '';

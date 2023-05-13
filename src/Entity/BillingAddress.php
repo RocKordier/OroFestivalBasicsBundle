@@ -16,6 +16,7 @@ use Oro\Bundle\FormBundle\Entity\EmptyItem;
 /**
  * @ORM\Table("ehdev_fwb_billing_address")
  * @ORM\HasLifecycleCallbacks()
+ *
  * @Config(
  *       defaultValues={
  *          "entity"={
@@ -23,6 +24,7 @@ use Oro\Bundle\FormBundle\Entity\EmptyItem;
  *          }
  *      }
  * )
+ *
  * @ORM\Entity
  */
 class BillingAddress extends ExtendBillingAddress implements DatesAwareInterface, EmptyItem, \Stringable

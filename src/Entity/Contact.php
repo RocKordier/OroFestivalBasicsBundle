@@ -21,6 +21,7 @@ use Oro\Bundle\FormBundle\Entity\PrimaryItem;
  * @ORM\Entity(repositoryClass="EHDev\FestivalBasicsBundle\Entity\Repository\ContactRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="ehdev_fwb_contact")
+ *
  * @Config(defaultValues={
  *  "entity"={"icon"="fa-th-list"},
  *  "grid"={"default"="ehdev-festival-contact-grid"},
@@ -70,6 +71,7 @@ class Contact extends ExtendContact implements DatesAwareInterface, EmailHolderI
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
+     *
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
