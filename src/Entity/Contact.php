@@ -24,7 +24,14 @@ use Oro\Bundle\FormBundle\Entity\PrimaryItem;
  * @ORM\Table(name="ehdev_fwb_contact")
  *
  * @Config(defaultValues={
- *  "entity"={"icon"="fa-th-list"},
+ *  "entity"={
+ *     "icon"="fa-th-list",
+ *     "contact_information"={
+ *         "email"={
+ *             {"fieldName"="primaryEmail"}
+ *         }
+ *     }
+ * },
  *  "grid"={"default"="ehdev-festival-contact-grid"},
  *  "form"= {"grid_name"="ehdev-festival-contact-grid"},
  *  "tag"={"enabled"=true}
@@ -71,14 +78,6 @@ class Contact implements ExtendEntityInterface, DatesAwareInterface, EmailHolder
 
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     *
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "contact_information"="email"
-     *          }
-     *      }
-     * )
      */
     protected string $email;
 
