@@ -24,6 +24,9 @@
     "require": {
         "php": "^8.2",
         "oro/platform": "^5.1",
+        "oro/calendar-bundle": "^5.1",
+        "oro/crm-call-bundle": "^5.1",
+        "oro/crm-task-bundle": "^5.1",
         "ehdev/oro-basics-bundle": "^5.1.0"
     },
     "require-dev": {
