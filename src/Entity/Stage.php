@@ -49,7 +49,7 @@ class Stage extends Base implements ExtendEntityInterface
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected string $description = '';
+    protected ?string $description = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Festival", inversedBy="stages")

@@ -34,7 +34,7 @@ class SecurityArea extends Base implements ExtendEntityInterface, \Stringable
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    protected ?string $description;
+    protected ?string $description = null;
 
     public function getName(): string
     {

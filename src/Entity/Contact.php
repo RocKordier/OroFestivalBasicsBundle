@@ -79,7 +79,7 @@ class Contact implements ExtendEntityInterface, DatesAwareInterface, EmailHolder
     /**
      * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
-    protected string $email;
+    protected ?string $email = null;
 
     /**
      * @ORM\OneToMany(targetEntity="ContactEmail",
