@@ -45,7 +45,7 @@ class ContactController
 
         return $this->constructResponse(
             $response,
-            'EHDevFestivalBasicsBundle:FestivalContact:update.html.twig',
+            '@EHDevFestivalBasics/FestivalContact/update.html.twig',
             ['iscreate' => true, 'festivalAccount' => $festivalAccount],
         );
     }
@@ -63,7 +63,7 @@ class ContactController
     {
         return $this->constructResponse(
             ['contact' => $contact, 'festivalAccount' => $contact->getOwner()],
-            'EHDevFestivalBasicsBundle:FestivalContact:info.html.twig',
+            '@EHDevFestivalBasics/FestivalContact/info.html.twig',
         );
     }
 
@@ -80,7 +80,7 @@ class ContactController
     {
         return $this->constructResponse(
             $this->update($entity),
-            'EHDevFestivalBasicsBundle:FestivalContact:update.html.twig',
+            '@EHDevFestivalBasics/FestivalContact/update.html.twig',
         );
     }
 

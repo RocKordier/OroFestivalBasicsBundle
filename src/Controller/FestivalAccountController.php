@@ -76,7 +76,7 @@ class FestivalAccountController
     {
         return $this->constructResponse(
             $this->update(new FestivalAccount()),
-            'EHDevFestivalBasicsBundle:FestivalAccount:update.html.twig',
+            '@EHDevFestivalBasics/FestivalAccount/update.html.twig',
         );
     }
 
