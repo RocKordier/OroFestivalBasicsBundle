@@ -63,7 +63,7 @@ class FestivalAccount implements ExtendEntityInterface, DatesAwareInterface, Org
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected ?int $id;
+    protected ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
