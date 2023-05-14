@@ -9,16 +9,15 @@ Basic FestivalBundle
 
 Installation
 ------------
-
-With composer, add:
-
-```json
-{
-    "require" : {
-        "ehdev/oro-festival-basics-bundle": "*"
-    }
-}
+With composer run
+```bash
+composer require ehdev/oro-festival-basics-bundle:^5.1
 ```
+
+Known Issues
+------------
+At the moment it is not possible to install the bundle in an existing platform - application. This is caused by
+some limitations of oro bundles which are not installed by default (OroCalendarBundles... )
 
 Components
 ----------
